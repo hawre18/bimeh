@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],function () {
     Route::get('/province','AddressController@getAllProvince');
+    Route::get('/customer','SellController@getAllCustomer');
+    Route::get('/services','SellController@getAllService');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
 });
 //,'middleware'=>['auth:web','checkAdmin']
@@ -34,6 +36,7 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
     Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
+    Route::get('sells','SellController@create')->name('sells.create');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
         Route::post('/{user}/delete','UserController@delete')->name('users.delete');

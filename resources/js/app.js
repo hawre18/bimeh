@@ -20,6 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('select-city-component', require('./components/SelectCityComponent.vue').default);
+Vue.component('select-customer-component', require('./components/SelectCustomerComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

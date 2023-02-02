@@ -41,26 +41,27 @@ class DoctorController extends Controller
         $this->validate(request(), [
             'fname' => 'required',
             'lname' => 'required',
-            'tellphone' => 'required|min:11|max:11',
-            'phone' => 'required|min:11|max:11',
+            'tellphone' => 'required|max:12',
+            'phone' => 'required|max:11',
             'address' => 'required',
-            'city_id' => 'required',
-            'province_id' => 'required',
+            'city' => 'required',
+            'province' => 'required',
             'sku' => 'required'
         ]);
         try{
             $doctor= new Doctor();
             $doctor->fname=$request->input('fname');
             $doctor->lname=$request->input('lname');
-            $doctor->address=$request->input('province_id'.'city_id'.'adrdess');
+            $doctor->address=$request->input('province').$request->input('city').$request->input('address');
             $doctor->phone=$request->input('phone');
             $doctor->tellphone=$request->input('tellphone');
-            $doctor->sku=$request->input('sky');
+            $doctor->sku=$request->input('sku');
             $doctor->save();
             alert()->success('موفقیت آمیز','دکتر با موفقیت اضافه شد');
             return redirect('admin/doctors/create');
         }
         catch (\Exception $m){
+            return $m;
             alert()->warning(' خطا','خطا در ثبت رکورد');
             return redirect('/admin/doctors/create');
         }

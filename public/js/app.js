@@ -5361,6 +5361,67 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      customer: 'مشتری را انتخاب کنید',
+      customers: [],
+      services: [],
+      flag: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+    axios.get('/api/customer').then(function (res) {
+      _this.customers = res.data.customers;
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  },
+  methods: {
+    getAllServices: function getAllServices() {
+      var _this2 = this;
+      axios.get('/api/services').then(function (res) {
+        _this2.services = res.data.services;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -5388,6 +5449,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('select-city-component', (__webpack_require__(/*! ./components/SelectCityComponent.vue */ "./resources/js/components/SelectCityComponent.vue")["default"]));
+Vue.component('select-customer-component', (__webpack_require__(/*! ./components/SelectCustomerComponent.vue */ "./resources/js/components/SelectCustomerComponent.vue")["default"]));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28128,6 +28190,45 @@ component.options.__file = "resources/js/components/SelectCityComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/SelectCustomerComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/SelectCustomerComponent.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectCustomerComponent.vue?vue&type=template&id=71d57f08& */ "./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08&");
+/* harmony import */ var _SelectCustomerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectCustomerComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SelectCustomerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SelectCustomerComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/SelectCityComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/SelectCityComponent.vue?vue&type=script&lang=js& ***!
@@ -28144,6 +28245,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCustomerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectCustomerComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCustomerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/SelectCityComponent.vue?vue&type=template&id=889d59ca&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/SelectCityComponent.vue?vue&type=template&id=889d59ca& ***!
@@ -28157,6 +28274,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCityComponent_vue_vue_type_template_id_889d59ca___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCityComponent_vue_vue_type_template_id_889d59ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectCityComponent.vue?vue&type=template&id=889d59ca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCityComponent.vue?vue&type=template&id=889d59ca&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectCustomerComponent_vue_vue_type_template_id_71d57f08___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectCustomerComponent.vue?vue&type=template&id=71d57f08& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08&");
 
 
 /***/ }),
@@ -28244,6 +28378,115 @@ var render = function () {
               _vm._l(_vm.cities, function (city) {
                 return _c("option", { domProps: { value: city.id } }, [
                   _vm._v(_vm._s(city.name)),
+                ])
+              }),
+            ],
+            2
+          ),
+        ])
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectCustomerComponent.vue?vue&type=template&id=71d57f08& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c("label", { staticClass: "form-label", attrs: { for: "province" } }, [
+        _vm._v("مشتری "),
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.customer,
+              expression: "customer",
+            },
+          ],
+          staticClass: "form-control department-name select2input",
+          attrs: {
+            id: "province",
+            name: "customer",
+            "data-live-search": "true",
+          },
+          on: {
+            change: [
+              function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.customer = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              function ($event) {
+                return _vm.getAllServices()
+              },
+            ],
+          },
+        },
+        [
+          _c("option", { attrs: { disabled: "" } }, [_vm._v("انتخاب کنید")]),
+          _vm._v(" "),
+          _vm._l(_vm.customers, function (customer) {
+            return _c("option", { domProps: { value: customer.id } }, [
+              _vm._v(
+                _vm._s(customer.f_name + " ") +
+                  _vm._s(customer.l_name + " ") +
+                  _vm._s(customer.nationalcode)
+              ),
+            ])
+          }),
+        ],
+        2
+      ),
+    ]),
+    _vm._v(" "),
+    _vm.customer > 0
+      ? _c("div", [
+          _c("label", { staticClass: "form-label" }, [_vm._v("خدمات")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "city", name: "service[]", multiple: "" },
+            },
+            [
+              _c("option", [_vm._v(" لطفا انتخاب کنید ")]),
+              _vm._v(" "),
+              _vm._l(_vm.services, function (service) {
+                return _c("option", { domProps: { value: service.id } }, [
+                  _vm._v(_vm._s(service.title)),
                 ])
               }),
             ],
