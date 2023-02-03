@@ -41,12 +41,12 @@ class ServiceController extends Controller
         $this->validate(request(), [
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required'
         ]);
         try{
             $service= new Service();
             $service->title=$request->input('title');
-            $service->description=$request->input('description');
+            $service->label=$request->input('description');
             $service->price=$request->input('price');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت اضافه شد');

@@ -36,7 +36,9 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
     Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
-    Route::get('sells','SellController@create')->name('sells.create');
+    Route::get('sells/create','SellController@create')->name('sells.create');
+    Route::get('wallet/{id}','WalletController@charge')->name('wallet.charge');
+    Route::patch('wallet/charging','WalletController@charging');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
         Route::post('/{user}/delete','UserController@delete')->name('users.delete');

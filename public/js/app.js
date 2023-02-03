@@ -5389,7 +5389,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -28481,16 +28480,12 @@ var render = function () {
               staticClass: "form-control",
               attrs: { id: "city", name: "service[]", multiple: "" },
             },
-            [
-              _c("option", [_vm._v(" لطفا انتخاب کنید ")]),
-              _vm._v(" "),
-              _vm._l(_vm.services, function (service) {
-                return _c("option", { domProps: { value: service.id } }, [
-                  _vm._v(_vm._s(service.title)),
-                ])
-              }),
-            ],
-            2
+            _vm._l(_vm.services, function (service) {
+              return _c("option", { domProps: { value: service.id } }, [
+                _vm._v(_vm._s(service.title)),
+              ])
+            }),
+            0
           ),
         ])
       : _vm._e(),

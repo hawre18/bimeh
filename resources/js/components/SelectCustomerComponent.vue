@@ -10,7 +10,6 @@
     <div v-if="customer>0">
         <label class="form-label">خدمات</label>
         <select class="form-control" id="city" name="service[]" multiple>
-            <option> لطفا انتخاب کنید </option>
             <option v-for="service in services" :value="service.id" >{{service.title}}</option>
         </select>
     </div>

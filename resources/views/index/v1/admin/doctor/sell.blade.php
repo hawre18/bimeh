@@ -22,11 +22,6 @@
                                         <select-customer-component></select-customer-component>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <select-city-component></select-city-component>
-                                        </div>
-                                    </div><!--end col-->
                                     <div class="col-md-12">
                                         <div class="d-grid">
                                             <button class="btn btn-primary">ثبت نام</button>
