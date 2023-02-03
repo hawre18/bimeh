@@ -5396,7 +5396,9 @@ __webpack_require__.r(__webpack_exports__);
       customer: 'مشتری را انتخاب کنید',
       customers: [],
       services: [],
-      flag: false
+      flag: false,
+      price: '',
+      sumMoney: '0'
     };
   },
   mounted: function mounted() {
@@ -28482,7 +28484,9 @@ var render = function () {
             },
             _vm._l(_vm.services, function (service) {
               return _c("option", { domProps: { value: service.id } }, [
-                _vm._v(_vm._s(service.title)),
+                _vm._v(
+                  _vm._s(service.title + " ") + _vm._s(service.price + "تومان")
+                ),
               ])
             }),
             0

@@ -13,8 +13,9 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ثبت‌نام</h4>
-                            <form method="post" action="/admin/doctors" class="login-form mt-4" enctype="multipart/form-data">
+                            <form method="post" action="/admin/doctors/selling" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="_method" value="post">
                                 <div class="row"  id="app">
 
                                     <div class="col-md-12">

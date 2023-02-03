@@ -10,7 +10,7 @@
     <div v-if="customer>0">
         <label class="form-label">خدمات</label>
         <select class="form-control" id="city" name="service[]" multiple>
-            <option v-for="service in services" :value="service.id" >{{service.title}}</option>
+            <option v-for="service in services" :value="service.id" >{{service.title+" "}}{{service.price+"تومان"}}</option>
         </select>
     </div>
     </div>
@@ -23,6 +23,8 @@ export default {
             customers:[],
             services:[],
             flag:false,
+            price:'',
+            sumMoney:'0',
         }
     },
     mounted(){
