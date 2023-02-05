@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Doctor extends Model
+class Payment extends Model
 {
-    public function sells()
+    public function sell()
     {
-        return $this->hasMany(Sell::class);
+        return $this->hasOne(Sell::class);
     }
 }

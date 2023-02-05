@@ -39,6 +39,8 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
     Route::get('sells/create','SellController@create')->name('sells.create');
     Route::post('doctors/selling','SellController@store');
     Route::get('wallet/{id}','WalletController@charge')->name('wallet.charge');
+    Route::get('sells/index','SellController@index');
+    Route::get('sells/payment','SellController@payment')->name('sell.pay');
     Route::patch('wallet/charging','WalletController@charging');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
@@ -50,3 +52,4 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

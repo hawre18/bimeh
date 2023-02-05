@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sell extends Model
 {
-    use HasFactory;
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

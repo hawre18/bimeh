@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class SellController extends Controller
 {
+    public function index()
+    {
+        $sells=Sell::where('doctor_id',1)->with('customer')->get();
+        return view('index.v1.admin.doctor.factor',compact(['sells']));
+    }
     public function create()
     {
         return view('index.v1.admin.doctor.sell');
@@ -17,6 +22,7 @@ class SellController extends Controller
 
     public function store(Request $request)
     {
+        $serviceId=[];
         $sum=0;
         try{
         $sell=new Sell();
@@ -24,10 +30,12 @@ class SellController extends Controller
         $sell->doctor_id=1;
         foreach($request->input('service') as $service){
             $ser=Service::findorfail($service)->first();
+            $serviceId=[$ser->id];
             $sum=$sum+$ser->price;
         }
         $sell->totalPrice=$sum;
         $sell->save();
+        $sell->services()->sync($serviceId);
             alert()->success('موفقیت آمیز','فاکتور با موفقیت صادر شد');
             return back();
         }
