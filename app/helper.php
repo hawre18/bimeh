@@ -5,7 +5,7 @@ if(!function_exists('isDoctorActive'))
 {
 function isDoctorActive($email) : bool
 {
-$doctor = DoctorAuth::whereEmail($email)->IsActive()->exists();
+$doctor = DoctorAuth::where('email',$email)->with('IsActive')->exists();
 
 if($doctor)
 {

@@ -10,12 +10,13 @@ class DoctorAuth extends Authenticatable
   protected  $table='doctors';
     protected $guarded = [];
 
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }
 
-    public function scopeIsActive($query)
+    public function IsActive($query)
     {
         return $query->where('is_active',1);
     }

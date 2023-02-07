@@ -1,4 +1,4 @@
-@extends('template.v1.admin.app')
+@extends('template.v1.doctor.app')
 @section('alert')
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
@@ -12,8 +12,8 @@
                     <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="mx-auto d-block" alt="">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ثبت‌نام</h4>
-                            <form method="post" action="/admin/doctors/selling" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">ایجاد فاکتور جدید</h4>
+                            <form method="post" action="/doctors/selling" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="post">
                                 <div class="row"  id="app">
@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary">ثبت نام</button>
+                                            <button class="btn btn-primary">ثبت</button>
                                         </div>
                                     </div>
                                 </div>

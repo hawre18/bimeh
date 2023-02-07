@@ -36,11 +36,11 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
     Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
-    Route::get('sells/create','SellController@create')->name('sells.create');
-    Route::post('doctors/selling','SellController@store');
+   // Route::get('sells/create','SellController@create')->name('sells.create');
+   // Route::post('doctors/selling','SellController@store');
     Route::get('wallet/{id}','WalletController@charge')->name('wallet.charge');
-    Route::get('sells/index','SellController@index');
-    Route::get('sells/payment','SellController@payment')->name('sell.pay');
+    //Route::get('sells/index','SellController@index');
+    //Route::get('sells/payment','SellController@payment')->name('sell.pay');
     Route::patch('wallet/charging','WalletController@charging');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
@@ -48,6 +48,13 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
 
     });
 });
+/**Route::group(['prefix' => 'doctor','middleware'=>['auth:doctor'],'namespace'=>'App\Http\Controllers\Admin'],function (){
+
+    Route::get('sells/create','SellController@create')->name('sells.create');
+    Route::post('selling','SellController@store');
+    Route::get('sells/index','SellController@index');
+    Route::get('sells/payment','SellController@payment')->name('sell.pay');
+});**/
 
 Auth::routes();
 

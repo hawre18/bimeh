@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Providers\RouteServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
     public function login()
     {
         if(View::exists('doctor.auth.login'))
@@ -24,7 +26,8 @@ class LoginController extends Controller
     {
         $credentials = $request->except(['_token']);
 
-        if(isDoctorActive($request->email))
+
+        if(isDoctorActive($request->email)==1)
         {
             if(Auth::guard('doctor')->attempt($credentials))
             {
