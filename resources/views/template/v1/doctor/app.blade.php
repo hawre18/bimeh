@@ -57,7 +57,6 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li><a href="{{route('sells.create')}}">ایجاد فاکتور</a></li>
-                            <li><a href="{{route('sell.pay')}}">پرداخت فاکتور</a></li>
                             <li><a href="{{route('sells.index')}}">فاکتورهای من</a></li>
                         </ul>
                     </div>

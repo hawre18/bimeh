@@ -25,15 +25,15 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">
-                                            <a href="#" class="text-dark">{{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}</a>
+                                            <a href="{{route('sell.show',['idSell'=>$sell->id,'idCustomer'=>$sell->customer->nationalcode])}}" class="text-dark">{{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}</a>
                                         </td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="p-3">{{$sell->id}}</td>
                                         <td class="p-3"> {{$sell->totalPrice}} </td>
                                         <td class="text-end p-3">
                                             <a href="" class="btn btn-icon btn-pills btn-soft-primary">dfg</a>
-                                            <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
-                                            <a href="{{route('sell.pay',$sell->id)}}" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
+                                            <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-price-circle"></i></a>
+                                            <a href="" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

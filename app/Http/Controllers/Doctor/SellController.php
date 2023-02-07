@@ -6,13 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Sell;
 use App\Models\Service;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class SellController extends Controller
 {
     public function index()
     {
-        $sells=Sell::where('doctor_id',1)->with('customer')->get();
+        $sells=Sell::where('doctor_id',auth()->guard('doctor')->user()->id)->with('customer')->get();
         return view('index.v1.doctor.factor',compact(['sells']));
     }
     public function create()
@@ -63,9 +66,25 @@ class SellController extends Controller
         return response()->json($response,200);
     }
 
-    public function payment()
+    public function payment($sellId, $customerId)
     {
-        $sells=Sell::where('doctor_id',1)->with('customer')->get();
-        return view('index.v1.doctor.factor',compact(['sells']));
+        $sell=Sell::where('id',$sellId)->with('services')->first();
+        $sells=Sell::where('doctor_id',Auth::guard('doctor')->user()->id)->with('customer')->paginate(20);
+        $wallet=Wallet::where('customer_id',$customerId)->first();
+        if($wallet->modeCharge>0){
+            $wallet->modeCharge=$wallet->modeCharge-$sell->totalprice;
+            $wallet->save();
+            $sell->status=1;
+            $sell->save();
+            return view('index.v1.doctor.factor',compact(['sells']));
+        }
+
+    }
+
+    public function show($id, $nationalcode)
+    {
+        $sell=Sell::with('services')->where('id',$id)->first();
+        $customer=Customer::where('nationalcode',$nationalcode)->first();
+        return view('index.v1.doctor.sellShow',compact(['sell','customer']));
     }
 }

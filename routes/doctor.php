@@ -19,8 +19,9 @@ Route::namespace('App\Http\Controllers\Doctor')->prefix('doctors')->middleware('
     Route::get('sells/create','SellController@create')->name('sells.create');
     Route::post('selling','SellController@store');
     Route::get('sells/index','SellController@index')->name('sells.index');
-    Route::get('sells/payment','SellController@payment')->name('sell.pay');
     Route::get('home','DoctorController@home')->name('doctors.home');
+    Route::get('sells/show/{idSell}/{idCustomer}','SellController@show')->name('sell.show');
+    Route::get('sells/pay/{sellId}/{customerId}','SellController@payment')->name('sell.pay');
     Route::post('/logout',function(){
         Auth::guard('doctor')->logout();
         return redirect()->action([
