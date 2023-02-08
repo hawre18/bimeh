@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -60,6 +61,7 @@ class DoctorController extends Controller
             $doctor->phone=$request->input('phone');
             $doctor->tellphone=$request->input('tellphone');
             $doctor->sku=$request->input('sku');
+
             $doctor->save();
             alert()->success('موفقیت آمیز','دکتر با موفقیت اضافه شد');
             return redirect('admin/doctors/create');

@@ -40,6 +40,7 @@
 <!-- Loader -->
 
 <div class="page-wrapper doctris-theme toggled">
+    @if(Auth::guard('doctor')->check())
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content" data-simplebar="" style="height: calc(100% - 60px);">
             <div class="sidebar-brand">
@@ -69,6 +70,13 @@
                             <li><a href="patients.html">بیماران</a></li>
                             <li><a href="add-patient.html">افزودن بیمار</a></li>
                             <li><a href="patient-profile.html">پروفایل</a></li>
+                            <li><a href="patient-profile.html">پروفایل</a></li>
+                            <li><a class="dropdown-item text-dark" href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
+                                <form id="logout-form" action="/doctors/logout" method="POST" class="d-none">
+                                    @csrf
+                                </form></li>
                         </ul>
                     </div>
                 </li>
@@ -84,19 +92,22 @@
             </li>
         </ul>
     </nav>
+    @endif
     <!-- sidebar-wrapper  -->
 
     <!-- Start Page Content -->
     <main class="page-content bg-light">
+        @if(Auth::guard('doctor')->check())
         <div class="top-header">
             <div class="header-bar d-flex justify-content-between border-bottom">
+
                 <div class="d-flex align-items-center">
                     <a href="{{route('doctors.home')}}" class="logo-icon">
                         <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
                         <span class="big">
-                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                                </span>
+                            <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                            <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        </span>
                     </a>
                     <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary me-2" href="#">
                         <i class="uil uil-bars"></i>
@@ -140,13 +151,12 @@
                 @endif
             </div>
         </div>
-
+    @endif
         <div class="container-fluid">
             <div class="layout-specing">
                 <div class="row">
                     <div class="col-xl-9 col-md-6">
                         <h5 class="mb-0">خانه</h5>
-
                     </div><!--end col-->
 
                     @yield('content')

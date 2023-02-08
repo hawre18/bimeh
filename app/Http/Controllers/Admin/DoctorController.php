@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -46,8 +47,11 @@ class DoctorController extends Controller
             'address' => 'required',
             'city' => 'required',
             'province' => 'required',
-            'sku' => 'required'
+            'sku' => 'required',
+            'password' => 'required',
+            'email' => 'required'
         ]);
+
         try{
             $doctor= new Doctor();
             $doctor->fname=$request->input('fname');
@@ -56,6 +60,8 @@ class DoctorController extends Controller
             $doctor->phone=$request->input('phone');
             $doctor->tellphone=$request->input('tellphone');
             $doctor->sku=$request->input('sku');
+            $doctor->password=Hash::make( $request->input('password'));
+            $doctor->email=$request->input('email');
             $doctor->save();
             alert()->success('موفقیت آمیز','دکتر با موفقیت اضافه شد');
             return redirect('admin/doctors/create');

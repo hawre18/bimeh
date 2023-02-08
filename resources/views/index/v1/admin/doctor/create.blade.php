@@ -12,7 +12,7 @@
                     <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="mx-auto d-block" alt="">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ثبت‌نام</h4>
+                            <h4 class="text-center">ثبت دکتر جدید</h4>
                             <form method="post" action="/admin/doctors" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -55,6 +55,18 @@
                                         <div class="mb-3">
                                             <label class="form-label">کد نظام پزشکی<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="کد نظام پزشکی" name="sku" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">ایمیل<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="ایمیل" name="email" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">پسورد<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="پسورد" name="password" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

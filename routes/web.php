@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],function () {
     Route::get('/province','AddressController@getAllProvince');
     Route::get('/customer','SellController@getAllCustomer');
@@ -20,7 +21,7 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
 });
 //,'middleware'=>['auth:web','checkAdmin']
-Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],function (){
+Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController');
     Route::get('customer/address/{id}','CustomerController@address')->name('address.customer');
     Route::resource('address','AddressController');
@@ -36,11 +37,9 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
     Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
-   // Route::get('sells/create','SellController@create')->name('sells.create');
-   // Route::post('doctors/selling','SellController@store');
+
     Route::get('wallet/{id}','WalletController@charge')->name('wallet.charge');
-    //Route::get('sells/index','SellController@index');
-    //Route::get('sells/payment','SellController@payment')->name('sell.pay');
+
     Route::patch('wallet/charging','WalletController@charging');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
@@ -48,15 +47,9 @@ Route::group(['prefix' => 'admin','namespace'=>'App\Http\Controllers\Admin'],fun
 
     });
 });
-/**Route::group(['prefix' => 'doctor','middleware'=>['auth:doctor'],'namespace'=>'App\Http\Controllers\Admin'],function (){
 
-    Route::get('sells/create','SellController@create')->name('sells.create');
-    Route::post('selling','SellController@store');
-    Route::get('sells/index','SellController@index');
-    Route::get('sells/payment','SellController@payment')->name('sell.pay');
-});**/
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

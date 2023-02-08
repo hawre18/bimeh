@@ -15,9 +15,9 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     public function login()
     {
-        if(View::exists('doctor.auth.login'))
+        if(View::exists('index.v1.doctor.auth.login'))
         {
-            return view('doctor.auth.login');
+            return view('index.v1.doctor.auth.login');
         }
         abort(Response::HTTP_NOT_FOUND);
     }
@@ -42,5 +42,10 @@ class LoginController extends Controller
             LoginController::class,
             'login'
         ])->with('message','You are not an active doctors!');
+    }
+    public function doctorLogout()
+    {
+        Auth::guard('doctor')->logout();
+        return redirect('/doctors/login');
     }
 }
