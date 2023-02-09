@@ -5,24 +5,6 @@
 @endsection
 @section('content')
     <!-- Start Page Content -->
-    <main class="page-content bg-light">
-        <div class="top-header">
-            <div class="header-bar d-flex justify-content-between border-bottom">
-                <div class="d-flex align-items-center">
-                    <a href="#" class="logo-icon">
-                        <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
-                        <span class="big">
-                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                                </span>
-                    </a>
-                    <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary me-2" href="#">
-                        <i class="uil uil-bars"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid">
             <div class="layout-specing">
                 <div class="row">
@@ -63,39 +45,7 @@
                         </div>
                     </div>
                 </div><!--end row-->
-
-                <div class="row text-center">
-                    <!-- PAGINATION START -->
-                    <div class="col-12 mt-4">
-                        <div class="d-md-flex align-items-center text-center justify-content-between">
-                            <span class="text-muted me-0">نمایش 1 - 10 از 50</span>
-                            <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">قبلی</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">بعدی</a></li>
-                            </ul>
-                        </div>
-                    </div><!--end col-->
-                    <!-- PAGINATION END -->
-                </div><!--end row-->
             </div>
         </div><!--end container-->
 
-        <!-- Footer Start -->
-        <footer class="bg-white shadow py-3">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <div class="text-sm-start text-center">
-                            <p class="mb-0 text-muted"> © داکتریس - ارائه <i class="mdi mdi-heart text-danger"></i> از <a href="" target="_blank" class="text-reset">آفرید تیم<p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </footer><!--end footer-->
-        <!-- End -->
-    </main>
-    <!--End page-content" -->
 @endsection

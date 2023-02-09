@@ -22,11 +22,11 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
 });
 //,'middleware'=>['auth:web','checkAdmin']
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
-    Route::resource('customer','CustomerController');
+    Route::resource('customer','CustomerController')->middleware('can:create-customer');
     Route::get('customer/address/{id}','CustomerController@address')->name('address.customer');
     Route::resource('address','AddressController');
     Route::get('address.delete/{id}','AddressController@delete')->name('address.delete');
-    Route::resource('plane','PlaneController');
+    Route::resource('plane','PlaneController')->middleware('can:create-customer');
     Route::get('plane.delete/{id}','PlaneController@delete')->name('plane.delete');
     Route::resource('role','RoleController');
     Route::get('role.delete/{id}','RoleController@delete')->name('role.delete');
