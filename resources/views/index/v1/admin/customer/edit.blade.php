@@ -12,31 +12,31 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ویرایش کاربر</h4>
-                            <form method="post" action="/admin/doctors" class="login-form mt-4" enctype="multipart/form-data">
+                            <form method="post" action="/admin/customer" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{$doctor->fname}}">
+                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{$customer->f_name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">نام خانوادگی <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{$doctor->lname}}">
+                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{$customer->l_name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">شماره همراه <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{$doctor->phone}}">
+                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{$customer->phone}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">کد نظام پزشکی<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="کد نظام پزشکی" name="sku" required="" value="{{$doctor->sku}}">
+                                            <label class="form-label">کدملی<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="کدملی" name="nationalcode" required="" value="{{$customer->nationalcode}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

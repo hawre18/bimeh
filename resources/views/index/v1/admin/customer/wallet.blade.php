@@ -17,7 +17,6 @@
                                     @csrf
                                     <input type="hidden" name="_method" value="patch">
                                     <div class="row">
-
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">مقدار شارژ</label>

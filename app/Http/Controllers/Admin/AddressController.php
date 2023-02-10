@@ -8,6 +8,8 @@ use App\Models\Address;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Customer;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class AddressController extends Controller
@@ -20,7 +22,11 @@ class AddressController extends Controller
     public function index()
     {
         $addresses=Address::with('customer','province','city')->paginate(20);
+        if(View::exists('index.v1.admin.address.index')){
         return view('index.v1.admin.address.index',compact(['addresses']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -39,7 +45,7 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $customerId)
     {
 
         $this->validate(request(), [
@@ -58,14 +64,14 @@ class AddressController extends Controller
             $address->tellphone=$request->input('tellphone');
             $address->postcode=$request->input('postcode');
             $address->bodyad=$request->input('addrbody');
-            $address->customer_id=$request->input('customer_id');
+            $address->customer_id=$customerId;
             $address->save();
             alert()->success('موفقیت آمیز','آدرس با موفقیت اضافه شد');
-            return redirect()->route('address.customer', [$request->input('customer_id')]);
+            return redirect()->route('create.address', [$customerId]);
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در ثبت رکورد');
-            return redirect('/admin/address/create');
+            return redirect()->route('create.address', [$customerId]);
         }
     }
 
@@ -111,21 +117,23 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    public function delete($id)
-    {
+
         try{
+            $address=Address::findorfail($id);
+            if(count(array($address))>0){
             $address=Address::findorfail($id);
             $address->delete();
             alert()->success('موفقیت آمیز','آدرس با موفقیت حذف شد');
             return redirect('admin/address');
+            }else{
+                alert()->error('خطا','آدرس یافت نشد');
+                return redirect('/admin/address');
+            }
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('admin/address');
         }
-
     }
     public function getAllProvince()
     {

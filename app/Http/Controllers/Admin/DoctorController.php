@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class DoctorController extends Controller
 {
@@ -16,8 +19,12 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors=Doctor::paginate(20);
+        $doctors=Doctor::latest('created_at')->paginate(20);
+        if(View::exists('index.v1.admin.doctor.index')){
         return view('index.v1.admin.doctor.index',compact(['doctors']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
 
     }
 
@@ -92,7 +99,18 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doctor=Doctor::findorfail($id);
+        if(count(array($doctor)>0)){
+            if(View::exists('index.v1.admin.doctor.edit')){
+                return view('index.v1.admin.doctor.edit',compact(['doctor']));
+            }elseif(!(View::exists('index.v1.admin.doctor.edit'))){
+                abort(Response::HTTP_NOT_FOUND);
+            }
+            elseif(count(array($doctor)<=0)){
+                alert()->error('خطا','خطا در پیداکردن رکورد');
+                return redirect('admin/doctors');
+            }
+        }
     }
 
     /**
@@ -115,20 +133,20 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    public function delete($id)
-    {
         try{
             $doctor=Doctor::findorfail($id);
+            if(count(array($doctor)>0)){
             $doctor->delete();
             alert()->success('موفقیت آمیز','دکتر با موفقیت حذف شد');
             return redirect('admin/doctors');
+        }else{
+                alert()->error('خطا','خطا در پیداکردن رکورد');
+                return redirect('admin/doctors');
+            }
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('admin/doctors');
         }
-
     }
 }

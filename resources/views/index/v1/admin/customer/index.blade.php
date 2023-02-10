@@ -17,8 +17,6 @@
                                     <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
                                     <th class="border-bottom p-3">کدملی</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
-                                    <th class="border-bottom p-3">تاریخ عضویت</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
@@ -27,16 +25,15 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">
-                                            <a href="#" class="text-dark">{{$customer->f_name}}</a>
+                                            <a href="{{route('customer.show',$customer->id)}}" class="text-dark">{{$customer->f_name}}</a>
                                         </td>
                                         <td class="p-3">{{$customer->l_name}}</td>
                                         <td class="p-3">{{$customer->nationalcode}}</td>
-                                        <td class="p-3"> {{$customer->phone}} </td>
-                                        <td class="p-3">{{$customer->created_at}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('address.customer',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-primary">dfg</a>
-                                            <a href="{{route('wallet.charge',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check-circle"></i></a>
-                                            <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
+                                            <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
+                                            <a href="{{route('wallet.charge',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>
+                                            <a href="{{route('customer.destroy',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <a href="{{route('customer.edit',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >ویرایش</a>
                                         </td>
                                     </tr>
                                 @endforeach

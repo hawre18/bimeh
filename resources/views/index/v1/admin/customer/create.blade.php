@@ -9,7 +9,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8">
-                    <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="mx-auto d-block" alt="">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ثبت‌نام</h4>
@@ -19,33 +18,25 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="">
+                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{old('fname')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">نام خانوادگی <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="">
+                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{old('lname')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">شماره همراه <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="">
+                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{old('phone')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">کدملی<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="کدملی" name="nationalcode" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input align-middle" type="checkbox" value="" id="accept-tnc-check">
-                                                <label class="form-check-label" for="accept-tnc-check"> قبول <a href="#" class="text-primary">مقررات و شرایط</a></label>
-                                            </div>
+                                            <input type="text" class="form-control" placeholder="کدملی" name="nationalcode" required="" value="{{old('nationalcode')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

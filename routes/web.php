@@ -23,9 +23,10 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
 //,'middleware'=>['auth:web','checkAdmin']
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController')->middleware('can:create-customer');
-    Route::get('customer/address/{id}','CustomerController@address')->name('address.customer');
-    Route::resource('address','AddressController');
-    Route::get('address.delete/{id}','AddressController@delete')->name('address.delete');
+    Route::get('customer/address/create/{customerId}','CustomerController@address')->name('create.address');
+    Route::get('address','AddressController@index')->name('index.address');
+    Route::post('customer/address/store/{customerId}','AddressController@store')->name('addresses.store');
+    Route::get('address.destroy/{id}','AddressController@destroy')->name('address.destroy');
     Route::resource('plane','PlaneController')->middleware('can:create-customer');
     Route::get('plane.delete/{id}','PlaneController@delete')->name('plane.delete');
     Route::resource('role','RoleController');
@@ -37,8 +38,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
-
-    Route::get('wallet/{id}','WalletController@charge')->name('wallet.charge');
+    Route::get('doctors','DoctorController@index')->name('doctors.index');
+    Route::get('doctors/edit','DoctorController@edit')->name('doctors.edit');
+    Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge');
 
     Route::patch('wallet/charging','WalletController@charging');
     Route::group(['prefix'=>'users'],function (){
