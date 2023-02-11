@@ -8,8 +8,8 @@ Route::namespace('App\Http\Controllers\Doctor\Auth')->prefix('doctors')->group(f
 
     Route::middleware('guest:doctor')->group(function(){
         //login route
-        Route::get('/login','LoginController@login')->name('login');
-        Route::post('/login','LoginController@processLogin')->name('doctors.login');
+        Route::get('/logins','LoginController@login')->name('logins');
+        Route::post('/logins','LoginController@processLogin')->name('doctors.login');
     });
 
 

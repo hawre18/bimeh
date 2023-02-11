@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Customer;
 use App\Models\Doctor;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
@@ -35,7 +37,12 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('index.v1.admin.doctor.create');
+        if(View::exists('index.v1.admin.doctor.create')){
+            return view('index.v1.admin.doctor.create');
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
     }
 
     /**
@@ -60,10 +67,13 @@ class DoctorController extends Controller
         ]);
 
         try{
+            $province=Province::where('id',$request->input('province'))->first();
+            $city=City::where('id',$request->input('city'))->first();
             $doctor= new Doctor();
+
             $doctor->fname=$request->input('fname');
             $doctor->lname=$request->input('lname');
-            $doctor->address=$request->input('province').$request->input('city').$request->input('address');
+            $doctor->address=$province->name.' '.$city->name.' '.$request->input('address');
             $doctor->phone=$request->input('phone');
             $doctor->tellphone=$request->input('tellphone');
             $doctor->sku=$request->input('sku');
@@ -122,7 +132,41 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'fname' => 'required',
+            'lname' => 'required',
+            'tellphone' => 'required|max:12',
+            'phone' => 'required|max:11',
+            'address' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'sku' => 'required',
+            'email' => 'required'
+        ]);
+
+        try{
+            $province=Province::where('id',$request->input('province'))->first();
+            $city=City::where('id',$request->input('city'))->first();
+            $doctor= new Doctor();
+            $doctor->fname=$request->input('fname');
+            $doctor->lname=$request->input('lname');
+            $doctor->address=$province->name.' '.$city->name.' '.$request->input('address');
+            $doctor->phone=$request->input('phone');
+            $doctor->tellphone=$request->input('tellphone');
+            $doctor->sku=$request->input('sku');
+            if($request->input('password')!=null){
+                $doctor->password=Hash::make( $request->input('password'));
+            }
+            $doctor->email=$request->input('email');
+            $doctor->save();
+            alert()->success('موفقیت آمیز','دکتر با موفقیت ویرایش شد');
+            return redirect('admin/doctors/create');
+        }
+        catch (\Exception $m){
+            return $m;
+            alert()->warning(' خطا','خطا در ویرایش رکورد');
+            return redirect('/admin/doctors/create');
+        }
     }
 
     /**

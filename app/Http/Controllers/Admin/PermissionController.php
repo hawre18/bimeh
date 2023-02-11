@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class PermissionController extends Controller
 {
@@ -15,8 +17,12 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions=Permission::paginate(20);
-        return view('index.v1.admin.permission.index',compact(['permissions']));
+        $permissions=Permission::latest('created_at')->paginate(20);
+        if(View::exists('index.v1.admin.permission.index')){
+            return view('index.v1.admin.permission.index',compact(['permissions']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -26,7 +32,13 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('index.v1.admin.permission.create');
+        if(View::exists('index.v1.admin.permission.create')){
+            return view('index.v1.admin.permission.create');
+        }
+        else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
     }
 
     /**
@@ -47,10 +59,11 @@ class PermissionController extends Controller
             $permission->label=$request->input('label');
             $permission->save();
             alert()->success('موفقیت آمیز',' دسترسی با موفقیت اضافه شد');
-            return redirect('/admin/permission/create');
+            return redirect('/admin/permission');
         }
         catch (\Exception $m){
-            return $m;
+            alert()->error('خطا','خطا در ذخیره دسترسی');
+            return redirect('/admin/permission/create');
         }
     }
 
@@ -73,7 +86,19 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(View::exists('index.v1.admin.permission.edit')){
+            $permission=Permission::findorfail($id)->first();
+            if(count(array($permission))>0){
+                return view('index.v1.admin.permission.edit',compact(['permission']));
+            }
+            elseif(count(array($permission))<=0){
+                alert()->error('خطا','مقام مورد نظر یافت نشد');
+                return redirect('/admin/permission');
+            }
+            elseif(!(View::exists('index.v1.admin.permission.edit'))){
+                abort(Response::HTTP_NOT_FOUND);
+            }
+        }
     }
 
     /**
@@ -85,7 +110,22 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|min:3',
+            'label' => 'required|min:3',
+        ]);
+        try{
+            $permission=Permission::findorfail($id)->first();
+            $permission->name=$request->input('name');
+            $permission->label=$request->input('label');
+            $permission->save();
+            alert()->success('موفقیت آمیز',' دسترسی با موفقیت ویرایش شد');
+            return redirect('/admin/permission');
+        }
+        catch (\Exception $m){
+            alert()->error('خطا','خطا در ویرایش دسترسی');
+            return redirect('/admin/permission');
+        }
     }
 
     /**
@@ -96,20 +136,18 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    public function delete($id)
-    {
         try{
             $permission=Permission::findorfail($id);
-            $permission->delete();
-            alert()->success('موفقیت آمیز',' دسترسی با موفقیت حذف شد');
-            return redirect('admin/permission');
+            if(count(array($permission))>0) {
+                $permission->delete();
+                alert()->success('موفقیت آمیز', ' دسترسی با موفقیت حذف شد');
+                return redirect('admin/permission');
+            }
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('admin/permission');
         }
-
     }
+
 }

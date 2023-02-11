@@ -18,6 +18,7 @@
                                     <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
                                     <th class="border-bottom p-3">کدنظام پزشکی</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;"> ایمیل</th>
                                     <th class="border-bottom p-3">تاریخ عضویت</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
@@ -30,6 +31,7 @@
                                         <td class="p-3">{{$doctor->lname}}</td>
                                         <td class="p-3">{{$doctor->sku}}</td>
                                         <td class="p-3"> {{$doctor->phone}} </td>
+                                        <td class="p-3"> {{$doctor->email}} </td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($doctor->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('doctors.edit',$doctor->id)}}" class="btn btn-icon btn-pills btn-soft-primary">ویرایش</a>

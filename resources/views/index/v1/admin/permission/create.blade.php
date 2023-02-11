@@ -11,26 +11,20 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">افزودن طرح</h4>
-                            <form method="post" action="/admin/services" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">ثبت مقام</h4>
+                            <form method="post" action="/admin/permission" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
+                                            <label class="form-label"> نام<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{old('name')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="توضیحات" name="description" required="" value="{{old('description')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">قیمت<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="قیمت" name="price" required="" value="{{old('price')}}">
+                                            <label class="form-label">عنوان دسترسی<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" value="{{old('label')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

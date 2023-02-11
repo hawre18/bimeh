@@ -40,6 +40,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">ایمیل<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="ایمیل" name="email" required="" value="{{$doctor->email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">رمزعبور جدید</label>
+                                            <input type="text" class="form-control" placeholder="اگر مایل به تغییر رمز عبور نیستید این فیلد را خالی بگذارین" name="password" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="d-grid">
                                             <button class="btn btn-primary">ویرایش</button>
                                         </div>

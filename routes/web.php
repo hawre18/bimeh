@@ -35,14 +35,12 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('permission.delete/{id}','PermissionController@delete')->name('permission.delete');
     Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']]);
     Route::resource('services','ServiceController');
-    Route::get('services.delete/{id}','ServiceController@delete')->name('services.delete');
     Route::resource('doctors','DoctorController');
     Route::get('doctors.delete/{id}','DoctorController@delete')->name('doctor.delete');
     Route::get('doctors','DoctorController@index')->name('doctors.index');
     Route::get('doctors/edit','DoctorController@edit')->name('doctors.edit');
     Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge');
-
-    Route::patch('wallet/charging','WalletController@charging');
+    Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging');
     Route::group(['prefix'=>'users'],function (){
         Route::get('/','UserController@index');
         Route::post('/{user}/delete','UserController@delete')->name('users.delete');

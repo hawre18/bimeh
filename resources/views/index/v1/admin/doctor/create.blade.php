@@ -19,31 +19,31 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="">
+                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{old('fname')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">نام خانوادگی <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="">
+                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{old('lname')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">شماره همراه <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="">
+                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{old('phone')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> تلفن <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="همراه کد شهر " name="tellphone" required="">
+                                            <input type="text" class="form-control" placeholder="همراه کد شهر " name="tellphone" required="" value="{{old('tellphone')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">آدرس<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="آدرس" name="address" required="">
+                                            <input type="text" class="form-control" placeholder="آدرس" name="address" required="" value="{{old('address')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6" id="app">
@@ -54,19 +54,19 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">کد نظام پزشکی<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="کد نظام پزشکی" name="sku" required="">
+                                            <input type="text" class="form-control" placeholder="کد نظام پزشکی" name="sku" required="" value="{{old('sku')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">ایمیل<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="ایمیل" name="email" required="">
+                                            <input type="text" class="form-control" placeholder="ایمیل" name="email" required="" value="{{old('email')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">پسورد<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="پسورد" name="password" required="">
+                                            <input type="text" class="form-control" placeholder="پسورد" name="password" required="" value="{{old('password')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

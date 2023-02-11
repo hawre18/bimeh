@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoleController extends Controller
 {
@@ -16,8 +18,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles=Role::paginate(20);
-        return view('index.v1.admin.role.index',compact(['roles']));
+        $roles=Role::latest('created_at')->paginate(20);
+        if(View::exists('index.v1.admin.role.index')){
+            return view('index.v1.admin.role.index',compact(['roles']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -28,7 +34,13 @@ class RoleController extends Controller
     public function create()
     {
         $permissions=Permission::latest()->get();
-        return view('index.v1.admin.role.create',compact(['permissions']));
+        if(View::exists('index.v1.admin.role.create')){
+            return view('index.v1.admin.role.create',compact(['permissions']));
+        }
+        else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
     }
 
     /**
@@ -51,10 +63,11 @@ class RoleController extends Controller
             $role->save();
             $role->permissions()->sync($request->input('permission_id'));
             alert()->success('موفقیت آمیز','سطح دسترسی با موفقیت اضافه شد');
-            return redirect('/admin/role/create');
+            return redirect('/admin/role');
         }
         catch (\Exception $m){
-            return $m;
+            alert()->error('خطا','خطا در ذخیره سطح دسترسی');
+            return redirect('/admin/role/create');
         }
     }
 
@@ -77,7 +90,19 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(View::exists('index.v1.admin.role.edit')){
+            $role=Role::findorfail($id)->first();
+            if(count(array($role))>0){
+                return view('index.v1.admin.role.edit',compact(['role']));
+            }
+            elseif(count(array($role))<=0){
+                alert()->error('خطا','مقام مورد نظر یافت نشد');
+                return redirect('/admin/role');
+            }
+            elseif(!(View::exists('index.v1.admin.role.edit'))){
+                abort(Response::HTTP_NOT_FOUND);
+            }
+        }
     }
 
     /**
@@ -89,7 +114,24 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|min:3',
+            'label' => 'required|min:3',
+            'permission_id'=>'required'
+        ]);
+        try{
+            $role=Role::findorfail($id)->with('permissiones')->first();
+            $role->name=$request->input('name');
+            $role->label=$request->input('label');
+            $role->save();
+            $role->permissions()->sync($request->input('permission_id'));
+            alert()->success('موفقیت آمیز','سطح دسترسی با موفقیت ویرایش شد');
+            return redirect('/admin/role');
+        }
+        catch (\Exception $m){
+            alert()->error('خطا','خطا در ویرایش رکورد');
+            return redirect('/admin/role');
+        }
     }
 
     /**
@@ -100,20 +142,18 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    public function delete($id)
-    {
         try{
             $role=Role::findorfail($id);
+            if(count(array($role))>0){
             $role->delete();
             alert()->success('موفقیت آمیز','مقام دسترسی با موفقیت حذف شد');
             return redirect('admin/role');
+            }
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('admin/role');
         }
-
     }
+
 }

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">ورود متخصص</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('doctors.login') }}">
+                        <form method="POST" action="{{ route('doctors.logins') }}">
                             @csrf
 
                             <div class="form-group row">

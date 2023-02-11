@@ -9,23 +9,22 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8">
-                    <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="mx-auto d-block" alt="">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ثبت‌نام</h4>
+                            <h4 class="text-center">ثبت مقام</h4>
                             <form method="post" action="/admin/role" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام" name="name" required="">
+                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{old('name')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">عنوان دسترسی<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="">
+                                            <input type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" value="{{old('label')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -41,7 +40,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary">ثبت نام</button>
+                                            <button class="btn btn-primary">ثبت </button>
                                         </div>
                                     </div>
                                 </div>

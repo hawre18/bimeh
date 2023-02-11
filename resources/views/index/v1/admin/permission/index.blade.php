@@ -14,30 +14,21 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
-                                    <th class="border-bottom p-3">مقام</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;">عنوان</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($roles as $role)
-                                    @if(count($role->users))
-                                        @foreach($role->users as $user)
+                                @foreach($permissiones as $permission)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">
-                                            <a href="#" class="text-dark">{{$user->name}}</a>
-                                        </td>
-                                        <td class="p-3">{{$user->email}}</td>
-                                        <td class="p-3">{{$role->label}}</td>
+                                        <td class="p-3">{{$permission->name}}</td>
+                                        <td class="p-3">{{$ermission->label}}</td>
                                         <td class="text-end p-3">
-                                            <a href="" class="btn btn-icon btn-pills btn-soft-primary">dfg</a>
-                                            <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
-                                            <a href="{{route('level.destroy',$role->id)}}" class="btn btn-icon btn-pills btn-soft-danger" ><i class="uil uil-times-circle"></i></a>
+                                            <a href="{{route('permission.edit',$permission->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
+                                            <a href="{{route('ermission.destroy',$permission->id)}}" class="btn btn-icon btn-pills btn-soft-danger">حذف</a>
                                         </td>
                                     </tr>
-                                        @endforeach
-                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>
