@@ -110,13 +110,13 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor=Doctor::findorfail($id);
-        if(count(array($doctor)>0)){
+        if(($doctor)!=null){
             if(View::exists('index.v1.admin.doctor.edit')){
                 return view('index.v1.admin.doctor.edit',compact(['doctor']));
             }elseif(!(View::exists('index.v1.admin.doctor.edit'))){
                 abort(Response::HTTP_NOT_FOUND);
             }
-            elseif(count(array($doctor)<=0)){
+            elseif(($doctor)==0){
                 alert()->error('خطا','خطا در پیداکردن رکورد');
                 return redirect('admin/doctors');
             }
@@ -147,7 +147,7 @@ class DoctorController extends Controller
         try{
             $province=Province::where('id',$request->input('province'))->first();
             $city=City::where('id',$request->input('city'))->first();
-            $doctor= new Doctor();
+            $doctor= Doctor::findorfail($id);
             $doctor->fname=$request->input('fname');
             $doctor->lname=$request->input('lname');
             $doctor->address=$province->name.' '.$city->name.' '.$request->input('address');
@@ -160,12 +160,12 @@ class DoctorController extends Controller
             $doctor->email=$request->input('email');
             $doctor->save();
             alert()->success('موفقیت آمیز','دکتر با موفقیت ویرایش شد');
-            return redirect('admin/doctors/create');
+            return redirect('admin/doctors');
         }
         catch (\Exception $m){
-            return $m;
+
             alert()->warning(' خطا','خطا در ویرایش رکورد');
-            return redirect('/admin/doctors/create');
+            return redirect('/admin/doctors');
         }
     }
 
@@ -179,18 +179,42 @@ class DoctorController extends Controller
     {
         try{
             $doctor=Doctor::findorfail($id);
-            if(count(array($doctor)>0)){
+            if(($doctor)!=null){
             $doctor->delete();
             alert()->success('موفقیت آمیز','دکتر با موفقیت حذف شد');
             return redirect('admin/doctors');
         }else{
-                alert()->error('خطا','خطا در پیداکردن رکورد');
+                alert()->success('خطا','خطا در پیداکردن رکورد');
                 return redirect('admin/doctors');
             }
         }
         catch (\Exception $m){
-            alert()->erorr(' خطا','خطا در حذف رکورد');
+            alert()->success(' خطا','خطا در حذف رکورد');
             return redirect('admin/doctors');
+        }
+    }
+
+    public function status($id)
+    {
+        try{
+            $doctor= Doctor::findorfail($id);
+            if($doctor->is_active==0){
+                $doctor->is_active=1;
+                $doctor->save();
+                alert()->success('موفقیت آمیز','دکتر با موفقیت فعال شد');
+                return redirect('admin/doctors');
+            }
+            elseif($doctor->is_active==1)
+            {
+                $doctor->is_active=0;
+                $doctor->save();
+                alert()->success('موفقیت آمیز','دکتر با موفقیت غیرفعال شد');
+                return redirect('admin/doctors');}
+            }
+        catch (\Exception $m){
+
+            alert()->warning(' خطا','خطا در ویرایش رکورد');
+            return redirect('/admin/doctors');
         }
     }
 }

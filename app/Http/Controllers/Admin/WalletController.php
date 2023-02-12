@@ -13,32 +13,16 @@ class WalletController extends Controller
 {
     public function charge($customerId)
     {
-        $wallet=Wallet::where('customer_id',$customerId)->with('customer')->first();
-        if(count(array($wallet))>0){
-            if(View::exists('index.v1.admin.customer.wallet')){
-                return view('index.v1.admin.customer.wallet',compact(['wallet']));
 
-            }
-            elseif(!(View::exists('index.v1.admin.customer.wallet')))
-            {
-            abort(Response::HTTP_NOT_FOUND);
-            }
+        if(View::exists('index.v1.admin.customer.wallet')) {
+            $wallet=Wallet::where('customer_id',$customerId)->with('customer')->first();
+            return view('index.v1.admin.customer.wallet', compact(['wallet']));
         }
-        elseif (count(array($wallet))<1)
+        else
         {
-            $wallets=new Wallet();
-            $wallets->customer_id=$customerId;
-            $wallets->modeCharge=0;
-            $wallets->save();
-            if(View::exists('index.v1.admin.customer.wallet')){
-                return view('index.v1.admin.customer.wallet',compact(['wallet']));
-
-            }
-            elseif(!(View::exists('index.v1.admin.customer.wallet')))
-            {
-                abort(Response::HTTP_NOT_FOUND);
-            }
+            abort(Response::HTTP_NOT_FOUND);
         }
+
 
     }
 

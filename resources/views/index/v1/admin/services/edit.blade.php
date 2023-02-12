@@ -12,7 +12,7 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ویرایش خدمت</h4>
-                            <form method="post" action="{{'service.update'.$service->id}}" class="login-form mt-4" enctype="multipart/form-data">
+                            <form method="post" action="{{route('services.update',$service->id)}}" class="login-form mt-4" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">

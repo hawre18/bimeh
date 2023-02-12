@@ -19,13 +19,13 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{ $role->name or old('name') }}">
+                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{ $role->name }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">عنوان دسترسی<span class="text-danger">*</span></label>
-                                            <textarea type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" >{{ $role->label or old('label') }}</textarea>
+                                            <textarea type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" >{{ $role->label}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -33,7 +33,7 @@
                                             <label for="permission" class="form-label">دسترسی ها </label>
                                             <select id="permission_id[]" class="form-control department-name select2input" name="permission_id[]" multiple>
                                                 @foreach(\App\Models\Permission::latest()->get() as $permission){
-                                                <option value="{{ $permission->id }}" {{ in_array(trim($permission->id) , $role->permissions->pluck('id')->toArray()) ? 'selected' : ''  }}>{{ $permission->name }} - {{ $permission->label }}</option>
+                                                <option value="{{ $permission->id}}" {{ in_array(trim($permission->id) , $role->permissions->pluck('id')->toArray()) ? 'selected' : ''  }}>{{ $permission->name }} - {{ $permission->label }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

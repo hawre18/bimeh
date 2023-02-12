@@ -31,7 +31,11 @@
                                         <td class="p-3">{{$plane->charge}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('plane.edit',$plane->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
-                                            <a href="{{route('plane.destroy',$plane->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <form method="post" action="{{route('plane.destroy',$plane->id)}}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

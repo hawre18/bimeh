@@ -26,11 +26,15 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$service->title}}</td>
-                                        <td class="p-3">{{$service->description}}</td>
+                                        <td class="p-3">{{$service->label}}</td>
                                         <td class="p-3"> {{$service->price}} </td>
                                         <td class="text-end p-3">
                                             <a href="{{route('services.edit',$service->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
-                                            <a href="{{route('services.destroy',$service->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <form method="post" action="{{route('services.destroy',$service->id)}}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

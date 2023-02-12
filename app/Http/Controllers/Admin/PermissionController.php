@@ -17,9 +17,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions=Permission::latest('created_at')->paginate(20);
+        $permissiones=Permission::latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.permission.index')){
-            return view('index.v1.admin.permission.index',compact(['permissions']));
+            return view('index.v1.admin.permission.index',compact(['permissiones']));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -87,11 +87,11 @@ class PermissionController extends Controller
     public function edit($id)
     {
         if(View::exists('index.v1.admin.permission.edit')){
-            $permission=Permission::findorfail($id)->first();
-            if(count(array($permission))>0){
+            $permission=Permission::findorfail($id);
+            if(($permission)!=null){
                 return view('index.v1.admin.permission.edit',compact(['permission']));
             }
-            elseif(count(array($permission))<=0){
+            elseif(($permission)==null){
                 alert()->error('خطا','مقام مورد نظر یافت نشد');
                 return redirect('/admin/permission');
             }
@@ -115,7 +115,7 @@ class PermissionController extends Controller
             'label' => 'required|min:3',
         ]);
         try{
-            $permission=Permission::findorfail($id)->first();
+            $permission=Permission::findorfail($id);
             $permission->name=$request->input('name');
             $permission->label=$request->input('label');
             $permission->save();
@@ -138,14 +138,18 @@ class PermissionController extends Controller
     {
         try{
             $permission=Permission::findorfail($id);
-            if(count(array($permission))>0) {
+            if(($permission)!=null) {
                 $permission->delete();
                 alert()->success('موفقیت آمیز', ' دسترسی با موفقیت حذف شد');
                 return redirect('admin/permission');
             }
+            else{
+                alert()->success('خطا', ' رکوردی یافت نشد');
+                return redirect('admin/permission');
+            }
         }
         catch (\Exception $m){
-            alert()->erorr(' خطا','خطا در حذف رکورد');
+            alert()->success(' خطا','خطا در حذف رکورد');
             return redirect('admin/permission');
         }
     }

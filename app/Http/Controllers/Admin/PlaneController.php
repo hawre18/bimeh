@@ -94,11 +94,11 @@ class PlaneController extends Controller
     {
         if(View::exists('index.v1.admin.plane.edit')){
             $plane=Plane::findorfail($id);
-            if(count(array($plane))>0){
+            if(($plane)!=null){
                 return view('index.v1.admin.plane.edit',compact(['plane']));
             }
-            elseif(count(array($plane))<=0){
-                alert()->error('خطا','کاربری یافت نشد');
+            elseif(!(($plane)!=null)){
+                alert()->error('خطا','طرح موردنظر یافت نشد');
                 return redirect('/admin/plane');
             }
             elseif(!(View::exists('index.v1.admin.plane.edit'))){
@@ -148,7 +148,7 @@ class PlaneController extends Controller
     {
         try{
             $plane=Plane::findorfail($id);
-            if(count(array($plane))>0){
+            if(($plane)!=null){
             $plane->delete();
             alert()->success('موفقیت آمیز','طرح با موفقیت حذف شد');
             return redirect('admin/plane');

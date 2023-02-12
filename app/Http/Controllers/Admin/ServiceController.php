@@ -62,7 +62,7 @@ class ServiceController extends Controller
             $service->price=$request->input('price');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت اضافه شد');
-            return redirect('admin/services/create');
+            return redirect('admin/services');
         }
         catch (\Exception $m){
             alert()->warning(' خطا','خطا در ثبت رکورد');
@@ -90,12 +90,12 @@ class ServiceController extends Controller
     public function edit($id)
     {
         if(View::exists('index.v1.admin.services.edit')){
-            $services=Service::findorfail($id);
-            if(count(array($services))>0){
-                return view('index.v1.admin.services.edit',compact(['services']));
+            $service=Service::findorfail($id);
+            if(($service)!=null){
+                return view('index.v1.admin.services.edit',compact(['service']));
             }
-            elseif(count(array($services))<=0){
-                alert()->error('خطا','کاربری یافت نشد');
+            elseif(!(($service))!=null){
+                alert()->error('خطا','سرویس یافت نشد');
                 return redirect('/admin/services');
             }
             elseif(!(View::exists('index.v1.admin.services.edit'))){
@@ -115,13 +115,13 @@ class ServiceController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required',
-            'description' => 'required',
+            'label' => 'required',
             'price' => 'required'
         ]);
         try{
             $service=Service::findorfail($id);
             $service->title=$request->input('title');
-            $service->label=$request->input('description');
+            $service->label=$request->input('label');
             $service->price=$request->input('price');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت ویرایش شد');
@@ -143,7 +143,7 @@ class ServiceController extends Controller
     {
         try {
             $service=Service::findorfail($id);
-            if(count(array($service))>0){
+            if(($service)!=null){
                 $service->delete();
                 alert()->success('موفقیت آمیز','خدمت با موفقیت حذف شد');
                 return redirect('admin/services');

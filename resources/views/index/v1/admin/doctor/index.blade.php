@@ -35,7 +35,25 @@
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($doctor->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('doctors.edit',$doctor->id)}}" class="btn btn-icon btn-pills btn-soft-primary">ویرایش</a>
-                                            <a href="{{route('doctors.destroy',$doctor->id)}}" class="btn btn-icon btn-pills btn-soft-danger">حذف</a>
+                                            <form method="post" action="{{route('doctors.destroy',$doctor->id)}}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>
+                                            </form>
+                                            @if($doctor->is_active==0)
+                                                <form method="post" action="{{route('doctors.active',$doctor->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button type="submit" class="btn btn-icon btn-pills btn-soft-success">A</button>
+                                                </form>
+                                            @endif
+                                            @if($doctor->is_active==1)
+                                                <form method="post" action="{{route('doctors.active',$doctor->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">DA</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -15,8 +15,10 @@
                             <tr>
                                 <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
+                                <th class="border-bottom p-3" style="min-width: 150px;">نام کاربری</th>
                                 <th class="border-bottom p-3">کدملی</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
+                                <th class="border-bottom p-3" style="min-width: 150px;"> ایمیل</th>
                                 <th class="border-bottom p-3">تاریخ عضویت</th>
                                 <th class="border-bottom p-3">علیات</th>
                             </tr>
@@ -25,17 +27,15 @@
                                 <tr>
                                     <td class="p-3">{{$customer->f_name}}</td>
                                     <td class="p-3">{{$customer->l_name}}</td>
+                                    <td class="p-3">{{$customer->user_name}}</td>
                                     <td class="p-3">{{$customer->nationalcode}}</td>
                                     <td class="p-3"> {{$customer->phone}} </td>
+                                    <td class="p-3"> {{$customer->ایمیل}} </td>
                                     <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($customer->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                     <td class="text-end p-3">
                                         <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
                                         <a href="{{route('wallet.charge',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>
-                                        <form method="post" action="{{route('customer.destroy',$customer->id)}}">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>
-                                        </form>
+                                        <a href="{{route('customer.destroy',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -62,11 +62,7 @@
                                     <td class="p-3"> {{$address->postcode}} </td>
                                     <td class="p-3"> {{$address->phone}} </td>
                                     <td class="text-end p-3">
-                                        <form method="post" action="{{route('address.destroy',$address->id)}}">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>
-                                        </form>
+                                        <a href="{{route('address.destroy',$address->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
                                     </td>
                                 </tr>
                             @endforeach

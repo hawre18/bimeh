@@ -19,13 +19,13 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{ $permission->name or old('name') }}">
+                                            <input type="text" class="form-control" placeholder="به لاتین وارد شود" name="name" required="" value="{{ $permission->name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">عنوان دسترسی<span class="text-danger">*</span></label>
-                                            <textarea type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" >{{ $permission->label or old('label') }}</textarea>
+                                            <textarea type="text" class="form-control" placeholder="عنوان دسترسی" name="label" required="" >{{ $permission->label}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

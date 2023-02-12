@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\View;
@@ -62,6 +63,10 @@ class CustomerController extends Controller
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
             $customer->save();
+            $wallets=new Wallet();
+            $wallets->customer_id=$customer->id;
+            $wallets->modeCharge=0;
+            $wallets->save();
             alert()->success('موفقیت آمیز','مشتری با موفقیت اضافه شد');
             return redirect('/admin/customer');
         }
@@ -159,17 +164,17 @@ class CustomerController extends Controller
     {
         try {
             $customer=Customer::findorfail($id);
-            if(count(array($customer))>0){
+            if(($customer)!=null){
                 $customer->delete();
                 alert()->success('موفقیت آمیز','مشتری با موفقیت حذف شد');
                 return redirect('/admin/customer');
             }else{
-                alert()->error('خطا','کاربری یافت نشد');
+                alert()->success('خطا','کاربری یافت نشد');
                 return redirect('/admin/customer');
             }
         }
         catch(\Exception $m){
-            alert()->error('خطا','مشکلی در انجام عملیات وجود دارد');
+            alert()->success('خطا','مشکلی در انجام عملیات وجود دارد');
             return redirect('/admin/customer');
         }
     }

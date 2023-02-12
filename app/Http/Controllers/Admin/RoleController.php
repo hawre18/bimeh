@@ -91,11 +91,11 @@ class RoleController extends Controller
     public function edit($id)
     {
         if(View::exists('index.v1.admin.role.edit')){
-            $role=Role::findorfail($id)->first();
-            if(count(array($role))>0){
+            $role=Role::findorfail($id);
+            if(($role)!=null){
                 return view('index.v1.admin.role.edit',compact(['role']));
             }
-            elseif(count(array($role))<=0){
+            elseif(!(($role))!=null){
                 alert()->error('خطا','مقام مورد نظر یافت نشد');
                 return redirect('/admin/role');
             }
@@ -120,7 +120,7 @@ class RoleController extends Controller
             'permission_id'=>'required'
         ]);
         try{
-            $role=Role::findorfail($id)->with('permissiones')->first();
+            $role=Role::where('id',$id)->with('permissions')->first();
             $role->name=$request->input('name');
             $role->label=$request->input('label');
             $role->save();
@@ -129,7 +129,8 @@ class RoleController extends Controller
             return redirect('/admin/role');
         }
         catch (\Exception $m){
-            alert()->error('خطا','خطا در ویرایش رکورد');
+            return $m;
+            alert()->success('خطا','خطا در ویرایش رکورد');
             return redirect('/admin/role');
         }
     }
@@ -144,7 +145,7 @@ class RoleController extends Controller
     {
         try{
             $role=Role::findorfail($id);
-            if(count(array($role))>0){
+            if(($role)!=null){
             $role->delete();
             alert()->success('موفقیت آمیز','مقام دسترسی با موفقیت حذف شد');
             return redirect('admin/role');
