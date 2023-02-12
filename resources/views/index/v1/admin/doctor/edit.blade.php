@@ -11,9 +11,10 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ویرایش کاربر</h4>
-                            <form method="post" action="/admin/doctors" class="login-form mt-4" enctype="multipart/form-data">
-                                @csrf
+                            <h4 class="text-center">ویرایش متخصص</h4>
+                            <form method="post" action="{{route('doctor.upadte',$doctor->id)}}" class="login-form mt-4" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">

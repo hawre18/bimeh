@@ -41,9 +41,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('doctors/edit','DoctorController@edit')->name('doctors.edit');
     Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge');
     Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging');
-    Route::group(['prefix'=>'users'],function (){
+    Route::group(['prefix'=>'user'],function (){
         Route::get('/','UserController@index');
-        Route::post('/{user}/delete','UserController@delete')->name('users.delete');
 
     });
 });

@@ -12,8 +12,9 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ویرایش کاربر</h4>
-                            <form method="post" action="/admin/customer" class="login-form mt-4" enctype="multipart/form-data">
-                                @csrf
+                            <form method="post" action="{{route('customer.update',$customer->id)}}" class="login-form mt-4" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">

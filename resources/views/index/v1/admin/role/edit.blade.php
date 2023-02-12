@@ -11,8 +11,8 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ثبت مقام</h4>
-                            <form method="post" action="/admin/role" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">ویرایش مقام</h4>
+                            <form method="post" action="{{route('role.update',$role->id)}}" class="login-form mt-4" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary">ثبت </button>
+                                            <button class="btn btn-primary">ویرایش </button>
                                         </div>
                                     </div>
                                 </div>

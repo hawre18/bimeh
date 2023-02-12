@@ -11,8 +11,8 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ثبت مقام</h4>
-                            <form method="post" action="/admin/permission" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">ویرایش مقام</h4>
+                            <form method="post" action="{{route('permission.update',$permission->id)}}" class="login-form mt-4" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">
