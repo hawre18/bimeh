@@ -164,9 +164,7 @@
         <div class="container-fluid">
             <div class="layout-specing">
                 <div class="row">
-                    <div class="col-xl-9 col-md-6">
-                        <h5 class="mb-0">خانه</h5>
-                    </div><!--end col-->
+
 
                     @yield('content')
 

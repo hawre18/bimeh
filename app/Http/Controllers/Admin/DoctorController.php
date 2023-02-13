@@ -24,9 +24,9 @@ class DoctorController extends Controller
         $doctors=Doctor::latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.doctor.index')){
         return view('index.v1.admin.doctor.index',compact(['doctors']));
-        }else{
-            abort(Response::HTTP_NOT_FOUND);
         }
+            abort(Response::HTTP_NOT_FOUND);
+
 
     }
 

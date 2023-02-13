@@ -9,6 +9,8 @@ use App\Models\Service;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class SellController extends Controller
@@ -16,11 +18,17 @@ class SellController extends Controller
     public function index()
     {
         $sells=Sell::where('doctor_id',auth()->guard('doctor')->user()->id)->with('customer')->get();
-        return view('index.v1.doctor.factor',compact(['sells']));
+        if(View::exists('index.v1.doctor.factor')){
+            return view('index.v1.doctor.factor',compact(['sells']));
+        }
+        abort(Response::HTTP_NOT_FOUND);
     }
     public function create()
     {
-        return view('index.v1.doctor.sell');
+        if(View::exists('index.v1.doctor.sell')){
+            return view('index.v1.doctor.sell');
+        }
+       abort(Response::HTTP_NOT_FOUND);
     }
 
     public function store(Request $request)
@@ -30,7 +38,7 @@ class SellController extends Controller
         try{
         $sell=new Sell();
         $sell->customer_id=$request->input('customer');
-        $sell->doctor_id=1;
+        $sell->doctor_id=auth()->guard('doctor')->user()->id;
         foreach($request->input('service') as $service){
             $ser=Service::findorfail($service)->first();
             $serviceId=[$ser->id];
@@ -86,5 +94,24 @@ class SellController extends Controller
         $sell=Sell::with('services')->where('id',$id)->first();
         $customer=Customer::where('nationalcode',$nationalcode)->first();
         return view('index.v1.doctor.sellShow',compact(['sell','customer']));
+    }
+
+    public function destro($id)
+    {
+        try {
+            $sell=Sell::findorfail($id);
+            if(($sell)!=null){
+                $sell->delete();
+                alert()->success('موفقیت آمیز','فاکتور با موفقیت حذف شد');
+                return redirect('doctors/sells/index');
+            }else{
+                alert()->error('خطا','فاکتور موردنظر یافت نشد');
+                return redirect('/doctors/sells/index');
+            }
+        }
+        catch(\Exception $m){
+            alert()->erorr(' خطا','خطا در حذف رکورد');
+            return redirect('doctors/sells/index');
+        }
     }
 }

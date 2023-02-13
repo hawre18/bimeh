@@ -9,7 +9,7 @@ Route::namespace('App\Http\Controllers\Doctor\Auth')->prefix('doctors')->group(f
     Route::middleware('guest:doctor')->group(function(){
         //login route
         Route::get('/logins','LoginController@login')->name('logins');
-        Route::post('/logins','LoginController@processLogin')->name('doctors.login');
+        Route::post('/logins','LoginController@processLogin')->name('doctors.logins');
     });
 
 
@@ -19,6 +19,7 @@ Route::namespace('App\Http\Controllers\Doctor')->prefix('doctors')->middleware('
     Route::get('sells/create','SellController@create')->name('sells.create');
     Route::post('selling','SellController@store');
     Route::get('sells/index','SellController@index')->name('sells.index');
+    Route::post('/sell/destroy','SellController@destroy')->name('sell.destroy');
     Route::get('home','DoctorController@home')->name('doctors.home');
     Route::get('sells/show/{idSell}/{idCustomer}','SellController@show')->name('sell.show');
     Route::get('sells/pay/{sellId}/{customerId}','SellController@payment')->name('sell.pay');
