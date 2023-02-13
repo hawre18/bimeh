@@ -38,7 +38,8 @@
                                         @endif
                                         <td class="p-3"> {{$sell->totalPrice}} </td>
                                         <td class="text-end p-3">
-                                            <a href="" class="btn btn-icon btn-pills btn-soft-primary">dfg</a>
+                                            @if($sell->status==0)
+                                            <a href="{{route('sell.edit',$sell->id)}}" class="btn btn-icon btn-pills btn-soft-primary">ویرایش</a>
                                             <form method="post" action="{{route('sell.pay',$sell->id)}}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('PATCH') }}
@@ -49,6 +50,8 @@
                                                 {{ method_field('DELETE') }}
                                                 <button class="btn btn-icon btn-pills btn-soft-primary" type="submit">حذف</button>
                                             </form>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

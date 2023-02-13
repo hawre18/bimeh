@@ -17,7 +17,7 @@ class SellController extends Controller
 {
     public function index()
     {
-        $sells=Sell::where('doctor_id',auth()->guard('doctor')->user()->id)->with('customer')->get();
+        $sells=Sell::where('doctor_id',auth()->guard('doctor')->user()->id)->with('customer')->paginate(20);
         if(View::exists('index.v1.doctor.factor')){
             return view('index.v1.doctor.factor',compact(['sells']));
         }
@@ -74,29 +74,36 @@ class SellController extends Controller
         return response()->json($response,200);
     }
 
-    public function payment($sellId, $customerId)
+    public function payment($id)
     {
-        $sell=Sell::where('id',$sellId)->with('services')->first();
-        $sells=Sell::where('doctor_id',Auth::guard('doctor')->user()->id)->with('customer')->paginate(20);
-        $wallet=Wallet::where('customer_id',$customerId)->first();
+
+        $sell=Sell::where('id',$id)->with('services','customer','doctor')->first();
+        $wallet=Wallet::where('customer_id',$sell->customer->id)->first();
         if($wallet->modeCharge>0){
-            $wallet->modeCharge=$wallet->modeCharge-$sell->totalprice;
+            $wallet->modeCharge=0;
             $wallet->save();
             $sell->status=1;
             $sell->save();
-            return view('index.v1.doctor.factor',compact(['sells']));
-        }
+            return redirect()->action([
+                SellController::class,
+                'index'
+            ])->alert()->success('موفقیت آمیز','فاکتور با موفقیت پرداخت شد');
+            }
+        return redirect()->action([
+            SellController::class,
+            'index'
+        ])->alert()->success('خطا','فاکتور پرداخت نشد');
 
     }
 
     public function show($id, $nationalcode)
     {
-        $sell=Sell::with('services')->where('id',$id)->first();
+        $sell=Sell::with('services')->where('id',$id)->get();
         $customer=Customer::where('nationalcode',$nationalcode)->first();
         return view('index.v1.doctor.sellShow',compact(['sell','customer']));
     }
 
-    public function destro($id)
+    public function destroy($id)
     {
         try {
             $sell=Sell::findorfail($id);
