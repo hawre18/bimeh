@@ -24,6 +24,7 @@ Route::namespace('App\Http\Controllers\Doctor')->prefix('doctors')->middleware('
     Route::get('home','DoctorController@home')->name('doctors.home');
     Route::get('sells/show/{idSell}/{idCustomer}','SellController@show')->name('sell.show');
     Route::patch('sells/pay/{id}','SellController@payment')->name('sell.pay');
-    Route::get('/logout','Auth\LoginController@doctorLogout')->name('doctor.logout');
+    Route::get('/logout','Auth\LoginController@doctorLogout')->name('doctors.logout');
+    Route::get('/sellpdf/{id}','SellController@createPDF')->name('sell.pdf');
 
 });

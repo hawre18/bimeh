@@ -15,5 +15,9 @@ class Customer extends Model
     {
         return $this->hasMany(Sell::class);
     }
+    public function wallet()
+    {
+        return $this->hasone(Wallet::class);
+    }
 
 }

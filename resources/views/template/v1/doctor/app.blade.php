@@ -45,8 +45,8 @@
         <div class="sidebar-content" data-simplebar="" style="height: calc(100% - 60px);">
             <div class="sidebar-brand">
                 <a href="{{route('doctors.home')}}">
-                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="logo-light-mode" alt="">
+                    <img src="{{asset('assets/v1/admin/images/logo-light.png')}}" height="24" class="logo-dark-mode" alt="">
                 </a>
             </div>
 
@@ -64,19 +64,15 @@
                 </li>
 
                 <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="uil uil-wheelchair ms-2 d-inline-block"></i>بیماران</a>
+                    <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>پروفایل</a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li><a href="patients.html">بیماران</a></li>
-                            <li><a href="add-patient.html">افزودن بیمار</a></li>
-                            <li><a href="patient-profile.html">پروفایل</a></li>
-                            <li><a href="patient-profile.html">پروفایل</a></li>
-                            <li><a class="dropdown-item text-dark" href="{{route('logout')}}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
+                            <li><a class="dropdown-item text-dark" href="{{route('doctors.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    <span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
                                 <form id="logout-form" action="/doctors/logout" method="POST" class="d-none">
                                     @csrf
-                                </form></li>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -84,13 +80,6 @@
             <!-- sidebar-menu  -->
         </div>
         <!-- sidebar-content  -->
-        <ul class="sidebar-footer list-unstyled mb-0">
-            <li class="list-inline-item mb-0 me-1">
-                <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                    <i class="uil uil-comment icons"></i>
-                </a>
-            </li>
-        </ul>
     </nav>
     @endif
     <!-- sidebar-wrapper  -->
@@ -100,13 +89,12 @@
         @if(Auth::guard('doctor')->check())
         <div class="top-header">
             <div class="header-bar d-flex justify-content-between border-bottom">
-
                 <div class="d-flex align-items-center">
                     <a href="{{route('doctors.home')}}" class="logo-icon">
-                        <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
+                        <img src="{{asset('assets/v1/admin/images/logo-icon.png')}}" height="30" class="small" alt="">
                         <span class="big">
-                            <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                            <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                            <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="logo-light-mode" alt="">
+                            <img src="{{asset('assets/v1/admin/images/logo-light.png')}}" height="24" class="logo-dark-mode" alt="">
                         </span>
                     </a>
                     <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary me-2" href="#">
@@ -117,33 +105,16 @@
                 <ul class="list-unstyled mb-0">
                     <li class="list-inline-item mb-0 me-1">
                         <div class="dropdown dropdown-primary">
-                            <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">پیام های خوانده نشده</span></span>
-
-                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar="" style="height: 320px; width: 300px;">
-                                <a href="#" class="d-flex align-items-center justify-content-between py-2">
-                                    <div class="d-inline-flex position-relative overflow-hidden">
-                                        <img src="../assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                        <small class="text-dark mb-0 d-block text-truncat ms-3"> یک ایمیل جدید دریافت کردید <b> جولیا </b> <small class="text-muted fw-normal d-inline-block">1 ساعت قبل</small></small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="list-inline-item mb-0 me-1">
-                        <div class="dropdown dropdown-primary">
-                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/v1/admin/images/doctors/01.jpg')}}" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                                <a class="dropdown-item d-flex align-items-center text-dark" href="">
-                                    <img src="../assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow ms-2" alt="">
+                                <a class="dropdown-item d-flex align-items-center text-dark" href="profile.html">
+                                    <img src="{{asset('assets/v1/admin/images/doctors/01.jpg')}}" class="avatar avatar-md-sm rounded-circle border shadow ms-2" alt="">
                                     <div class="flex-1 ">
                                         <span class="d-block mb-1" >{{Auth::guard('doctor')->user()->fname ." "}}{{Auth::guard('doctor')->user()->lname}}</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-dark" href="{{route('doctors.home')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span>داشبرد</a>
-                                <div class="dropdown-divider border-top"></div>
-                                <a class="dropdown-item text-dark" href="{{route('logout')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
+                                <a class="dropdown-item text-dark" href="{{route('doctors.logout')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
                             </div>
                         </div>
                     </li>
@@ -155,9 +126,7 @@
         <div class="container-fluid">
             <div class="layout-specing">
                 <div class="row">
-                    <div class="col-xl-9 col-md-6">
-                        <h5 class="mb-0">خانه</h5>
-                    </div><!--end col-->
+
 
                     @yield('content')
 

@@ -7,8 +7,12 @@
     <div class="container-fluid">
         <div class="layout-specing">
             <div class="row">
+                <div class="col-xl-9 col-md-6">
+                    <h5 class="mb-0">جزئیات فاکتور</h5>
+                </div><!--end col-->
                 <div class="col-12 mt-4">
                     <div class="table-responsive bg-white shadow rounded">
+                        <div class="label alert-success"><span>موجودی کیف پول: </span>{{$customer->wallet->modeCharge}}</div>
                         <table class="table mb-0 table-center">
                             <thead>
                             <tr>
@@ -28,7 +32,12 @@
                                     <td class="p-3">{{$sell->id}}</td>
                                     <td class="p-3"> @foreach($sell->services as $service){{$service->title.','}} @endforeach</td>
                                     <td class="p-3"> {{$sell->totalPrice}} </td>
-                                    <td class="text-end p-3"><div class="  mt-4 mt-md-0 text-left"><a href="{{route('sell.pay',['sellId'=>$sell->id,'customerId'=>$customer->id])}}" class="btn btn-primary">پرداخت</a></div></td>
+                                    <td class="text-end p-3"><div class="  mt-4 mt-md-0 text-left">
+                                            <form method="post" action="{{route('sell.pay',$sell->id)}}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PATCH') }}
+                                                <button class="btn btn-primary" type="submit">pay</button>
+                                            </form></div></td>
                                 </tr>
                             </tbody>
                         </table>

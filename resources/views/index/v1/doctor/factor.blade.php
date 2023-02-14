@@ -4,24 +4,29 @@
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
 @section('content')
+    <div class="row">
+        <div class="col-xl-9 col-md-6">
+            <h5 class="mb-0">فاکتورها</h5>
+        </div><!--end col-->
         <div class="container-fluid">
             <div class="layout-specing">
-                <div class="row">
-                    <div class="col-12 mt-4">
-                        <div class="table-responsive bg-white shadow rounded">
-                            <table class="table mb-0 table-center">
+                <div ><a class="btn btn-primary" href="{{route('sells.index')}}">ایجاد فاکتور</a></div>
+                <div class="col-12 mt-4">
+                    <div class="table-responsive bg-white shadow rounded">
+                        <table class="table mb-0 table-center">
+
                                 <thead>
-                                <tr>
-                                    <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                    <th class="border-bottom p-3" style="min-width: 180px;">مشتری</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">تاریخ صدور</th>
-                                    <th class="border-bottom p-3">کدفاکتور</th>
-                                    <th class="border-bottom p-3">وضعیت</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;"> مبلغ</th>
-                                    <th class="border-bottom p-3">علیات</th>
-                                </tr>
+                                    <tr>
+                                        <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                                        <th class="border-bottom p-3" style="min-width: 180px;">مشتری</th>
+                                        <th class="border-bottom p-3" style="min-width: 150px;">تاریخ صدور</th>
+                                        <th class="border-bottom p-3">کدفاکتور</th>
+                                        <th class="border-bottom p-3">وضعیت</th>
+                                        <th class="border-bottom p-3" style="min-width: 150px;"> مبلغ</th>
+                                        <th class="border-bottom p-3">علیات</th>
+                                    </tr>
                                 </thead>
-                                <tbody>
+                            <tbody>
                                 @foreach($sells as $sell)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
@@ -31,35 +36,35 @@
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="p-3">{{$sell->id}}</td>
                                         @if($sell->status==0)
-                                        <td class="p-3">پرداخت نشده</td>
+                                            <td class="p-3" ><span class="label alert-info" >پرداخت نشده</span></td>
                                         @endif
                                         @if($sell->status==1)
-                                            <td class="p-3">پرداخت شده</td>
+                                            <td class="p-3" ><span class="label alert-success">پرداخت شده</span></td>
                                         @endif
                                         <td class="p-3"> {{$sell->totalPrice}} </td>
                                         <td class="text-end p-3">
                                             @if($sell->status==0)
-                                            <a href="{{route('sell.edit',$sell->id)}}" class="btn btn-icon btn-pills btn-soft-primary">ویرایش</a>
-                                            <form method="post" action="{{route('sell.pay',$sell->id)}}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('PATCH') }}
-                                                <button class="btn btn-icon btn-pills btn-soft-success" type="submit">pay</button>
-                                            </form>
-                                            <form method="post" action="{{route('sell.destroy',$sell->id)}}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <button class="btn btn-icon btn-pills btn-soft-primary" type="submit">حذف</button>
-                                            </form>
-                                            @endif
-
+                                                <a href="{{route('sell.edit',$sell->id)}}" class="btn  btn-soft-primary">ویرایش</a>
+                                                <a href="{{route('sell.pdf',$sell->id)}}" class="btn  btn-soft-info">PDF</a>
+                                                <form method="post" action="{{route('sell.pay',$sell->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-soft-success" type="submit">pay</button>
+                                                </form>
+                                                <form method="post" action="{{route('sell.destroy',$sell->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                    <button class="btn  btn-soft-danger" type="submit">حذف</button>
+                                                </form>
+                                           @endif
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                </div><!--end row-->
-            </div>
-        </div><!--end container-->
+                </div>
+            </div><!--end row-->
+        </div>
+    </div><!--end container-->
 @endsection

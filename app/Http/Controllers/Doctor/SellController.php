@@ -7,10 +7,13 @@ use App\Models\Customer;
 use App\Models\Sell;
 use App\Models\Service;
 use App\Models\Wallet;
+use Dompdf\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
+use PDF;
+use Illuminate\Support\Facades\App;
 
 
 class SellController extends Controller
@@ -51,7 +54,6 @@ class SellController extends Controller
             return back();
         }
         catch (\Exception $m){
-            return $m;
             alert()->erorr(' خطا','خطا در صدور فاکتور');
             return back();
         }
@@ -79,35 +81,47 @@ class SellController extends Controller
 
         $sell=Sell::where('id',$id)->with('services','customer','doctor')->first();
         $wallet=Wallet::where('customer_id',$sell->customer->id)->first();
-        if($wallet->modeCharge>0){
-            $wallet->modeCharge=0;
-            $wallet->save();
-            $sell->status=1;
-            $sell->save();
+        try {
+            if($sell->status==0&&$wallet->modeCharge>0){
+                $sell->pricePay=$sell->totalprice-$wallet->modeCharge;
+                $wallet->modeCharge=0;
+                $wallet->save();
+                $sell->status=1;
+                $sell->save();
+                alert()->success('موفقیت آمیز','فاکتور با موفقیت پرداخت شد');
+                return redirect()->action([
+                    SellController::class,
+                    'index'
+                ]);
+            }
+
+        }catch (\Exception $m){
+            alert()->success('خطا','فاکتور پرداخت نشد');
             return redirect()->action([
                 SellController::class,
                 'index'
-            ])->alert()->success('موفقیت آمیز','فاکتور با موفقیت پرداخت شد');
-            }
-        return redirect()->action([
-            SellController::class,
-            'index'
-        ])->alert()->success('خطا','فاکتور پرداخت نشد');
-
+            ]);
+        }
     }
 
     public function show($id, $nationalcode)
     {
-        $sell=Sell::with('services')->where('id',$id)->get();
-        $customer=Customer::where('nationalcode',$nationalcode)->first();
-        return view('index.v1.doctor.sellShow',compact(['sell','customer']));
+        $sell=Sell::with('services','customer')->where('id',$id)->first();
+        if($sell!=null){
+            $customer=Customer::where('nationalcode',$nationalcode)->with('wallet')->first();
+            return view('index.v1.doctor.sellShow',compact(['sell','customer']));
+        }
+        return redirect()->action([
+            SellController::class,
+            'index'
+        ])->alert()->success('خطا','فاکتور پرداخت نشد');
     }
 
     public function destroy($id)
     {
         try {
             $sell=Sell::findorfail($id);
-            if(($sell)!=null){
+            if(($sell)!=null&&$sell->status==0){
                 $sell->delete();
                 alert()->success('موفقیت آمیز','فاکتور با موفقیت حذف شد');
                 return redirect('doctors/sells/index');
@@ -120,5 +134,15 @@ class SellController extends Controller
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('doctors/sells/index');
         }
+    }
+    public function createPDF($id) {
+        // retreive all records from db
+        $sell = Sell::with('services','customer')->where('id',$id)->first();
+        $customer=Customer::where('id',$sell->customer_id)->first();
+        // share data to view
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('index.v1.doctor.sellShow',compact(['sell','customer']));
+        // download PDF file with download method
+        return $pdf->stream();
     }
 }
