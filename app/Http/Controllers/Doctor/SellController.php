@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
-use PDF;
+use NPDF;
 use Illuminate\Support\Facades\App;
 
 
@@ -137,12 +137,10 @@ class SellController extends Controller
     }
     public function createPDF($id) {
         // retreive all records from db
-        $sell = Sell::with('services','customer')->where('id',$id)->first();
-        $customer=Customer::where('id',$sell->customer_id)->first();
+        $sell=Sell::with('services','customer')->where('id',$id)->first();
+        $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
         // share data to view
-        $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('index.v1.doctor.sellShow',compact(['sell','customer']));
-        // download PDF file with download method
-        return $pdf->stream();
+        $pdf = NPDF::loadView('index.v1.doctor.sellShow',compact(['sell','customer']));
+        return $pdf->download('sample.pdf');
     }
 }

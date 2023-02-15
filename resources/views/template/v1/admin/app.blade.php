@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>سامانه جامع مدیریت شرکت</title>
+    <title> سامانه جامع مدیریت شرکت آوا سلامت</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Premium Bootstrap 4 Landing Page Template">
     <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health">
@@ -44,34 +44,41 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar="" style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
-                    <a href="{{route('doctors.home')}}">
-                        <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                        <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <a href="{{route('admin.home')}}">
+                        <img src="{{asset('assets/v1/admin/images/logo-dark.png')}}" height="24" class="logo-light-mode" alt="">
+                        <img src="{{asset('assets/v1/admin/images/logo-light.png')}}" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
 
                 <ul class="sidebar-menu pt-3">
-                    <li><a href="{{route('doctors.home')}}"><i class="uil uil-dashboard ms-2 d-inline-block"></i>داشبرد</a></li>
+                    <li><a href="{{route('admin.home')}}"><i class="uil uil-dashboard ms-2 d-inline-block"></i>داشبرد</a></li>
 
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>فاکتور</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('sells.index')}}">فاکتورهای پرداخت نشده</a></li>
-                                <li><a href="{{route('sells.index')}}">فاکتورهای پرداخت شده</a></li>
+                                <li><a href="{{route('sells.index')}}">فاکتورها</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>دکترها</a>
+                        <a href="javascript:void(0)"><i class="uil uil-nurse ms-2 d-inline-block"></i>دکترها</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('sells.index')}}">افزودن دکتر</a></li>
-                                <li><a href="{{route('sells.index')}}">لیست دکترها</a></li>
+                                <li><a href="{{route('doctor.create')}}">افزودن دکتر</a></li>
+                                <li><a href="{{route('doctor.index')}}">لیست دکترها</a></li>
                             </ul>
                         </div>
                     </li>
-
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>کاربران</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('user.create')}}">افزودن دکتر</a></li>
+                                <li><a href="{{route('user.index')}}">لیست دکترها</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-wheelchair ms-2 d-inline-block"></i>بیماران</a>
                         <div class="sidebar-submenu">

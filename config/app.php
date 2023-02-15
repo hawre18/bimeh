@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -236,7 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'NPDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
 
