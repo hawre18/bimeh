@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class LevelManageController extends Controller
 {
@@ -13,13 +14,19 @@ class LevelManageController extends Controller
     {
 
         $roles=Role::latest()->with('users')->paginate(20);
-        return view('index.v1.admin.levelAdmins.index',compact(['roles']));
+        if(View::exist('index.v1.admin.levelAdmins.index')){
+            return view('index.v1.admin.levelAdmins.index',compact(['roles']));
+        }
+        abort(Response::HTTP_NOT_FOUND);
     }
     public function create()
     {
         $users=User::whereLevel('admin')->get();
         $roles=Role::all();
-        return view('index.v1.admin.levelAdmins.create',compact(['users','roles']));
+        if(View::exists('index.v1.admin.levelAdmins.create')){
+            return view('index.v1.admin.levelAdmins.create',compact(['users','roles']));
+        }
+        abort(Response::HTTP_NOT_FOUND);
     }
 
     public function store(Request $request)
@@ -31,10 +38,11 @@ class LevelManageController extends Controller
         try{
             $users=findorfail($request->input('user_id'))->roles()->sync($request->input('roles_id'));
             alert()->success('موفقیت آمیز',' دسترسی با موفقیت اضافه شد');
-            return redirect('/admin/level/create');
+            return redirect('/admin/level');
         }
         catch (\Exception $m){
-            return $m;
+            alert()->success('خطا','خطا در درج رکورد');
+            return redirect('/admin/level/create');
         }
     }
     public function destroy(User $user)
@@ -46,7 +54,7 @@ class LevelManageController extends Controller
         }
         catch (\Exception $m){
             alert()->erorr(' خطا','خطا در حذف رکورد');
-            return redirect('admin/permission');
+            return redirect('admin/level');
         }
 
     }

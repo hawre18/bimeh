@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('select-city-component', require('./components/SelectCityComponent.vue').default);
 Vue.component('select-customer-component', require('./components/SelectCustomerComponent.vue').default);
+Vue.component('select-plane-component', require('./components/SelectPlaneComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

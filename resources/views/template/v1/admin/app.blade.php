@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> سامانه جامع مدیریت شرکت آوا سلامت</title>
+    <title> سامانه جامع مدیریت شرکت آوا شفا</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Premium Bootstrap 4 Landing Page Template">
     <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health">
@@ -62,11 +62,11 @@
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-nurse ms-2 d-inline-block"></i>دکترها</a>
+                        <a href="javascript:void(0)"><i class="uil uil-user-nurse ms-2 d-inline-block"></i>دکترها</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('doctor.create')}}">افزودن دکتر</a></li>
-                                <li><a href="{{route('doctor.index')}}">لیست دکترها</a></li>
+                                <li><a href="{{route('doctors.create')}}">افزودن دکتر</a></li>
+                                <li><a href="{{route('doctors.index')}}">لیست دکترها</a></li>
                             </ul>
                         </div>
                     </li>
@@ -74,25 +74,74 @@
                         <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>کاربران</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('user.create')}}">افزودن دکتر</a></li>
-                                <li><a href="{{route('user.index')}}">لیست دکترها</a></li>
+                                <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
+                                <li><a class="dropdown-item text-dark" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
+                                    <form id="logout-form" action="/logout" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
                             </ul>
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-wheelchair ms-2 d-inline-block"></i>بیماران</a>
+                        <a href="javascript:void(0)"><i class="uil uil-plane ms-2 d-inline-block"></i>طرح ها</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="patients.html">بیماران</a></li>
-                                <li><a href="add-patient.html">افزودن بیمار</a></li>
-                                <li><a href="patient-profile.html">پروفایل</a></li>
-                                <li><a href="patient-profile.html">پروفایل</a></li>
-                                <li><a class="dropdown-item text-dark" href="{{route('logout')}}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
-                                    <form id="logout-form" action="/doctors/logout" method="POST" class="d-none">
-                                        @csrf
-                                    </form></li>
+                                <li><a href="{{route('plane.index')}}">لیست طرح ها</a></li>
+                                <li><a href="{{route('plane.create')}}">افزودن طرح </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-servicemark ms-2 d-inline-block"></i>خدمات</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('services.index')}}">لیست خدمات</a></li>
+                                <li><a href="{{route('services.create')}}">افزودن خدمت</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-wheelchair ms-2 d-inline-block"></i>مشتریان</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('customer.index')}}">لیست مشتری ها</a></li>
+                                <li><a href="{{route('customer.create')}}">افزودن مشتری</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-archive ms-2 d-inline-block"></i>مقام ها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('role.index')}}">لیست مقام ها</a></li>
+                                <li><a href="{{route('role.create')}}">افزودن مقام</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-accessible-icon-alt ms-2 d-inline-block"></i>سطوح دسترسی </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('permission.index')}}">لیست سطوح </a></li>
+                                <li><a href="{{route('permission.create')}}">افزودن سطح دسترسی جدید</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-address ms-2 d-inline-block"></i>آدرس ها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('index.address')}}">لیست آدرس ها </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-address ms-2 d-inline-block"></i>فروش ها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('order.index')}}">لیست فروش ها </a></li>
+                                <li><a href="{{route('order.create')}}">ایجاد فروش</a></li>
                             </ul>
                         </div>
                     </li>
@@ -100,13 +149,7 @@
                 <!-- sidebar-menu  -->
             </div>
             <!-- sidebar-content  -->
-            <ul class="sidebar-footer list-unstyled mb-0">
-                <li class="list-inline-item mb-0 me-1">
-                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                        <i class="uil uil-comment icons"></i>
-                    </a>
-                </li>
-            </ul>
+
         </nav>
     @endif
     <!-- sidebar-wrapper  -->
@@ -170,6 +213,7 @@
         @endif
         <div class="container-fluid">
             <div class="layout-specing">
+                @include('template.errors')
                 <div class="row">
 
 

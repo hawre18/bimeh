@@ -25,15 +25,13 @@
                                         @foreach($role->users as $user)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">
-                                            <a href="#" class="text-dark">{{$user->name}}</a>
-                                        </td>
-                                        <td class="p-3">{{$user->email}}</td>
+                                        <td class="p-3">{{$user->f_name}}</td>
+                                        <td class="p-3">{{$user->l_name}}</td>
                                         <td class="p-3">{{$role->label}}</td>
                                         <td class="text-end p-3">
                                             <a href="" class="btn btn-icon btn-pills btn-soft-primary">dfg</a>
                                             <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
-                                            <a href="{{route('level.destroy',$role->id)}}" class="btn btn-icon btn-pills btn-soft-danger" ><i class="uil uil-times-circle"></i></a>
+                                            <a href="{{route('level.destroy',$role->id)}}" class="btn btn-icon  btn-soft-danger" >حذف مقام</a>
                                         </td>
                                     </tr>
                                         @endforeach

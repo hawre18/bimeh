@@ -36,6 +36,10 @@ class SellController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'customer' => 'required',
+            'service' => 'required'
+        ]);
         $serviceId=[];
         $sum=0;
         try{
@@ -140,7 +144,7 @@ class SellController extends Controller
         $sell=Sell::with('services','customer')->where('id',$id)->first();
         $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
         // share data to view
-        $pdf = NPDF::loadView('index.v1.doctor.sellShow',compact(['sell','customer']));
-        return $pdf->download('sample.pdf');
+        $pdf = NPDF::loadView('index.v1.doctor.showFactor',compact(['sell','customer']));
+        return $pdf->stream('report.pdf');
     }
 }

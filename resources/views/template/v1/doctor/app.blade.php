@@ -125,6 +125,7 @@
     @endif
         <div class="container-fluid">
             <div class="layout-specing">
+                @include('template.errors')
                 <div class="row">
 
 
