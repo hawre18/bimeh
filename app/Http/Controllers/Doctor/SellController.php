@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 use NPDF;
 use Illuminate\Support\Facades\App;
-
+use Carbon;
 
 class SellController extends Controller
 {
@@ -143,6 +143,8 @@ class SellController extends Controller
         // retreive all records from db
         $sell=Sell::with('services','customer')->where('id',$id)->first();
         $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
+        $mytime =Carbon::now();
+        $name=$customer->nationalcode+$mytime->toDateTimeString();
         // share data to view
         $pdf = NPDF::loadView('index.v1.doctor.showFactor',compact(['sell','customer']));
         return $pdf->stream('report.pdf');

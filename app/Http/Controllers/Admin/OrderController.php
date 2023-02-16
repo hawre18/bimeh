@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Plane;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Kavenegar;
+use Kavenegar\Exceptions\ApiException;
+use Kavenegar\Exceptions\HttpException;
+
 
 class OrderController extends Controller
 {
+    const FORMAT = "%s = %s <br/>";
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +66,7 @@ class OrderController extends Controller
         ]);
         try{
             $plane=Plane::findorfail($request->input('plane'));
+            $customer=Customer::findorfail($request->input('customer'));
             $order=new Order();
             $order->customer_id=$request->input('customer');
             $order->user_id=auth()->guard('web')->user()->id;
@@ -70,6 +77,21 @@ class OrderController extends Controller
                 $wallet=Wallet::where('customer_id',$request->input('customer'))->first();
                 $wallet->modeCharge=$wallet->modeCharge+$plane->charge;
                 $wallet->save();
+                try {
+                    $sender='2000050066';
+                    $message = "کیف پول شما به مبلغ"+$plane->charge+"تومان شارژ شد";
+                    $receptor = $customer->phone;
+                    $result = Kavenegar::Send( $sender,$receptor,$message);
+                    $this->format($result);
+                    return $result;
+                }catch(ApiException $e){
+                    echo $e->errorMessage();
+                }
+                catch(HttpException $e){
+                    echo $e->errorMessage();
+                }
+
+
             }
             alert()->success('موفقیت آمیز','فروش با موفقیت ثبت شد');
             return back();
@@ -77,6 +99,24 @@ class OrderController extends Controller
         catch (\Exception $m){
             alert()->success(' خطا','خطا در فروش ');
             return back();
+        }
+    }
+    private function format($result)
+    {
+        if($result){
+            echo "<pre>";
+            foreach($result as $r){
+                echo sprintf(self::FORMAT, "messageid", $r->messageid);
+                echo sprintf(self::FORMAT, "message", $r->message);
+                echo sprintf(self::FORMAT, "status", $r->status);
+                echo sprintf(self::FORMAT, "statustext", $r->statustext);
+                echo sprintf(self::FORMAT, "sender", $r->sender);
+                echo sprintf(self::FORMAT, "receptor", $r->receptor);
+                echo sprintf(self::FORMAT, "date", $r->date);
+                echo sprintf(self::FORMAT, "cost", $r->cost);
+                echo "<hr/>";
+            }
+            echo "</pre>";
         }
     }
 

@@ -177,6 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Kavenegar\Laravel\ServiceProvider::class,
+
 
 
 
@@ -236,6 +238,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Kavenegar' => Kavenegar\Laravel\Facade::class,
         'NPDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
