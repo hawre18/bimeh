@@ -20,7 +20,7 @@ Route::namespace('App\Http\Controllers\Doctor')->prefix('doctors')->middleware('
     Route::post('selling','SellController@store');
     Route::get('sells/index','SellController@index')->name('sells.index');
     Route::post('/sell/destroy','SellController@destroy')->name('sell.destroy');
-    Route::post('/sell/edit','SellController@edit')->name('sell.edit');
+    Route::get('dashboard','DoctorController@home')->name('doctor.dashboard');
     Route::get('home','DoctorController@home')->name('doctors.home');
     Route::get('sells/show/{idSell}/{idCustomer}','SellController@show')->name('sell.show');
     Route::patch('sells/pay/{id}','SellController@payment')->name('sell.pay');

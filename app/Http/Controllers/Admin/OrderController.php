@@ -78,12 +78,19 @@ class OrderController extends Controller
                 $wallet->modeCharge=$wallet->modeCharge+$plane->charge;
                 $wallet->save();
                 try {
-                    $sender='2000050066';
-                    $message = "کیف پول شما به مبلغ"+$plane->charge+"تومان شارژ شد";
+                    $sender='10000550002200';
+                    $mes1=$customer->f_name;
+                    $mes2='عزیز '."<br/>";
+
+                    $mes3="کیف پول شما به مبلغ";
+                    $mes4=$plane->charge;
+                    $mes5="تومان شارژ شد. "."<br/>"."<br/>";
+                    $mes6="شفا آوا";
+                    $message = $mes1.$mes2.$mes3.$mes4.$mes5.$mes6;
                     $receptor = $customer->phone;
                     $result = Kavenegar::Send( $sender,$receptor,$message);
                     $this->format($result);
-                    return $result;
+
                 }catch(ApiException $e){
                     echo $e->errorMessage();
                 }

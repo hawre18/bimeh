@@ -20,6 +20,10 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/services','SellController@getAllService');
     Route::get('/planes','OrderController@getAllPlane');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
+    Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
+});
+Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
+    Route::get('/wallet/{customerId}','SellController@getWallet');
 });
 //,'middleware'=>['auth:web','checkAdmin']
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){

@@ -5389,6 +5389,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5396,6 +5402,7 @@ __webpack_require__.r(__webpack_exports__);
       customer: 'مشتری را انتخاب کنید',
       customers: [],
       services: [],
+      wallets: [],
       flag: false,
       price: '',
       sumMoney: '0'
@@ -5414,6 +5421,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
       axios.get('/api/services').then(function (res) {
         _this2.services = res.data.services;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    getWallet: function getWallet() {
+      var _this3 = this;
+      axios.get('/apiDoctor/wallet/' + this.customer).then(function (res) {
+        _this3.wallets = res.data.wallets;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -28587,7 +28602,7 @@ var render = function () {
                   : $$selectedVal[0]
               },
               function ($event) {
-                return _vm.getAllServices()
+                _vm.getAllServices(), _vm.getWallet()
               },
             ],
           },
@@ -28608,6 +28623,26 @@ var render = function () {
         2
       ),
     ]),
+    _vm._v(" "),
+    _vm.customer > 0
+      ? _c(
+          "div",
+          [
+            _c("label", { staticClass: "form-label" }, [
+              _vm._v("موجودی کیف پول:"),
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm._l(_vm.wallets, function (wallet) {
+              return _c("label", { staticClass: "alert alert-info" }, [
+                _vm._v(_vm._s(wallet.modeCharge + " تومان")),
+              ])
+            }),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.customer > 0
       ? _c("div", [

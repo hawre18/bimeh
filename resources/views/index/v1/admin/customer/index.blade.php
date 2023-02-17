@@ -7,6 +7,7 @@
     <!-- Start Page Content -->
         <div class="container-fluid">
             <div class="layout-specing">
+                <div ><a class="btn btn-primary" href="{{route('customer.create')}}">افزودن مشتری</a></div>
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive bg-white shadow rounded">

@@ -9,9 +9,13 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
+use Kavenegar;
+use Kavenegar\Exceptions\ApiException;
+use Kavenegar\Exceptions\HttpException;
 
 class CustomerController extends Controller
 {
+    const FORMAT = "%s = %s <br/>";
     /**
      * Display a listing of the resource.
      *
@@ -67,6 +71,22 @@ class CustomerController extends Controller
             $wallets->customer_id=$customer->id;
             $wallets->modeCharge=0;
             $wallets->save();
+            try {
+                $sender='10000550002200';
+                $mes1=$customer->f_name;
+                $mes2='عزیز '."<br/>";
+                $mes3="به جمع خانواده شفا آوا خوش آمدید";
+                $message = $mes1.$mes2.$mes3;
+                $receptor = $customer->phone;
+                $result = Kavenegar::Send( $sender,$receptor,$message);
+                $this->format($result);
+
+            }catch(ApiException $e){
+                echo $e->errorMessage();
+            }
+            catch(HttpException $e){
+                echo $e->errorMessage();
+            }
             alert()->success('موفقیت آمیز','مشتری با موفقیت اضافه شد');
             return redirect('/admin/customer');
         }

@@ -2,11 +2,17 @@
     <div>
     <div>
         <label for="province" class="form-label">مشتری </label>
-        <select id="province" class="form-control department-name select2input" name="customer" v-model="customer" data-live-search="true" @change="getAllServices()">
+        <select id="province" class="form-control department-name select2input" name="customer" v-model="customer" data-live-search="true" @change="getAllServices(),getWallet()">
             <option  disabled>انتخاب کنید</option>
             <option v-for="customer in customers" :value="customer.id" >{{customer.f_name +" "}}{{customer.l_name +" "}}{{customer.nationalcode}}</option>
         </select>
     </div>
+        <div v-if="customer>0">
+
+            <label class="form-label" >موجودی کیف پول:</label>
+            <br/>
+            <label class="alert alert-info" v-for="wallet in wallets">{{wallet.modeCharge+" تومان"}}</label>
+        </div>
     <div v-if="customer>0">
         <label class="form-label">خدمات</label>
         <select class="form-control" id="city" name="service[]" multiple>
@@ -22,6 +28,7 @@ export default {
             customer:'مشتری را انتخاب کنید',
             customers:[],
             services:[],
+            wallets:[],
             flag:false,
             price:'',
             sumMoney:'0',
@@ -38,6 +45,13 @@ export default {
         getAllServices: function () {
             axios.get('/api/services').then(res=> {
                 this.services=res.data.services
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
+        getWallet: function () {
+            axios.get('/apiDoctor/wallet/'+this.customer).then(res=> {
+                this.wallets=res.data.wallets
             }).catch(err=>{
                 console.log(err)
             })

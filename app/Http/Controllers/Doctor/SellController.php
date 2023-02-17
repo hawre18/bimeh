@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 use NPDF;
 use Illuminate\Support\Facades\App;
-use Carbon;
+use Kavenegar;
+use Kavenegar\Exceptions\ApiException;
+use Kavenegar\Exceptions\HttpException;
 
 class SellController extends Controller
 {
+    const FORMAT = "%s = %s <br/>";
     public function index()
     {
         $sells=Sell::where('doctor_id',auth()->guard('doctor')->user()->id)->with('customer')->paginate(20);
@@ -71,6 +74,14 @@ class SellController extends Controller
         ];
         return response()->json($response,200);
     }
+    public function getWallet($customerId)
+    {
+        $wallets=Wallet::where('customer_id',$customerId)->get();
+        $response=[
+            'wallets'=>$wallets
+        ];
+        return response()->json($response,200);
+    }
     public function getAllService()
     {
         $services=Service::all();
@@ -83,24 +94,42 @@ class SellController extends Controller
     public function payment($id)
     {
 
-        $sell=Sell::where('id',$id)->with('services','customer','doctor')->first();
-        $wallet=Wallet::where('customer_id',$sell->customer->id)->first();
+        $sell = Sell::where('id', $id)->with('services', 'customer', 'doctor')->first();
+        $wallet = Wallet::where('customer_id', $sell->customer->id)->first();
         try {
-            if($sell->status==0&&$wallet->modeCharge>0){
-                $sell->pricePay=$sell->totalprice-$wallet->modeCharge;
-                $wallet->modeCharge=0;
+            if ($sell->status == 0 && $wallet->modeCharge > 0) {
+                $sell->pricePay = $sell->totalprice - $wallet->modeCharge;
+                $wallet->modeCharge = $wallet->modeCharge - $sell->totalPrice;
                 $wallet->save();
-                $sell->status=1;
+                $sell->status = 1;
                 $sell->save();
-                alert()->success('موفقیت آمیز','فاکتور با موفقیت پرداخت شد');
+                try {
+                    $sender = '10000550002200';
+                    $mes1 = $sell->customer->f_name;
+                    $mes2 = 'عزیز ' . "<br/>";
+                    $mes3 = "پرداخت با موفیقت انجام شد" . "<br/>";
+                    $mes4 = 'باقیمانده کیف پول شما: ';
+                    $mes5 = $wallet->modeCharge . "<br/>" . "<br/>";
+                    $mes6 = "شفا آوا";
+                    $message = $mes1 . $mes2 . $mes3 . $mes4 . $mes5 . $mes6;
+                    $receptor = $sell->customer->phone;
+                    $result = Kavenegar::Send($sender, $receptor, $message);
+                    $this->format($result);
+
+                } catch (ApiException $e) {
+                    echo $e->errorMessage();
+                } catch (HttpException $e) {
+                    echo $e->errorMessage();
+                }
+                alert()->success('موفقیت آمیز', 'فاکتور با موفقیت پرداخت شد');
                 return redirect()->action([
                     SellController::class,
                     'index'
                 ]);
             }
 
-        }catch (\Exception $m){
-            alert()->success('خطا','فاکتور پرداخت نشد');
+        } catch (\Exception $m) {
+            alert()->success('خطا', 'فاکتور پرداخت نشد');
             return redirect()->action([
                 SellController::class,
                 'index'

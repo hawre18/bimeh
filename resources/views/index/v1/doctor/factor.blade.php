@@ -10,7 +10,7 @@
         </div><!--end col-->
         <div class="container-fluid">
             <div class="layout-specing">
-                <div ><a class="btn btn-primary" href="{{route('sells.index')}}">ایجاد فاکتور</a></div>
+                <div ><a class="btn btn-primary" href="{{route('sells.create')}}">ایجاد فاکتور</a></div>
                 <div class="col-12 mt-4">
                     <div class="table-responsive bg-white shadow rounded">
                         <table class="table mb-0 table-center">
@@ -33,7 +33,7 @@
                                         <td class="p-3">
                                             <a href="{{route('sell.show',['idSell'=>$sell->id,'idCustomer'=>$sell->customer->nationalcode])}}" class="text-dark">{{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}</a>
                                         </td>
-                                        <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
+                                        <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="p-3">{{$sell->id}}</td>
                                         @if($sell->status==0)
                                             <td class="p-3" ><span class="label alert-info" >پرداخت نشده</span></td>
@@ -44,8 +44,6 @@
                                         <td class="p-3"> {{$sell->totalPrice}} </td>
                                         <td class="text-end p-3">
                                             @if($sell->status==0)
-                                                <a href="{{route('sell.edit',$sell->id)}}" class="btn  btn-soft-primary">ویرایش</a>
-                                                <a href="{{route('sell.pdf',$sell->id)}}" class="btn  btn-soft-info">PDF</a>
                                                 <form method="post" action="{{route('sell.pay',$sell->id)}}">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
@@ -57,6 +55,9 @@
                                                     <button class="btn  btn-soft-danger" type="submit">حذف</button>
                                                 </form>
                                            @endif
+                                                @if($sell->status==1)
+                                                    <a href="{{route('sell.pdf',$sell->id)}}" class="btn  btn-soft-info">PDF</a>
+                                                @endif
                                         </td>
                                     </tr>
                                 @endforeach
