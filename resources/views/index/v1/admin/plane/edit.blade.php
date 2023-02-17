@@ -1,4 +1,7 @@
 @extends('template.v1.admin.app')
+@section('styles')
+    <link rel="stylesheet" href="{{asset('/admin/dist/css/dropzone.css')}}">
+@endsection
 @section('alert')
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
@@ -41,8 +44,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">گالری تصاویر<span class="text-danger">*</span></label>
+                                            <input type="hidden" name="photo_id" id="plane-photo">
+                                            <div class="form-control dropzone" id="photo"></div>
+                                                <div class="col-sm-3" id="updated_photo_{{$image->id}}">
+                                                    <img class="img-responsive" src="{{asset('storage/photos/plane/'.$image->path)}}">
+                                                    <button type="button" class="btn btn-danger" onclick="removeImages({{$image->id}})">حذف</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary">ویرایش</button>
+                                            <button class="btn btn-primary" onclick="PlaneGallery()">ویرایش</button>
                                         </div>
                                     </div>
                                 </div>
@@ -54,4 +68,30 @@
         </div> <!--end container-->
     </section><!--end section-->
     <!-- Hero End -->
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
+    <script>
+        Dropzone.autoDiscover=false;
+        var photosGallery=[]
+        var photo=[].concat({{$image->id}})
+        var drop=new Dropzone('#photo',{
+            addRemoveLinks:true,
+            url:"{{route('photos.upload')}}",
+            sending:function (file,xhr,formData) {
+                formData.append("_token","{{csrf_token()}}")
+            },
+            success: function (file,response) {
+                photosGallery.push(response.photo_id)
+            }
+        });
+        PlaneGallery=function () {
+            document.getElementById('plane-photo').value=photosGallery.concat(photo)
+        }
+        removeImages=function (id) {
+            var index=photo.indexOf(id)
+            photo.splice(index,1);
+            document.getElementById('updated_photo_'+id).remove();
+        }
+    </script>
 @endsection

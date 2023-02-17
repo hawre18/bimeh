@@ -66,6 +66,7 @@ class CustomerController extends Controller
             $customer->l_name=$request->input('lname');
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
+            $customer->admin_id=auth()->guard('web')->user()->id;
             $customer->save();
             $wallets=new Wallet();
             $wallets->customer_id=$customer->id;

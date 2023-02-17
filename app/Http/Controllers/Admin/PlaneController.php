@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Models\Plane;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -63,6 +64,7 @@ class PlaneController extends Controller
             $plane->description=$request->input('description');
             $plane->price=$request->input('price');
             $plane->charge=$request->input('charge');
+            $plane->image_id=$request->input('photo_id');
             $plane->save();
             alert()->success('موفقیت آمیز','طرح با موفقیت اضافه شد');
             return redirect('admin/plane');
@@ -94,8 +96,9 @@ class PlaneController extends Controller
     {
         if(View::exists('index.v1.admin.plane.edit')){
             $plane=Plane::findorfail($id);
+            $image=Image::where('id',$plane->image_id)->first();
             if(($plane)!=null){
-                return view('index.v1.admin.plane.edit',compact(['plane']));
+                return view('index.v1.admin.plane.edit',compact(['plane','image']));
             }
             elseif(!(($plane)!=null)){
                 alert()->error('خطا','طرح موردنظر یافت نشد');
@@ -128,6 +131,7 @@ class PlaneController extends Controller
             $plane->description=$request->input('description');
             $plane->price=$request->input('price');
             $plane->charge=$request->input('charge');
+            $plane->image_id=$request->input('photo_id');
             $plane->save();
             alert()->success('موفقیت آمیز','طرح با موفقیت ویرایش شد');
             return redirect('admin/plane');

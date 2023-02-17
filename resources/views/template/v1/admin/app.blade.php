@@ -23,7 +23,7 @@
     <link href="{{asset('assets/v1/admin/css/unicons.iconscout.com/release/v3.0.6/css/line.css')}}" rel="stylesheet">
     <!-- Css -->
     <link href="{{asset('assets/v1/admin/css/style-rtl.min.css')}}" rel="stylesheet" type="text/css" id="theme-opt">
-
+    @yield('styles')
 </head>
 
 <body>
@@ -75,9 +75,8 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
-                                <li><a class="dropdown-item text-dark" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        <span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
-                                    <form id="logout-form" action="/logout" method="POST" class="d-none">
+                                <li> <a href="{{route('user.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item text-dark"><i class="fa fa-sign-out"></i></a>
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="post" style="display: none;">
                                         @csrf
                                     </form></li>
                             </ul>
@@ -202,7 +201,10 @@
                                         </a>
                                         <a class="dropdown-item text-dark" href="{{route('doctors.home')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span>داشبرد</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="{{route('logout')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> خروج</a>
+                                        <a href="{{route('user.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item text-dark"><i class="fa fa-sign-out"></i></a>
+                                        <form id="logout-form" action="{{ route('user.logout') }}" method="post" style="display: none;">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
                             </li>
@@ -242,6 +244,7 @@
         <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
     </div>
 </div>
+@yield('scripts')
 <!-- Offcanvas End -->
 <!-- javascript -->
 <script src="{{asset('js/app.js')}}"></script>

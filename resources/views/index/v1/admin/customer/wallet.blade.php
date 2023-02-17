@@ -18,13 +18,8 @@
                                 <form class="mt-4" method="post" action="{{route('wallet.charging',['customerId'=>$wallet->customer->id])}}">
                                     @csrf
                                     {{ method_field('PUT') }}
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">مقدار شارژ</label>
-                                                <input name="charge" type="number" class="form-control" placeholder="مقدار شارژ :">
-                                            </div>
-                                        </div><!--end col-->
+                                    <div class="row" id="app">
+                                       <plane-component></plane-component>
                                     </div><!--end row-->
                                     <button type="submit" class="btn btn-primary">شارژ کردن حساب کاربری </button>
                                 </form>

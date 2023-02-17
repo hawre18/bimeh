@@ -21,6 +21,7 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/planes','OrderController@getAllPlane');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
+    Route::post('photos/upload','ImageController@upload')->name('photos.upload');
 });
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::patch('doctors/active/{id}','DoctorController@status')->name('doctors.active')->middleware('can:doctor-crud');
     Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
     Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
+    Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
 
