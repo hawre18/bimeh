@@ -26,7 +26,6 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
 });
-//,'middleware'=>['auth:web','checkAdmin']
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController')->middleware('can:customer-crud');
     Route::get('customer/address/create/{customerId}','CustomerController@address')->name('create.address')->middleware('can:customer-crud');
