@@ -14,7 +14,7 @@ class LevelManageController extends Controller
     {
 
         $roles=Role::latest()->with('users')->paginate(20);
-        if(View::exist('index.v1.admin.levelAdmins.index')){
+        if(View::exists('index.v1.admin.levelAdmins.index')){
             return view('index.v1.admin.levelAdmins.index',compact(['roles']));
         }
         abort(Response::HTTP_NOT_FOUND);
@@ -44,6 +44,11 @@ class LevelManageController extends Controller
             alert()->success('خطا','خطا در درج رکورد');
             return redirect('/admin/level/create');
         }
+    }
+
+    public function show($id)
+    {
+
     }
     public function destroy(User $user)
     {

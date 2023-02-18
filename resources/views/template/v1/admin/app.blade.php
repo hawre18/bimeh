@@ -78,7 +78,10 @@
                                 <li> <a href="{{route('user.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item text-dark"><i class="fa fa-sign-out"></i></a>
                                     <form id="logout-form" action="{{ route('user.logout') }}" method="post" style="display: none;">
                                         @csrf
-                                    </form></li>
+                                    </form>
+                                </li>
+                                <li><a href="{{route('level.index')}}">لیست مدیران</a></li>
+                                <li><a href="{{route('level.create')}}">افزودن مدیر</a></li>
                             </ul>
                         </div>
                     </li>
@@ -144,6 +147,14 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-address ms-2 d-inline-block"></i>فاکتور ها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('sellsa.index')}}">لیست فکتورها </a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <!-- sidebar-menu  -->
             </div>
@@ -196,7 +207,7 @@
                                         <a class="dropdown-item d-flex align-items-center text-dark" href="">
                                             <img src="../assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow ms-2" alt="">
                                             <div class="flex-1 ">
-                                                <span class="d-block mb-1" >{{Auth::guard('web')->user()->name ." "}}</span>
+                                                <span class="d-block mb-1" >{{Auth::guard('web')->user()->f_name ." "}}{{Auth::guard('web')->user()->l_name}}</span>
                                             </div>
                                         </a>
                                         <a class="dropdown-item text-dark" href="{{route('doctors.home')}}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span>داشبرد</a>

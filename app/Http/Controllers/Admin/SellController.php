@@ -6,51 +6,46 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Sell;
 use App\Models\Service;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 
 class SellController extends Controller
 {
     public function index()
     {
-        $sells=Sell::where('doctor_id',1)->with('customer')->get();
-        return view('index.v1.admin.doctor.factor',compact(['sells']));
+        $sells=Sell::where('status',1)->with(['doctor','customer','services'])->paginate(20);
+        return view('index.v1.admin.sell.index',compact(['sells']));
+    }
+    public function createPDF($id) {
+        // retreive all records from db
+        $sell=Sell::with(['services','customer','doctor'])->where('id',$id)->first();
+        $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
+        // share data to view
+        $pdf = NPDF::loadView('index.v1.admin.sell.showFactor',compact(['sell','customer']));
+        return $pdf->stream($sell->customer->nationalcode);
     }
     public function create()
     {
-        return view('index.v1.admin.doctor.sell');
+
     }
 
     public function store(Request $request)
     {
-        $serviceId=[];
-        $sum=0;
-        try{
-        $sell=new Sell();
-        $sell->customer_id=$request->input('customer');
-        $sell->doctor_id=1;
-        foreach($request->input('service') as $service){
-            $ser=Service::findorfail($service)->first();
-            $serviceId=[$ser->id];
-            $sum=$sum+$ser->price;
-        }
-        $sell->totalPrice=$sum;
-        $sell->save();
-        $sell->services()->sync($serviceId);
-            alert()->success('موفقیت آمیز','فاکتور با موفقیت صادر شد');
-            return back();
-        }
-        catch (\Exception $m){
-            return $m;
-            alert()->erorr(' خطا','خطا در صدور فاکتور');
-            return back();
-        }
-            //$sell->permissions()->sync($request->input('permission_id'));
+
     }
     public function getAllCustomer()
     {
         $customers=Customer::all();
         $response=[
             'customers'=>$customers
+        ];
+        return response()->json($response,200);
+    }
+    public function getWallet($customerId)
+    {
+        $wallets=Wallet::where('customer_id',$customerId)->get();
+        $response=[
+            'wallets'=>$wallets
         ];
         return response()->json($response,200);
     }
@@ -62,4 +57,5 @@ class SellController extends Controller
         ];
         return response()->json($response,200);
     }
+
 }

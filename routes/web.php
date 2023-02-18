@@ -45,6 +45,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
     Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
     Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
+    Route::get('sells/index','SellController@index')->name('sellsa.index');
+    Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf');
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
 
