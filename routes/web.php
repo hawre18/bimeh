@@ -53,7 +53,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     });
 });
 
-
+Route::group(['namespace'=>'App\Http\Controllers\User'],function (){
+    Route::get('/','HomeController@home')->name('/');
+});
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
