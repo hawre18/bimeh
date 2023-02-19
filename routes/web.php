@@ -22,6 +22,7 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
     Route::post('photos/upload','ImageController@upload')->name('photos.upload');
+    Route::post('photosLogo/upload','ImageController@uploadLogo')->name('photosLogo.upload');
 });
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']]);
     Route::resource('services','ServiceController')->middleware('can:service-crud');
     Route::resource('doctors','DoctorController')->middleware('can:doctor-crud');
+    Route::resource('information','InformationController')->middleware('can:doctor-crud');
     Route::patch('doctors/active/{id}','DoctorController@status')->name('doctors.active')->middleware('can:doctor-crud');
     Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
     Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
@@ -55,6 +57,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
 
 Route::group(['namespace'=>'App\Http\Controllers\User'],function (){
     Route::get('/','HomeController@home')->name('/');
+    Route::get('contact','HomeController@contact')->name('contact');
+    Route::get('about','HomeController@about')->name('about');
 });
 
 

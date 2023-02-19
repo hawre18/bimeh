@@ -14,38 +14,44 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">افزودن طرح فروش جدید</h4>
-                            <form method="post" action="/admin/plane" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">افزودن اطلاعات شرکت</h4>
+                            <form method="post" action="/admin/information" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label"> عنوان<span class="text-danger">*</span></label>
+                                            <label class="form-label">اسم شرکت<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="توضیحات" name="description" required=""value="{{old('description')}}">
+                                            <label class="form-label">درباره شرکت<span class="text-danger">*</span></label>
+                                            <textarea class="form-control" name="description" required="" value="{{old('description')}}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">قیمت<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="قیمت" name="price" required=""value="{{old('price')}}">
+                                            <label class="form-label">تلفن<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="تلفن" name="phone" required="" value="{{old('phone')}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">آدرس شرکت<span class="text-danger">*</span></label>
+                                            <textarea class="form-control" name="address" required="" value="{{old('address')}}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">مقدارشارژ<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="مقدارشارژ" name="charge" required=""value="{{old('charge')}}">
+                                            <label class="form-label">ایمیل<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="ایمیل" name="email" required="" value="{{old('email')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">عکس<span class="text-danger">*</span></label>
-                                            <input type="hidden" name="photo_id" id="product-photo">
+                                            <input type="hidden" name="photo_id" id="logo-photo">
                                             <div id="photo" class="dropzone" ></div>
                                             <div class="=row">
                                             </div>
@@ -53,7 +59,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary" onclick="productGallery()">ثبت</button>
+                                            <button class="btn btn-primary" onclick="logoGallery()">ثبت</button>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +79,7 @@
         var photosGallery=[]
         var drop=new Dropzone('#photo',{
             addRemoveLinks:true,
-            url:"{{route('photosLogo.upload')}}",
+            url:"{{route('photos.upload')}}",
             sending:function (file,xhr,formData) {
                 formData.append("_token","{{csrf_token()}}")
             },
@@ -81,8 +87,8 @@
                 photosGallery.push(response.photo_id)
             }
         });
-        productGallery=function () {
-            document.getElementById('product-photo').value = photosGallery
+        logoGallery=function () {
+            document.getElementById('logo-photo').value = photosGallery
         }
 
     </script>

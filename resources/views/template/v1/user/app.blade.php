@@ -46,7 +46,7 @@
                         </ul>
                     </li>
                     <li><a href="about.html">درباره ما </a></li>
-                    <li><a href="about.html">تماس با ما </a></li>
+                    <li><a href="{{route('contact')}}">تماس با ما </a></li>
                 </ul>
             </nav>
             <div class="humberger-menu d-block d-lg-none pl--20 pl_sm--10">
@@ -84,7 +84,7 @@
             </li>
             <li><a href="about.html">درباره ما </a></li>
 
-            <li><a href="contact.html">تماس با ما </a></li>
+            <li><a href="{{route('contact')}}">تماس با ما </a></li>
         </ul>
     </div>
 </div>

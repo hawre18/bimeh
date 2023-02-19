@@ -12,4 +12,8 @@ class Image extends Model
     {
         return $this->belongsTo(Plane::class);
     }
+    public function information()
+    {
+        return $this->belongsTo(Information::class);
+    }
 }

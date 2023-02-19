@@ -272,7 +272,7 @@
             <div class="col-lg-12">
                 <div class="section-title text-center"><span class="subtitle">شفا آوا</span>
                     <h2 class="title">رشد شرکت ما</h2>
-                    <p class="description">ما در 20 سال گذشته قدرت خود را افزایش داده ایم.</p>
+                    <p class="description">ما در چند سال گذشته قدرت خود را افزایش داده ایم.</p>
                 </div>
             </div>
         </div>

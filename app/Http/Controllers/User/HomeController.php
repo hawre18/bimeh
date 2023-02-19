@@ -22,4 +22,24 @@ class HomeController extends Controller
         }
         abort(Response::HTTP_NOT_FOUND);
     }
+    public function contact()
+    {
+        $services=Service::all();
+        $plane=Plane::all();
+        $customer=Customer::all();
+        if (View::exists('index.v1.user.contact')){
+            return view('index.v1.user.contact',compact(['services','plane','customer']));
+        }
+        abort(Response::HTTP_NOT_FOUND);
+    }
+    public function about()
+    {
+        $services=Service::all();
+        $plane=Plane::all();
+        $customer=Customer::all();
+        if (View::exists('index.v1.user.about')){
+            return view('index.v1.user.about',compact(['services','plane','customer']));
+        }
+        abort(Response::HTTP_NOT_FOUND);
+    }
 }
