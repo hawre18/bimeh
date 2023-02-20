@@ -7,7 +7,7 @@
 
         <div class="container-fluid">
             <div class="layout-specing">
-                <div ><a class="btn btn-primary" href="{{route('plane.create')}}">افزودن طرح</a></div>
+                <div ><a class="btn btn-primary" href="{{route('wallet.create')}}">افزودن کیف پول</a></div>
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive bg-white shadow rounded">
@@ -15,26 +15,22 @@
                                 <thead>
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                    <th class="border-bottom p-3" style="min-width: 180px;">عنوان پلن</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">توضیحات</th>
-                                    <th class="border-bottom p-3">قیمت</th>
-                                    <th class="border-bottom p-3">مقدار شارژ</th>
-                                    <th class="border-bottom p-3">نوع طرح</th>
+                                    <th class="border-bottom p-3" style="min-width: 180px;">مشتری</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;">نوع</th>
+                                    <th class="border-bottom p-3">شارژ</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($planes as $plane)
+                                @foreach($wallets as $wallet)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">{{$plane->title}}</td>
-                                        <td class="p-3">{{$plane->description}}</td>
-                                        <td class="p-3"> {{$plane->price}} </td>
-                                        <td class="p-3">{{$plane->charge}}</td>
-                                        <td class="p-3">{{$plane->type->label}}</td>
+                                        <td class="p-3">{{$wallet->customer->f_name}}{{' '}}{{$wallet->customer->l_name}}</td>
+                                        <td class="p-3">{{$wallet->type->label}}</td>
+                                        <td class="p-3">{{$wallet->modeCharge}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('plane.edit',$plane->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
-                                            <form method="post" action="{{route('plane.destroy',$plane->id)}}">
+                                            <a href="{{route('wallet.edit',$wallet->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
+                                            <form method="post" action="{{route('wallet.destroy',$wallet->id)}}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>

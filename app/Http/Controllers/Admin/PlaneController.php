@@ -97,9 +97,11 @@ class PlaneController extends Controller
     {
         if(View::exists('index.v1.admin.plane.edit')){
             $plane=Plane::findorfail($id);
+            $pla=Plane::with('type')->get();
+            $types=Type::get()->all();
             $image=Image::where('id',$plane->image_id)->first();
             if(($plane)!=null){
-                return view('index.v1.admin.plane.edit',compact(['plane','image']));
+                return view('index.v1.admin.plane.edit',compact(['plane','image','pla','types']));
             }
             elseif(!(($plane)!=null)){
                 alert()->error('خطا','طرح موردنظر یافت نشد');
@@ -124,7 +126,8 @@ class PlaneController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'charge' => 'required'
+            'charge' => 'required',
+            'typePlane' => 'required'
         ]);
         try{
             $plane=Plane::findorfail($id);
@@ -132,6 +135,7 @@ class PlaneController extends Controller
             $plane->description=$request->input('description');
             $plane->price=$request->input('price');
             $plane->charge=$request->input('charge');
+            $plane->type_id=$request->input('typePlane');
             $plane->image_id=$request->input('photo_id');
             $plane->save();
             alert()->success('موفقیت آمیز','طرح با موفقیت ویرایش شد');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plane;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -17,9 +18,10 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types=Type::with(['type'])->latest('created_at')->paginate(20);
+        $types=Type::latest('created_at')->paginate(20);
+        $planes=Plane::latest('created_at')->get();
         if(View::exists('index.v1.admin.type.index')){
-            return view('index.v1.admin.type.index',compact(['types']));
+            return view('index.v1.admin.type.index',compact('types','planes'));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -55,8 +57,8 @@ class TypeController extends Controller
         ]);
         try{
             $type= new Type();
-            $type->title=$request->input('name');
-            $type->description=$request->input('label');
+            $type->name=$request->input('name');
+            $type->label=$request->input('label');
             $type->save();
             alert()->success('موفقیت آمیز','نوع طرح با موفقیت اضافه شد');
             return redirect('admin/type');
@@ -116,8 +118,8 @@ class TypeController extends Controller
         ]);
         try{
             $type=Type::findorfail($id);
-            $type->title=$request->input('name');
-            $type->description=$request->input('label');
+            $type->name=$request->input('name');
+            $type->label=$request->input('label');
             $type->save();
             alert()->success('موفقیت آمیز','نوع طرح با موفقیت ویرایش شد');
             return redirect('admin/type');
@@ -152,5 +154,5 @@ class TypeController extends Controller
             return redirect('admin/type');
         }
     }
-    
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Type;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -15,6 +16,53 @@ use Symfony\Component\HttpFoundation\Response;
 class WalletController extends Controller
 {
     const FORMAT = "%s = %s <br/>";
+
+    public function index()
+    {
+        $wallets=Wallet::with(['type','customer'])->latest('created_at')->paginate(20);
+        if(View::exists('index.v1.admin.wallet.index')){
+            return view('index.v1.admin.wallet.index',compact(['wallets']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function create()
+    {
+        $types=Type::all();
+        if(View::exists('index.v1.admin.wallet.create')){
+            return view('index.v1.admin.wallet.create',compact(['types']));
+
+        }
+        else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function store(Request $request)
+    {
+
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
+    }
     public function charge($customerId)
     {
 

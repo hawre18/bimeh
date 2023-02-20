@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
-use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\View;
@@ -68,10 +67,6 @@ class CustomerController extends Controller
             $customer->nationalcode=$request->input('nationalcode');
             $customer->admin_id=auth()->guard('web')->user()->id;
             $customer->save();
-            $wallets=new Wallet();
-            $wallets->customer_id=$customer->id;
-            $wallets->modeCharge=0;
-            $wallets->save();
             try {
                 $sender='10000550002200';
                 $mes1=$customer->f_name;

@@ -12,4 +12,8 @@ class Type extends Model
     {
         return $this->hasMany(Plane::class);
     }
+    public function wallets()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 }

@@ -1,5 +1,7 @@
 @extends('template.v1.admin.app')
-
+@section('styles')
+    <link rel="stylesheet" href="{{asset('/admin/dist/css/dropzone.css')}}">
+@endsection
 @section('alert')
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
@@ -12,8 +14,8 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">افزودن طرح فروش جدید</h4>
-                            <form method="post" action="/admin/plane" class="login-form mt-4" enctype="multipart/form-data">
+                            <h4 class="text-center">افزودن کیف پول جدید</h4>
+                            <form method="post" action="/admin/wallet" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -25,6 +27,12 @@
                                                 <option value="{{$type->id}}" >{{$type->name+" "}}{{$type->label}}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label"> عنوان<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -75,4 +83,24 @@
     </section><!--end section-->
     <!-- Hero End -->
 @endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
+    <script>
+        Dropzone.autoDiscover=false;
+        var photosGallery=[]
+        var drop=new Dropzone('#photo',{
+            addRemoveLinks:true,
+            url:"{{route('photosLogo.upload')}}",
+            sending:function (file,xhr,formData) {
+                formData.append("_token","{{csrf_token()}}")
+            },
+            success: function (file,response) {
+                photosGallery.push(response.photo_id)
+            }
+        });
+        productGallery=function () {
+            document.getElementById('product-photo').value = photosGallery
+        }
 
+    </script>
+@endsection

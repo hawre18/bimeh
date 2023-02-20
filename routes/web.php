@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::post('customer/address/store/{customerId}','AddressController@store')->name('addresses.store')->middleware('can:address-crud');
     Route::get('address.destroy/{id}','AddressController@destroy')->name('address.destroy')->middleware('can:address-crud');
     Route::resource('plane','PlaneController')->middleware('can:plane-crud');
+    Route::resource('type','TypeController')->middleware('can:plane-crud');
     Route::resource('session','sessionController')->middleware('can:plane-crud');
     Route::resource('role','RoleController')->middleware('can:role-crud');
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
@@ -50,6 +51,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
     Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
     Route::get('sells/index','SellController@index')->name('sellsa.index');
+    Route::resource('wallet','WalletController');
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf');
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
