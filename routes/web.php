@@ -23,6 +23,7 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
     Route::post('photos/upload','ImageController@upload')->name('photos.upload');
     Route::post('photosLogo/upload','ImageController@uploadLogo')->name('photosLogo.upload');
+    Route::post('photosSession/upload','ImageController@uploadsession')->name('photoSession.upload');
 });
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
@@ -35,6 +36,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::post('customer/address/store/{customerId}','AddressController@store')->name('addresses.store')->middleware('can:address-crud');
     Route::get('address.destroy/{id}','AddressController@destroy')->name('address.destroy')->middleware('can:address-crud');
     Route::resource('plane','PlaneController')->middleware('can:plane-crud');
+    Route::resource('session','sessionController')->middleware('can:plane-crud');
     Route::resource('role','RoleController')->middleware('can:role-crud');
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
     Route::resource('order','OrderController')->middleware('can:role-crud');

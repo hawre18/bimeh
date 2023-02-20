@@ -16,4 +16,8 @@ class Image extends Model
     {
         return $this->belongsTo(Information::class);
     }
+    public function session()
+    {
+        return $this->belongsTo(Session::class);
+    }
 }

@@ -45,4 +45,22 @@ class ImageController extends Controller
         ]);
 
     }
+    public function uploadSession(Request $request){
+
+        $uploadedFile=$request->file('file');
+        $filename=time().$uploadedFile->getClientOriginalName();
+        $original_name=$uploadedFile->getClientOriginalName();
+        Storage::disk('local')->putFileas(
+            'public/photos/session',$uploadedFile,$filename
+        );
+        $photo=new Image();
+        $photo->name=$original_name;
+        $photo->path=$filename;
+        // $photo->user_id=auth()->guard('web')->user()->id;;
+        $photo->save();
+        return response()->json([
+            'photo_id'=>$photo->id
+        ]);
+
+    }
 }

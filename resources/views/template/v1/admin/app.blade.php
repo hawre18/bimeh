@@ -24,6 +24,8 @@
     <!-- Css -->
     <link href="{{asset('assets/v1/admin/css/style-rtl.min.css')}}" rel="stylesheet" type="text/css" id="theme-opt">
     @yield('styles')
+    @yield('datepickercss')
+    @yield('editoS')
 </head>
 
 <body>
@@ -265,7 +267,8 @@
 <script src="{{asset('assets/v1/admin/js/feather.min.js')}}"></script>
 <!-- Main Js -->
 <script src="{{asset('assets/v1/admin/js/app.js')}}"></script>
-
+@yield('editor')
+@yield('datepickerjs')
 </body>
 
 </html>
