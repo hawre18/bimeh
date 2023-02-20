@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Plane;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ class PlaneController extends Controller
      */
     public function index()
     {
-        $planes=Plane::latest('created_at')->paginate(20);
+        $planes=Plane::with(['type'])->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.plane.index')){
             return view('index.v1.admin.plane.index',compact(['planes']));
         }else{
@@ -34,9 +35,9 @@ class PlaneController extends Controller
      */
     public function create()
     {
-
+        $types=Type::all();
         if(View::exists('index.v1.admin.plane.create')){
-            return view('index.v1.admin.plane.create');
+            return view('index.v1.admin.plane.create',compact(['types']));
 
         }
         else{

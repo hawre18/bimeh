@@ -15,4 +15,8 @@ class Plane extends Model
     {
         return $this->hasOne(Image::class);
     }
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

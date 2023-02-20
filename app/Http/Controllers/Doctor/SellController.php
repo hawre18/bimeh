@@ -34,7 +34,7 @@ class SellController extends Controller
         if(View::exists('index.v1.doctor.sell')){
             return view('index.v1.doctor.sell');
         }
-       abort(Response::HTTP_NOT_FOUND);
+        abort(Response::HTTP_NOT_FOUND);
     }
 
     public function store(Request $request)
@@ -46,25 +46,26 @@ class SellController extends Controller
         $serviceId=[];
         $sum=0;
         try{
-        $sell=new Sell();
-        $sell->customer_id=$request->input('customer');
-        $sell->doctor_id=auth()->guard('doctor')->user()->id;
-        foreach($request->input('service') as $service){
-            $ser=Service::findorfail($service)->first();
-            $serviceId=[$ser->id];
-            $sum=$sum+$ser->price;
-        }
-        $sell->totalPrice=$sum;
-        $sell->save();
-        $sell->services()->sync($serviceId);
+            $sell=new Sell();
+            $sell->customer_id=$request->input('customer');
+            $sell->doctor_id=auth()->guard('doctor')->user()->id;
+            foreach($request->input('service') as $service){
+                $ser=Service::findorfail($service);
+                $serviceId=[$ser->id];
+                $sum=$sum+$ser->price;
+            }
+
+            $sell->totalPrice=$sum;
+            $sell->save();
+            $sell->services()->sync($request->input('service'));
             alert()->success('موفقیت آمیز','فاکتور با موفقیت صادر شد');
             return back();
         }
         catch (\Exception $m){
-            alert()->erorr(' خطا','خطا در صدور فاکتور');
+            alert()->success(' خطا','خطا در صدور فاکتور');
             return back();
         }
-            //$sell->permissions()->sync($request->input('permission_id'));
+        //$sell->permissions()->sync($request->input('permission_id'));
     }
     public function getAllCustomer()
     {
@@ -94,7 +95,7 @@ class SellController extends Controller
     public function payment($id)
     {
 
-        $sell = Sell::where('id', $id)->with('services', 'customer', 'doctor')->first();
+        $sell = Sell::where('id', $id)->with(['services', 'customer', 'doctor'])->first();
         $wallet = Wallet::where('customer_id', $sell->customer->id)->first();
         try {
             if ($sell->status == 0 && $wallet->modeCharge > 0) {
@@ -114,7 +115,7 @@ class SellController extends Controller
                     $message = $mes1 . $mes2 . $mes3 . $mes4 . $mes5 . $mes6;
                     $receptor = $sell->customer->phone;
                     $result = Kavenegar::Send($sender, $receptor, $message);
-                    $this->format($result);
+
 
                 } catch (ApiException $e) {
                     echo $e->errorMessage();
@@ -129,6 +130,7 @@ class SellController extends Controller
             }
 
         } catch (\Exception $m) {
+            return $m;
             alert()->success('خطا', 'فاکتور پرداخت نشد');
             return redirect()->action([
                 SellController::class,
@@ -164,6 +166,7 @@ class SellController extends Controller
             }
         }
         catch(\Exception $m){
+
             alert()->erorr(' خطا','خطا در حذف رکورد');
             return redirect('doctors/sells/index');
         }
@@ -172,8 +175,6 @@ class SellController extends Controller
         // retreive all records from db
         $sell=Sell::with('services','customer')->where('id',$id)->first();
         $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
-        $mytime =Carbon::now();
-        $name=$customer->nationalcode+$mytime->toDateTimeString();
         // share data to view
         $pdf = NPDF::loadView('index.v1.doctor.showFactor',compact(['sell','customer']));
         return $pdf->stream('report.pdf');

@@ -330,7 +330,8 @@
 
                         <td class="column3">{{$sell->totalPrice}}</td>
                         <td class="column4">
-                            @foreach($sell->services as $service){{$service->title.','}}
+                            @foreach
+                                ($sell->services as $service){{$service->title.','}}
                             @endforeach
                         </td>
 
