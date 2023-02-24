@@ -6,9 +6,7 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
-@section('datepickercss')
-    <link rel="stylesheet" href="{{asset('assets/v1/admin/css/style.css')}}"/>
-@endsection
+
 @section('editorS')
 
     <style>
@@ -52,9 +50,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3" id="app">
+                                        <div class="mb-3">
                                             <label class="form-label"> تاریخ برگزاری نشست<span class="text-danger">*</span></label>
-                                            <input type="text" class="example1"  name="date" required="" value="{{old('date')}}">
+                                            <input type="text" class="flatpickr flatpickr-input form-control" id="checkin-date" placeholder="1400-12-06"  name="date">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -249,12 +247,4 @@
         });
     </script>
 @endsection
-@section('datepickerjs')
-    <script src="{{asset('assets/v1/admin/js/persian-date.js')}}"></script>
-    <script src="{{asset('assets/v1/admin/js/persian-date.min.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".example1").pDatepicker();
-        });
-    </script>
-@endsection
+

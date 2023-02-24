@@ -15,9 +15,8 @@
                                 <thead>
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                    <th class="border-bottom p-3" style="min-width: 180px;"> نوع</th>
+                                    <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">برچسب</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">طرح ها</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
@@ -27,13 +26,6 @@
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$type->name}}</td>
                                         <td class="p-3">{{$type->label}}</td>
-                                        <td class="p-3">
-                                            @foreach($planes as $plane)
-                                                @if($plane->type_id==$type->id)
-                                                    {{$plane->title}}{{' '}}
-                                                @endif
-                                            @endforeach
-                                        </td>
                                         <td class="text-end p-3">
                                             <a href="{{route('type.edit',$type->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
                                             <form method="post" action="{{route('type.destroy',$type->id)}}">

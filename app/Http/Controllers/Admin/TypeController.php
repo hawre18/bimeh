@@ -19,9 +19,8 @@ class TypeController extends Controller
     public function index()
     {
         $types=Type::latest('created_at')->paginate(20);
-        $planes=Plane::latest('created_at')->get();
         if(View::exists('index.v1.admin.type.index')){
-            return view('index.v1.admin.type.index',compact('types','planes'));
+            return view('index.v1.admin.type.index',compact('types'));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
