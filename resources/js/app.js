@@ -24,7 +24,7 @@ Vue.component('select-customer-component', require('./components/SelectCustomerC
 Vue.component('select-plane-component', require('./components/SelectPlaneComponent.vue').default);
 Vue.component('plane-component', require('./components/PlaneComponent.vue').default);
 Vue.component('customer-component', require('./components/CustomerComponent.vue').default);
-
+Vue.component('where-plane-component',require('./components/WherePlaneComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

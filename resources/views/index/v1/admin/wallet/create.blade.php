@@ -1,7 +1,4 @@
 @extends('template.v1.admin.app')
-@section('styles')
-    <link rel="stylesheet" href="{{asset('/admin/dist/css/dropzone.css')}}">
-@endsection
 @section('alert')
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
@@ -15,7 +12,7 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">افزودن کیف پول جدید</h4>
-                            <form method="post" action="/admin/wallet" class="login-form mt-4" enctype="multipart/form-data">
+                            <form method="post" action="/admin/wallets" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -24,53 +21,25 @@
                                             <select class="form-control" name="typePlane">
                                                 <option  disabled>انتخاب کنید</option>
                                                 @foreach($types as $type)
-                                                <option value="{{$type->id}}" >{{$type->name+" "}}{{$type->label}}</option>
+                                                <option value="{{$type->id}}" >{{$type->name}}{{" "}}{{$type->label}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label"> عنوان<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label"> عنوان<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="توضیحات" name="description" required=""value="{{old('description')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">قیمت<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="قیمت" name="price" required=""value="{{old('price')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">مقدارشارژ<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="مقدارشارژ" name="charge" required=""value="{{old('charge')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">عکس<span class="text-danger">*</span></label>
-                                            <input type="hidden" name="photo_id" id="product-photo">
-                                            <div id="photo" class="dropzone" ></div>
-                                            <div class="=row">
-                                            </div>
+                                            <label class="form-label">مشتری<span class="text-danger">*</span></label>
+                                            <select class="form-control" name="customer_id">
+                                                <option  disabled>انتخاب کنید</option>
+                                                @foreach($customers as $customer)
+                                                    <option value="{{$customer->id}}" >{{$customer->f_name}}{{" "}}{{$customer->l_name}}{{" "}}{{$customer->nationalcode}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary" onclick="productGallery()">ثبت</button>
+                                            <button class="btn btn-primary">ثبت</button>
                                         </div>
                                     </div>
                                 </div>
@@ -82,25 +51,4 @@
         </div> <!--end container-->
     </section><!--end section-->
     <!-- Hero End -->
-@endsection
-@section('scripts')
-    <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
-    <script>
-        Dropzone.autoDiscover=false;
-        var photosGallery=[]
-        var drop=new Dropzone('#photo',{
-            addRemoveLinks:true,
-            url:"{{route('photosLogo.upload')}}",
-            sending:function (file,xhr,formData) {
-                formData.append("_token","{{csrf_token()}}")
-            },
-            success: function (file,response) {
-                photosGallery.push(response.photo_id)
-            }
-        });
-        productGallery=function () {
-            document.getElementById('product-photo').value = photosGallery
-        }
-
-    </script>
 @endsection

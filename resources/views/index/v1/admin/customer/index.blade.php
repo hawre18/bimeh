@@ -32,7 +32,6 @@
                                         <td class="p-3">{{$customer->nationalcode}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
-                                            <a href="{{route('wallet.charge',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>
                                             <a href="{{route('customer.edit',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >ویرایش</a>
                                             <form method="post" action="{{route('customer.destroy',$customer->id)}}">
                                                 {{ csrf_field() }}

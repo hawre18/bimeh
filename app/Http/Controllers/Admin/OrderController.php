@@ -43,9 +43,17 @@ class OrderController extends Controller
         }
         abort(Response::HTTP_NOT_FOUND);
     }
+    public function getWallet($id)
+    {
+        $wallets=Wallet::where('customer_id',$id)->get()->all();
+        $response=[
+            'wallets'=>$wallets
+        ];
+        return response()->json($response,200);
+    }
     public function getAllPlane()
     {
-        $planes=Plane::all();
+        $planes=Plane::where();
         $response=[
             'planes'=>$planes
         ];

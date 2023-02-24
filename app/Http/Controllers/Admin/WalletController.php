@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Plane;
 use App\Models\Type;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class WalletController extends Controller
     public function index()
     {
         $wallets=Wallet::with(['type','customer'])->latest('created_at')->paginate(20);
+        $type=Type::all();
         if(View::exists('index.v1.admin.wallet.index')){
             return view('index.v1.admin.wallet.index',compact(['wallets']));
         }else{
@@ -29,9 +31,11 @@ class WalletController extends Controller
 
     public function create()
     {
+
         $types=Type::all();
+        $customers=Customer::all();
         if(View::exists('index.v1.admin.wallet.create')){
-            return view('index.v1.admin.wallet.create',compact(['types']));
+            return view('index.v1.admin.wallet.create',compact(['types','customers']));
 
         }
         else{
@@ -46,29 +50,81 @@ class WalletController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'typePlane' => 'required',
+            'customer_id' => 'required'
+        ]);
+        try{
 
+            $walletFind=Wallet::where('customer_id',$request->input('customer_id'))->where('type_id',$request->input('typePlane'))->count();
+
+            if($walletFind<1){
+                $wallet=new Wallet();
+                $wallet->customer_id=$request->input('customer_id');
+                $wallet->type_id=$request->input('typePlane');
+                $wallet->modeCharge=0;
+                $wallet->save();
+                alert()->success('موفقیت آمیز','کیف پول با موفقیت ایجاد شد');
+                return redirect('/admin/wallets');
+            }
+            else{
+                alert()->success('خطا ','کیف پول قبلا ایجاد شده است ');
+                return redirect('/admin/wallets/create');
+
+            }
+
+        }
+        catch (\Exception $m){
+            return $m;
+            alert()->warning(' خطا','خطا در ایجاد کیف پول');
+            return redirect('/admin/wallets/create');
+        }
     }
 
     public function edit($id)
     {
-
+        if(View::exists('index.v1.admin.wallet.edit')){
+            $wallet=Wallet::findorfail($id);
+            if(($wallet)!=null){
+                return view('index.v1.admin.wallet.edit',compact(['wallet']));
+            }
+            elseif(($wallet)==null){
+                alert()->error('خطا','کیف پول یافت نشد');
+                return redirect('/admin/wallets');
+            }
+            elseif(!(View::exists('index.v1.admin.wallet.edit'))){
+                abort(Response::HTTP_NOT_FOUND);
+            }
+        }
     }
 
     public function update(Request $request, $id)
     {
-
+        $this->validate(request(), [
+            'charge' => 'required'
+        ]);
+        try{
+            $wallet=Wallet::findorfail($id);
+            $wallet->modeCharge=$request->input('charge');
+            $wallet->save();
+            alert()->success('موفقیت آمیز','کیف پول با موفقیت ویرایش شد');
+            return redirect('/admin/wallets');
+        }
+        catch (\Exception $m){
+            alert()->error('خطا','خطا در ویرایش کیف پول');
+            return redirect('/admin/wallets');
+        }
     }
 
     public function destroy($id)
     {
 
     }
-    public function charge($customerId)
+    public function charge($customerId, $typePlane)
     {
-
-        if(View::exists('index.v1.admin.customer.wallet')) {
-            $wallet=Wallet::where('customer_id',$customerId)->with('customer')->first();
-            return view('index.v1.admin.customer.wallet', compact(['wallet']));
+        if(View::exists('index.v1.admin.wallet.charge')) {
+            $wallet=Wallet::where('customer_id',$customerId)->where('type_id',$typePlane)->with(['customer','type'])->first();
+            return view('index.v1.admin.wallet.charge', compact(['wallet','typePlane']));
         }
         else
         {
@@ -78,20 +134,20 @@ class WalletController extends Controller
 
     }
 
-    public function charging(Request $request, $customerId)
+    public function charging(Request $request, $customerId, $typePlane)
     {
         $this->validate(request(), [
             'charge' => 'required'
         ]);
         try{
 
-            $wallet=Wallet::where('customer_id',$customerId)->first();
+            $wallet=Wallet::where('customer_id',$customerId)->where('type_id',$typePlane)->first();
             $customer=Customer::where('id',$customerId)->first();
             if(count(array($wallet))>0){
                 $wallet->modeCharge=$wallet->modeCharge+$request->input('charge');
                 $wallet->save();
                 alert()->success('موفقیت آمیز','حساب با موفقیت شارژ شد');
-                return redirect()->route('wallet.charge', [$customerId]);
+                return redirect()->route('wallet.charge', [$customerId,$typePlane]);
             }
             else{
                 $wallet1=new Wallet();
@@ -129,5 +185,13 @@ class WalletController extends Controller
             alert()->warning(' خطا','خطا در شارژ حساب');
             return redirect()->route('wallet.charge', [$customerId]);
         }
+    }
+    public function getPlane($typePlane)
+    {
+        $planes=Plane::where('type_id',$typePlane)->get()->all();
+        $response=[
+            'planes'=>$planes
+        ];
+        return response()->json($response,200);
     }
 }

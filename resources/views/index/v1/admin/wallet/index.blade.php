@@ -7,7 +7,7 @@
 
         <div class="container-fluid">
             <div class="layout-specing">
-                <div ><a class="btn btn-primary" href="{{route('wallet.create')}}">افزودن کیف پول</a></div>
+                <div ><a class="btn btn-primary" href="{{route('wallets.create')}}">افزودن کیف پول</a></div>
                 <div class="row">
                     <div class="col-12 mt-4">
                         <div class="table-responsive bg-white shadow rounded">
@@ -29,8 +29,9 @@
                                         <td class="p-3">{{$wallet->type->label}}</td>
                                         <td class="p-3">{{$wallet->modeCharge}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('wallet.edit',$wallet->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
-                                            <form method="post" action="{{route('wallet.destroy',$wallet->id)}}">
+                                            <a href="{{route('wallets.edit',$wallet->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
+                                            <a href="{{route('wallet.charge',['customerId'=>$wallet->customer->id,'typePlane'=>$wallet->type_id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>
+                                            <form method="post" action="{{route('wallets.destroy',$wallet->id)}}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">حذف</button>

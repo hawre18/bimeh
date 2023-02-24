@@ -19,6 +19,8 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/customer','SellController@getAllCustomer');
     Route::get('/services','SellController@getAllService');
     Route::get('/planes','OrderController@getAllPlane');
+    Route::get('/plane/{typeplane}','WalletController@getPlane');
+    Route::get('/wallets/{id}','OrderController@getWallet');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
     Route::post('photos/upload','ImageController@upload')->name('photos.upload');
@@ -47,11 +49,11 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::resource('doctors','DoctorController')->middleware('can:doctor-crud');
     Route::resource('information','InformationController')->middleware('can:doctor-crud');
     Route::patch('doctors/active/{id}','DoctorController@status')->name('doctors.active')->middleware('can:doctor-crud');
-    Route::get('wallet/{customerId}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
-    Route::put('wallet/charging/{customerId}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
+    Route::get('wallet/{customerId}/{typePlane}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
+    Route::put('wallet/charging/{customerId}/{typePlane}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
     Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
     Route::get('sells/index','SellController@index')->name('sellsa.index');
-    Route::resource('wallet','WalletController');
+    Route::resource('wallets','WalletController');
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf');
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
