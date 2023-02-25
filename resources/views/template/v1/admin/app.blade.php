@@ -291,7 +291,6 @@
 <!-- Main Js -->
 <script src="{{asset('assets/v1/admin/js/app.js')}}"></script>
 @yield('editor')
-@yield('datepickerjs')
 </body>
 
 </html>

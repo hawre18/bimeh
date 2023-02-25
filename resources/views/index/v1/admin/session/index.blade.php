@@ -27,8 +27,8 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$session->title}}</td>
-                                        <td class="p-3">{{$session->description}}</td>
-                                        <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->date)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
+                                        <td class="p-3">{!!substr($session->description,0,20)!!}</td>
+                                        <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($session->date)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="p-3"><img class="img-responsive" src="{{asset('storage/photos/session/'.$session->image->path)}}"></td>
                                         <td class="text-end p-3">
                                             <a href="{{route('session.edit',$session->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>

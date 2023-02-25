@@ -9,6 +9,6 @@ class Session extends Model
 {
     public function image()
     {
-        return $this->hasOne(Image::class);
+        return $this->belongsTo(Image::class);
     }
 }

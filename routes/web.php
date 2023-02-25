@@ -23,7 +23,7 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/wallets/{id}','OrderController@getWallet');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
-    Route::post('photos/upload','ImageController@upload')->name('photos.upload');
+    Route::post('photos/uploadPlane','ImageController@upload')->name('photosPlane.upload');
     Route::post('photosLogo/upload','ImageController@uploadLogo')->name('photosLogo.upload');
     Route::post('photosSession/upload','ImageController@uploadsession')->name('photoSession.upload');
 });

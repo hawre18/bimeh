@@ -19,7 +19,7 @@ class PlaneController extends Controller
      */
     public function index()
     {
-        $planes=Plane::with(['type'])->latest('created_at')->paginate(20);
+        $planes=Plane::with(['type','image'])->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.plane.index')){
             return view('index.v1.admin.plane.index',compact(['planes']));
         }else{

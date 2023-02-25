@@ -46,13 +46,13 @@
 
                                     <label class="form-label">توضیحات<span class="text-danger">*</span></label>
                                     <div id="container">
-                                        <div  id="editor" name="description">
-                                        </div>
+                                        <textarea  id="editor" name="description">
+                                        </textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> تاریخ برگزاری نشست<span class="text-danger">*</span></label>
-                                            <input type="text" class="flatpickr flatpickr-input form-control" id="checkin-date" placeholder="1400-12-06"  name="date">
+                                            <input type="date"  placeholder="قالب:09-08-1999"  name="date">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -94,7 +94,7 @@
                 photosGallery.push(response.photo_id)
             }
         });
-        essionGallery=function () {
+        sessionGallery=function () {
             document.getElementById('session-photo').value = photosGallery
         }
 

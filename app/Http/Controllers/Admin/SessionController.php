@@ -18,7 +18,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions=Session::latest('created_at')->paginate(20);
+        $sessions=Session::latest('created_at')->with(['image'])->paginate(20);
         if(View::exists('index.v1.admin.session.index')){
             return view('index.v1.admin.session.index',compact(['sessions']));
         }else{
