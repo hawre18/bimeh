@@ -20,4 +20,8 @@ class Image extends Model
     {
         return $this->belongsTo(Session::class);
     }
+    public function sample()
+    {
+        return $this->belongsTo(Sample::class);
+    }
 }

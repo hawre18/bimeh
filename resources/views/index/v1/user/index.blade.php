@@ -37,96 +37,24 @@
                 <div class="row service-main-wrapper">
 
                     <!-- Starrt Single Services -->
+                    @foreach(App\Models\Type::all() as $type)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
+                        <a href="#">
                             <div class="service service__style--2 text-left bg-gray">
                                 <div class="icon">
                                     <i data-feather="cast"></i>
                                 </div>
                                 <div class="content">
-                                    <h3 class="title">استراتژی کسب و کار</h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
+                                    <h3 class="title">{{$type->label}}</h3>
+                                    <p>{!! substr($type->description,0,90) !!}</p>
                                 </div>
                             </div>
                         </a>
                     </div>
+                    @endforeach
                     <!-- ENd Single Services -->
 
-                    <!-- Start Single Services -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
-                            <div class="service service__style--2 text-left bg-gray">
-                                <div class="icon">
-                                    <i data-feather="layers"></i>
-                                </div>
-                                <div class="content">
-                                    <h3 class="title">توسعه وب </h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Ens Single Services -->
 
-                    <!-- Start Single Services -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
-                            <div class="service service__style--2 text-left bg-gray">
-                                <div class="icon">
-                                    <i data-feather="users"></i>
-                                </div>
-                                <div class="content">
-                                    <h3 class="title">بازاریابی و گزارش</h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- ENd Services -->
-
-                    <!-- Start Services -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
-                            <div class="service service__style--2 text-left bg-gray">
-                                <div class="icon">
-                                    <i data-feather="monitor"></i>
-                                </div>
-                                <div class="content">
-                                    <h3 class="title">توسعه وب موبایل</h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- End Services -->
-
-                    <!-- Start Services  -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
-                            <div class="service service__style--2 text-left bg-gray">
-                                <div class="icon">
-                                    <i data-feather="users"></i>
-                                </div>
-                                <div class="content">
-                                    <h3 class="title">بازاریابی و گزارش</h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="service-details.html">
-                            <div class="service service__style--2 text-left bg-gray">
-                                <div class="icon">
-                                    <i data-feather="monitor"></i>
-                                </div>
-                                <div class="content">
-                                    <h3 class="title">توسعه وب موبایل</h3>
-                                    <p>در حالی که نزدیک زمین دراز می کشم خود را در میان علف های بلند کنار نهر به پایین پرت می کنم.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -159,106 +87,28 @@
                 {"breakpoint":770, "settings": {"slidesToShow": 2}},
                 {"breakpoint":490, "settings": {"slidesToShow": 1}}
                 ]'>
-
+                @foreach(App\Models\Sample::with('image')->get()->all() as $sample)
                 <div class="single_im_portfolio">
                     <div class="im_portfolio">
                         <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="portfolio-details.html"><img src="{{asset('assets/v1/user/images/portfolio/portfolio-5.jpg')}}" alt="React Creative Agency"></a></div>
+                            <div class="thumbnail"><a href="#"><img src="{{asset('storage/photos/plane/'.$sample->image->path)}}" alt="React Creative Agency"></a></div>
                         </div>
                         <div class="content">
                             <div class="inner">
                                 <div class="portfolio_heading">
-                                    <div class="category_list"><a href="portfolio-details.html">فروشگاه </a></div>
-                                    <h4 class="title"><a href="portfolio-details.html">ووکامرس </a>
+                                    <div class="category_list"><a href="#">{{$sample->dateDo}} </a></div>
+                                    <h4 class="title"><a href="#">{{$sample->label}} </a>
                                     </h4>
                                 </div>
                                 <div class="portfolio_hover">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
+                                    <p>{!! substr($sample->description,0,50) !!}</p>
                                 </div>
                             </div>
-                        </div><a class="transparent_link" href="portfolio-details.html"></a>
+                        </div><a class="transparent_link" href="#"></a>
                     </div>
                 </div>
 
-                <div class="single_im_portfolio">
-                    <div class="im_portfolio">
-                        <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="portfolio-details.html"><img src="{{asset('assets/v1/user/images/portfolio/portfolio-6.jpg')}}" alt="React Creative Agency"></a></div>
-                        </div>
-                        <div class="content">
-                            <div class="inner">
-                                <div class="portfolio_heading">
-                                    <div class="category_list"><a href="portfolio-details.html">آژانسی </a></div>
-                                    <h4 class="title"><a href="portfolio-details.html">آژانسی خلاق </a>
-                                    </h4>
-                                </div>
-                                <div class="portfolio_hover">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                                </div>
-                            </div>
-                        </div><a class="transparent_link" href="portfolio-details.html"></a>
-                    </div>
-                </div>
-
-                <div class="single_im_portfolio">
-                    <div class="im_portfolio">
-                        <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="portfolio-details.html"><img src="{{asset('assets/v1/user/images/portfolio/portfolio-7.jpg')}}" alt="React Creative Agency"></a></div>
-                        </div>
-                        <div class="content">
-                            <div class="inner">
-                                <div class="portfolio_heading">
-                                    <div class="category_list"><a href="portfolio-details.html">توسعه وب </a></div>
-                                    <h4 class="title"><a href="portfolio-details.html">توسعه وب</a>
-                                    </h4>
-                                </div>
-                                <div class="portfolio_hover">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                                </div>
-                            </div>
-                        </div><a class="transparent_link" href="portfolio-details.html"></a>
-                    </div>
-                </div>
-
-                <div class="single_im_portfolio">
-                    <div class="im_portfolio">
-                        <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="portfolio-details.html"><img src="{{asset('assets/v1/user/images/portfolio/portfolio-8.jpg')}}" alt="React Creative Agency"></a></div>
-                        </div>
-                        <div class="content">
-                            <div class="inner">
-                                <div class="portfolio_heading">
-                                    <div class="category_list"><a href="portfolio-details.html">طراحی</a></div>
-                                    <h4 class="title"><a href="portfolio-details.html">طراحی وب </a>
-                                    </h4>
-                                </div>
-                                <div class="portfolio_hover">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                                </div>
-                            </div>
-                        </div><a class="transparent_link" href="portfolio-details.html"></a>
-                    </div>
-                </div>
-
-                <div class="single_im_portfolio">
-                    <div class="im_portfolio">
-                        <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="portfolio-details.html"><img src="{{asset('assets/v1/user/images/portfolio/portfolio-9.jpg')}}" alt="React Creative Agency"></a></div>
-                        </div>
-                        <div class="content">
-                            <div class="inner">
-                                <div class="portfolio_heading">
-                                    <div class="category_list"><a href="portfolio-details.html">اپ </a></div>
-                                    <h4 class="title"><a href="portfolio-details.html">طراحی اپ </a>
-                                    </h4>
-                                </div>
-                                <div class="portfolio_hover">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                                </div>
-                            </div>
-                        </div><a class="transparent_link" href="portfolio-details.html"></a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -566,25 +416,27 @@
             {"breakpoint":490, "settings": {"slidesToShow": 1}}
             ]'>
             <!-- Start Blog Area  -->
+            @foreach(App\Models\Session::with('image')->get()->all() as $session)
             <div class="imroz-blog">
                 <div class="im_box">
                     <div class="thumbnail ">
-                        <a href="blog-details.html">
-                            <img class="w-100" src="{{asset('assets/v1/user/images/blog/blog-01.jpg')}}" alt="Blog Images" />
+                        <a href="#">
+                            <img class="w-100" src="{{asset('storage/photos/session/'.$session->image->path)}}" alt="Blog Images" />
                         </a>
                     </div>
                     <div class="content">
                         <div class="inner">
                             <div class="content_heading">
-                                <div class="category_list"><a href="portfolio-details.html">توسعه وب</a></div>
-                                <h4 class="title"><a href="blog-details.html">تفاوت وب و برند چیست؟.</a></h4>
+                                <div class="category_list"><a href="#">{{$session->title}}</a></div>
+                                <h4 class="title"><a href="#">{!! substr($session->description,0,30) !!}</a></h4>
                             </div>
-                            <div class="content_footer"><a class="rn-btn btn-opacity" href="blog-details.html">ادامه مطلب </a>
+                            <div class="content_footer"><a class="rn-btn btn-opacity" href="#">ادامه مطلب </a>
                             </div>
-                        </div><a class="transparent_link" href="blog-details.html"></a>
+                        </div><a class="transparent_link" href="#"></a>
                     </div>
                 </div>
             </div>
+            @endforeach
             <!-- End Blog Area  -->
         </div>
     </div>
