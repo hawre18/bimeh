@@ -42,4 +42,13 @@ class HomeController extends Controller
         }
         abort(Response::HTTP_NOT_FOUND);
     }
+
+    public function planeShow($id)
+    {
+        $plane=Plane::findorfail($id)->with('image');
+        if(View::exists('index.v1.user.planeShow')){
+            return view('index.v1.user.planeShow',compact('plane'));
+        }
+        abort(Response::HTTP_NOT_FOUND);
+    }
 }

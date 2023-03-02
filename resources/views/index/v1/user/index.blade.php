@@ -91,7 +91,7 @@
                 <div class="single_im_portfolio">
                     <div class="im_portfolio">
                         <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="#"><img src="{{asset('storage/photos/plane/'.$sample->image->path)}}" alt="React Creative Agency"></a></div>
+                            <div class="thumbnail"><a href="#"><img src="{{asset('storage/photos/sample/'.$sample->image->path)}}" alt="React Creative Agency"></a></div>
                         </div>
                         <div class="content">
                             <div class="inner">
@@ -176,104 +176,7 @@
 </div>
 <!-- ENd Counter Up Section -->
 
-<!-- Rn Team Area Start -->
-<div class="rn-team-area ptb--120 bg_color--5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center mb--25 mb_sm--0"><span class="subtitle">همکاران</span>
-                    <h2 class="title"> متخصص های ما </h2>
-                    <p class="description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است., <br> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!-- Start Single Member -->
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="team team-style--bottom">
-                    <div class="thumbnail"><img src="{{asset('assets/v1/user/images/team/team-01.jpg')}}" alt="Blog Images"></div>
-                    <div class="content">
-                        <h4 class="title">بنجامین</h4>
-                        <p class="designation">توسعه وب </p>
-                    </div>
-                    <ul class="social-icon">
-                        <li>
-                            <a href="#">
-                                <i data-feather="facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="twitter"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End Single Member -->
 
-            <!-- Start Single Member -->
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="team team-style--bottom">
-                    <div class="thumbnail"><img src="{{asset('assets/v1/user/images/team/team-02.jpg')}}" alt="Blog Images"></div>
-                    <div class="content">
-                        <h4 class="title">تئودار رودو </h4>
-                        <p class="designation">مهندسی فرانت اند</p>
-                    </div>
-                    <ul class="social-icon">
-                        <li>
-                            <a href="#">
-                                <i data-feather="facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End Member -->
-
-            <!-- Start member -->
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="team team-style--bottom">
-                    <div class="thumbnail"><img src="{{asset('assets/v1/user/images/team/team-03.jpg')}}" alt="Blog Images"></div>
-                    <div class="content">
-                        <h4 class="title">چارتور </h4>
-                        <p class="designation">طراح گرافیک </p>
-                    </div>
-                    <ul class="social-icon">
-                        <li>
-                            <a href="#">
-                                <i data-feather="facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="twitter"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End single member -->
-
-        </div>
-    </div>
-</div>
-<!-- Rn Team Area End -->
 
 <!-- Start Testimonial Area  -->
 <div class="rn-testimonial-area bg_color--1 ptb--120">
@@ -420,7 +323,7 @@
             <div class="imroz-blog">
                 <div class="im_box">
                     <div class="thumbnail ">
-                        <a href="#">
+                        <a href="{{route('uSession.show',$session->id)}}">
                             <img class="w-100" src="{{asset('storage/photos/session/'.$session->image->path)}}" alt="Blog Images" />
                         </a>
                     </div>

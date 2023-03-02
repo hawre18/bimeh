@@ -54,7 +54,7 @@ class SellController extends Controller
                 $serviceId=[$ser->id];
                 $sum=$sum+$ser->price;
             }
-
+            $sum=$sum/2;
             $sell->totalPrice=$sum;
             $sell->save();
             $sell->services()->sync($request->input('service'));
@@ -67,8 +67,24 @@ class SellController extends Controller
         }
         //$sell->permissions()->sync($request->input('permission_id'));
     }
+
+    public function fetch(Request $request)
+    {
+        if($request->get('query')){
+            $query=$request->get('query');
+            $data=Customer::where('nationalcode','LIKE',$request->query.'%')->get();
+
+
+                $response=[
+                    'customers'=>$data
+                ];
+                return response()->json($response,200);
+
+        }
+    }
     public function getAllCustomer()
     {
+
         $customers=Customer::all();
         $response=[
             'customers'=>$customers
@@ -77,7 +93,7 @@ class SellController extends Controller
     }
     public function getWallet($customerId)
     {
-        $wallets=Wallet::where('customer_id',$customerId)->get();
+        $wallets=Wallet::where('customer_id',$customerId)->where('type_id',auth()->guard('doctor')->user()->type_id)->get();
         $response=[
             'wallets'=>$wallets
         ];
@@ -91,15 +107,23 @@ class SellController extends Controller
         ];
         return response()->json($response,200);
     }
+    public function getService()
+    {
+        $services=Service::where('type_id',auth()->guard('doctor')->user()->type_id)->get();
+        $response=[
+            'services'=>$services
+        ];
+        return response()->json($response,200);
+    }
 
     public function payment($id)
     {
 
         $sell = Sell::where('id', $id)->with(['services', 'customer', 'doctor'])->first();
-        $wallet = Wallet::where('customer_id', $sell->customer->id)->first();
+        $wallet = Wallet::where('customer_id', $sell->customer->id)->where('type_id',auth()->guard('doctor')->user()->type_id)->first();
         try {
             if ($sell->status == 0 && $wallet->modeCharge > 0) {
-                $sell->pricePay = $sell->totalprice - $wallet->modeCharge;
+                $sell->pricePay = $sell->totalprice- $wallet->modeCharge;
                 $wallet->modeCharge = $wallet->modeCharge - $sell->totalPrice;
                 $wallet->save();
                 $sell->status = 1;

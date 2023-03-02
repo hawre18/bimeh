@@ -1,11 +1,11 @@
 <template>
     <div>
     <div>
-        <label for="province" class="form-label">مشتری </label>
-        <select id="province" class="form-control department-name select2input" name="customer" v-model="customer" data-live-search="true" @change="getAllServices(),getWallet()">
+        <label for="customer" class="form-label">مشتری </label>
+        <multiselect  id="customer" class="form-control department-name select2input" name="customer" v-model="customer" data-live-search="true"  @change="getAllServices(),getWallet()">
             <option  disabled>انتخاب کنید</option>
             <option v-for="customer in customers" :value="customer.id" >{{customer.f_name +" "}}{{customer.l_name +" "}}{{customer.nationalcode}}</option>
-        </select>
+        </multiselect >
     </div>
         <div v-if="customer>0">
 
@@ -22,9 +22,15 @@
     </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
+
+
+
 export default {
-    data(){
-        return{
+
+    data () {
+        return {
+            value: [],
             customer:'مشتری را انتخاب کنید',
             customers:[],
             services:[],
@@ -43,7 +49,7 @@ export default {
     },
     methods:{
         getAllServices: function () {
-            axios.get('/api/services').then(res=> {
+            axios.get('/apiDoctor/servicewhere').then(res=> {
                 this.services=res.data.services
             }).catch(err=>{
                 console.log(err)

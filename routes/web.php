@@ -18,8 +18,8 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::get('/province','AddressController@getAllProvince');
     Route::get('/customer','SellController@getAllCustomer');
     Route::get('/services','SellController@getAllService');
-    Route::get('/planes','OrderController@getAllPlane');
-    Route::get('/plane/{typeplane}','WalletController@getPlane');
+    Route::get('/planes/{id}','OrderController@getAllPlane');
+    Route::get('/plane','WalletController@getPlane');
     Route::get('/wallets/{id}','OrderController@getWallet');
     Route::get('/cities/{provinceId}','AddressController@getAllCities');
     Route::get('/wallet/{customerId}','.\..\Doctor\SellController@getWallet');
@@ -29,9 +29,11 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
 });
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
+    Route::get('/servicewhere','SellController@getService');
 });
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController')->middleware('can:customer-crud');
+    Route::resource('company','LegalCustomerController')->middleware('can:customer-crud');
     Route::get('customer/address/create/{customerId}','CustomerController@address')->name('create.address')->middleware('can:customer-crud');
     Route::get('home','HomeController@index')->name('admin.home');
     Route::get('address','AddressController@index')->name('index.address')->middleware('can:address-crud');
@@ -65,6 +67,9 @@ Route::group(['namespace'=>'App\Http\Controllers\User'],function (){
     Route::get('/','HomeController@home')->name('/');
     Route::get('contact','HomeController@contact')->name('contact');
     Route::get('about','HomeController@about')->name('about');
+    Route::get('plane/show/{id}','HomeController@planeShow')->name('uPlane.show');
+    Route::get('session/show/{id}','HomeController@sessionShow')->name('uSession.show');
+    Route::get('type/show/{id}','HomeController@typeShow')->name('uType.show');
 });
 
 

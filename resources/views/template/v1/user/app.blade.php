@@ -73,6 +73,9 @@
         </div>
         <ul class="mainmenu">
             <li class="has-dropdown">
+                <a href="{{route('/')}}">ورود/عضویت </a>
+            </li>
+            <li class="has-dropdown">
                 <a href="{{route('/')}}">خانه </a>
             </li>
             <li class="has-dropdown">

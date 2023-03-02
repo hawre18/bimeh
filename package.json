@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^36.0.1",
-        "persian-datepicker": "^1.2.0"
+        "persian-datepicker": "^1.2.0",
+        "vue-multiselect": "^2.1.7"
     }
 }

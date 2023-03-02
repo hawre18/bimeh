@@ -186,9 +186,10 @@ class WalletController extends Controller
             return redirect()->route('wallet.charge', [$customerId]);
         }
     }
-    public function getPlane($typePlane)
+    public function getPlane($id)
     {
-        $planes=Plane::where('type_id',$typePlane)->get()->all();
+        $wallets=Wallet::where($id)->get()->all();
+        $planes=Plane::where('type_id',$wallets->type_id)->get()->all();
         $response=[
             'planes'=>$planes
         ];

@@ -26,5 +26,5 @@ Route::namespace('App\Http\Controllers\Doctor')->prefix('doctors')->middleware('
     Route::patch('sells/pay/{id}','SellController@payment')->name('sell.pay');
     Route::get('/logout','Auth\LoginController@doctorLogout')->name('doctors.logout');
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sell.pdf');
-
+    Route::post('/search/fetch','SellController@fetch')->name('search.fetch');
 });

@@ -3,6 +3,10 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
+@section('multiselect')
+    <script src="https://unpkg.com/vue-multiselect@2.1.6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.6/dist/vue-multiselect.min.css">
+@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-9 col-md-6">

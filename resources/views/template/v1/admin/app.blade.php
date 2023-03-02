@@ -23,8 +23,7 @@
     <link href="{{asset('assets/v1/admin/css/unicons.iconscout.com/release/v3.0.6/css/line.css')}}" rel="stylesheet">
     <!-- Css -->
     <link href="{{asset('assets/v1/admin/css/style-rtl.min.css')}}" rel="stylesheet" type="text/css" id="theme-opt">
-    <link rel="stylesheet" href="{{asset('assets/v1/admin/css/flatpickr.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/v1/admin/css/jquery.timepicker.min.css')}}"/>
+
 
     @yield('styles')
 
@@ -58,14 +57,6 @@
                 <ul class="sidebar-menu pt-3">
                     <li><a href="{{route('admin.home')}}"><i class="uil uil-dashboard ms-2 d-inline-block"></i>داشبرد</a></li>
 
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>فاکتور</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="{{route('sells.index')}}">فاکتورها</a></li>
-                            </ul>
-                        </div>
-                    </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-user-nurse ms-2 d-inline-block"></i>دکترها</a>
                         <div class="sidebar-submenu">
@@ -118,6 +109,15 @@
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-building ms-2 d-inline-block"></i>شرکت/ارگان</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('company.index')}}">لیست ارگان ها/شرکت ها</a></li>
+                                <li><a href="{{route('company.create')}}">افزودن شرکت /ارگان</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-accessible-icon-alt ms-2 d-inline-block"></i>مقام ها</a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -165,7 +165,7 @@
                         <a href="javascript:void(0)"><i class="uil uil-invoice ms-2 d-inline-block"></i>فاکتور ها</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('sellsa.index')}}">لیست فکتورها </a></li>
+                                <li><a href="{{route('sellsa.index')}}">لیست فاکتورها </a></li>
                             </ul>
                         </div>
                     </li>
@@ -272,15 +272,10 @@
 @yield('scripts')
 <!-- Offcanvas End -->
 <!-- javascript -->
-<!-- Datepicker -->
-
-<script src="{{asset('assets/v1/admin/js/flatpickr.min.js')}}"></script>
-<script src="{{asset('assets/v1/admin/js/jdate.min.js')}}"></script>
+<
 <script src="{{asset('assets/v1/admin/js/plugins/rangePlugin.js')}}"></script>
 <script src="{{asset('assets/v1/admin/js/fa.js')}}"></script>
-<script src="{{asset('assets/v1/admin/js/flatpickr.init.js')}}"></script>
-<script src="{{asset('assets/v1/admin/js/jquery.timepicker.min.js')}}"></script>
-<script src="{{asset('assets/v1/admin/js/timepicker.init.js')}}"></script>
+
 
 
 <script src="{{asset('js/app.js')}}"></script>

@@ -8,17 +8,25 @@
             </select>
         </div>
         <div v-if="customer>0">
+            <label for="pay" class="form-label">راه پرداختی</label>
+            <br/>
+                <input type="radio" name="pay" value="cache">نقدی<br/>
+                <input type="radio" name="pay" value="transfer">کارت به کارت<br/>
+                <input type="radio" name="pay" value="pos">کارت خوان<br/>
+
+        </div>
+        <div v-if="customer>0">
             <label class="form-label">کیف پول</label>
-            <select class="form-control" id="wallet" name="wallet">
+            <select class="form-control" id="wallet" name="wallet" v-model="wallet" @change="getAllPlanes()">
                 <option  disabled>انتخاب کنید</option>
                 <option v-for="wallet in wallets" :value="wallet.id" >{{wallet.label}}</option>
             </select>
         </div>
-        <div v-if="customer>10">
+        <div v-if="wallet>0">
             <label class="form-label">طرح</label>
             <select class="form-control" id="plane" name="plane">
                 <option  disabled>انتخاب کنید</option>
-                <option v-for="plane in planes" :value="plane.id" >{{plane.title+" "}}{{plane.price+"تومان "}}</option>
+                <option v-for="plane in planes" :value="plane.id" >{{plane.title+" "}}{{number_format(plane.price,0,'',',') +"تومان "}}</option>
             </select>
         </div>
 
@@ -32,8 +40,10 @@ export default {
             customers:[],
             planes:null,
             wallets:null,
+            wallet:'انتخاب کنید',
             flag:false,
             price:'',
+            plane:'انتخاب کنید',
             sumMoney:'0',
             wher:null,
         }
@@ -46,8 +56,8 @@ export default {
         })
     },
     methods:{
-        getAllPlanes: function () {
-            axios.get('/api/planes/').then(res=> {
+        getAllPlanes: function (wallet) {
+            axios.get('/api/planes/'+this.wallet).then(res=> {
                 this.planes=res.data.planes
             }).catch(err=>{
                 console.log(err)
@@ -56,7 +66,6 @@ export default {
 
         getWallet: function (customer) {
             axios.get('/api/wallets/'+this.customer).then(res=> {
-                console.log(res)
                 this.wallets=res.data.wallets
             }).catch(err=>{
                 console.log(err)

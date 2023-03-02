@@ -51,9 +51,10 @@ class OrderController extends Controller
         ];
         return response()->json($response,200);
     }
-    public function getAllPlane()
+    public function getAllPlane($id)
     {
-        $planes=Plane::where();
+        $wallets=Wallet::findorfail($id);
+        $planes=Plane::where('type_id',$wallets->type_id)->get();
         $response=[
             'planes'=>$planes
         ];
@@ -69,7 +70,8 @@ class OrderController extends Controller
     {
         $this->validate(request(), [
             'customer' => 'required',
-            'plane' => 'required'
+            'plane' => 'required',
+            'pay'=>'required'
 
         ]);
         try{
@@ -79,10 +81,11 @@ class OrderController extends Controller
             $order->customer_id=$request->input('customer');
             $order->user_id=auth()->guard('web')->user()->id;
             $order->status=1;
+            $order->payType=$request->input('pay');
             $order->plane_id=$plane->id;
             $order->save();
             if($order->status==1){
-                $wallet=Wallet::where('customer_id',$request->input('customer'))->first();
+                $wallet=Wallet::where('customer_id',$request->input('customer'))->where('type_id',$plane->type_id)->first();
                 $wallet->modeCharge=$wallet->modeCharge+$plane->charge;
                 $wallet->save();
                 try {

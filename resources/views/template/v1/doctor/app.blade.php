@@ -163,7 +163,7 @@
 <script src="{{asset('assets/v1/admin/js/feather.min.js')}}"></script>
 <!-- Main Js -->
 <script src="{{asset('assets/v1/admin/js/app.js')}}"></script>
-
+@yield('multiselect')
 </body>
 
 </html>
