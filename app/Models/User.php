@@ -48,6 +48,13 @@ class User extends Authenticatable
     {
         return $this->level=='admin' ? true : false;
     }
-
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
+    public function emploies()
+    {
+        return $this->hasMany(Employ::class);
+    }
 
 }

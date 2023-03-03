@@ -32,7 +32,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">کد ثبت<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="کد ثبت" name="uniqCode" required="" value="{{old('uniqCode')}}">
+                                            <input type="text" class="form-control" placeholder="کد ثبت" name="uniqueCode" required="" value="{{old('uniqueCode')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6" id="app">

@@ -7,8 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    public function employs()
+    public function customers()
     {
-        return $this->hasMany(Employ::class);
+        return $this->hasMany(Customer::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\View;
@@ -22,7 +23,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers=Customer::latest('created_at')->paginate(20);
+        $customers=Customer::with('company')->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.customer.index')){
             return view('index.v1.admin.customer.index', compact(['customers']));
         }else{
@@ -38,7 +39,8 @@ class CustomerController extends Controller
     public function create()
     {
         if(View::exists('index.v1.admin.customer.create')){
-        return view('index.v1.admin.customer.create');
+            $companies=Company::all();
+        return view('index.v1.admin.customer.create',compact('companies'));
         }
         else{
                 abort(Response::HTTP_NOT_FOUND);
@@ -65,7 +67,8 @@ class CustomerController extends Controller
             $customer->l_name=$request->input('lname');
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
-            $customer->admin_id=auth()->guard('web')->user()->id;
+            $customer->company_id=$request->input('company');
+            $customer->user_id=auth()->guard('web')->user()->id;
             $customer->save();
             try {
                 $sender='10000550002200';
@@ -75,7 +78,7 @@ class CustomerController extends Controller
                 $message = $mes1.$mes2.$mes3;
                 $receptor = $customer->phone;
                 $result = Kavenegar::Send( $sender,$receptor,$message);
-                $this->format($result);
+               // $this->format($result);
 
             }catch(ApiException $e){
                 echo $e->errorMessage();
@@ -87,6 +90,7 @@ class CustomerController extends Controller
             return redirect('/admin/customer');
         }
         catch (\Exception $m){
+            return $m;
             alert()->error('خطا','خطا در ذخیره کاربر');
             return redirect('/admin/customer/create');
         }
@@ -101,12 +105,12 @@ class CustomerController extends Controller
     public function show($id)
     {
         if(View::exists('index.v1.admin.customer.show')){
-            $customer=Customer::findorfail($id);
-            if(count(array($customer))>0){
+            $customer=Customer::with('company')->findorfail($id);
+            if(($customer)!=null){
                 $addresses=Address::where('customer_id',$customer->id)->get();
                 return view('index.v1.admin.customer.show',compact(['customer','addresses']));
             }
-            elseif(count(array($customer))<=0){
+            elseif(($customer)==null){
                 alert()->error('خطا','کاربری یافت نشد');
                 return redirect('/admin/customer');
             }
@@ -125,11 +129,12 @@ class CustomerController extends Controller
     public function edit($id)
     {
         if(View::exists('index.v1.admin.customer.edit')){
+            $companies=Company::all();
             $customer=Customer::findorfail($id);
-            if(count(array($customer))>0){
-                return view('index.v1.admin.customer.edit',compact(['customer']));
+            if(($customer)!=null){
+                return view('index.v1.admin.customer.edit',compact(['customer','companies']));
             }
-            elseif(count(array($customer))<=0){
+            elseif(($customer)==null){
                 alert()->error('خطا','کاربری یافت نشد');
                 return redirect('/admin/customer');
             }
@@ -160,6 +165,7 @@ class CustomerController extends Controller
             $customer->l_name=$request->input('lname');
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
+            $customer->user_id=auth()->guard('web')->user()->id;
             $customer->save();
             alert()->success('موفقیت آمیز','مشتری با موفقیت ویرایش شد');
             return redirect('/admin/customer');

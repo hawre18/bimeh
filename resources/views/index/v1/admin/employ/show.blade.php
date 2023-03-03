@@ -18,9 +18,6 @@
                                 <th class="border-bottom p-3">کدملی</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
                                 <th class="border-bottom p-3">تاریخ عضویت</th>
-                                @if($customer->company_id>0)
-                                    <th class="border-bottom p-3">شرکت/ارگان</th>
-                                @endif
                                 <th class="border-bottom p-3">علیات</th>
                             </tr>
                             </thead>
@@ -31,9 +28,6 @@
                                     <td class="p-3">{{$customer->nationalcode}}</td>
                                     <td class="p-3"> {{$customer->phone}} </td>
                                     <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($customer->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
-                                    @if($customer->company_id>0)
-                                        <td class="p-3">{{$customer->company->companyName}}</td>
-                                    @endif
                                     <td class="text-end p-3">
                                         <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
                                         <a href="{{route('wallet.charge',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>

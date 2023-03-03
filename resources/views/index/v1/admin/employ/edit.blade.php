@@ -12,37 +12,37 @@
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">ویرایش کاربر</h4>
-                            <form method="post" action="{{route('customer.update',$customer->id)}}" class="login-form mt-4" enctype="multipart/form-data">
+                            <form method="post" action="{{route('employ.update',$employ->id)}}" class="login-form mt-4" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نام<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{$customer->f_name}}">
+                                            <input type="text" class="form-control" placeholder="نام" name="fname" required="" value="{{$employ->f_name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">نام خانوادگی <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{$customer->l_name}}">
+                                            <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{$employ->l_name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">شماره همراه <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{$customer->phone}}">
+                                            <input type="text" class="form-control" placeholder="شماره همراه" name="phone" required="" value="{{$employ->phone}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">کدملی<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="کدملی" name="nationalcode" required="" value="{{$customer->nationalcode}}">
+                                            <input type="text" class="form-control" placeholder="کدملی" name="nationalcode" required="" value="{{$employ->nationalcode}}">
                                         </div>
                                     </div>
+
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <span>اگر مشتری طرف قرارداد با ارگان یا شرکت هست لطفا انتخاب کنید در غیر اینصورت فیلد را خالی بگذارید</span>
                                             <label class="form-label">شرکت/ارگان<span class="text-danger">*</span></label>
                                             <select class="form-control" name="company">
                                                 <option>انتخاب کنید</option>
@@ -50,7 +50,7 @@
                                                     <option @if($company->id==$employ->company_id) selected @endif value="{{$company->id}}">{{$company->companyName}}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
+                                           </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="d-grid">

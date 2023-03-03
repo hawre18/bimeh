@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
-use App\Models\Customer;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Kavenegar\Exceptions\ApiException;
@@ -52,7 +51,7 @@ class CompanyController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|min:3',
-            'uniqCode' => 'required|min:3',
+            'uniqueCode' => 'required|min:3',
             'companyBoss' => 'required',
             'addrbody' => 'required',
             'province' => 'required',
@@ -61,9 +60,9 @@ class CompanyController extends Controller
             'tellphone' => 'required'
         ]);
         try {
-            $company = new Customer();
+            $company = new Company();
             $company->companyName = $request->input('name');
-            $company->uniqCode = $request->input('uinqCode');
+            $company->uniqueCode = $request->input('uniqueCode');
             $company->companyBoss = $request->input('companyBoss');
             $company->postcode = $request->input('postcode');
             $company->address = $request->input('addrbody');
@@ -76,6 +75,7 @@ class CompanyController extends Controller
             alert()->success('موفقیت آمیز', 'شرکت با موفقیت اضافه شد');
             return redirect('/admin/company');
         } catch (\Exception $m) {
+            return $m;
             alert()->error('خطا', 'خطا در ذخیره رکورد');
             return redirect('/admin/company/create');
         }
@@ -90,10 +90,9 @@ class CompanyController extends Controller
     public function show($id)
     {
         if (View::exists('index.v1.admin.company.show')) {
-            $company = Customer::findorfail($id);
+            $company = Company::with(['province','city','user'])->findorfail($id);
             if (($company)!=null) {
-                $addresses = Address::where('company_id', $company->id)->get();
-                return view('index.v1.admin.company.show', compact(['company', 'addresses']));
+                return view('index.v1.admin.company.show', compact(['company']));
             } elseif (($company)==null) {
                 alert()->error('خطا', 'رکوردی یافت نشد');
                 return redirect('/admin/company');
@@ -112,7 +111,7 @@ class CompanyController extends Controller
     public function edit($id)
     {
         if (View::exists('index.v1.admin.company.edit')) {
-            $company = Customer::findorfail($id);
+            $company = company::findorfail($id);
             if (($company) != null) {
                 return view('index.v1.admin.company.edit', compact(['company']));
             } elseif (($company) == null) {
@@ -135,7 +134,7 @@ class CompanyController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|min:3',
-            'uniqCode' => 'required|min:3',
+            'uniqueCode' => 'required|min:3',
             'companyBoss' => 'required',
             'addrbody' => 'required',
             'province' => 'required',
@@ -144,9 +143,9 @@ class CompanyController extends Controller
             'tellphone' => 'required'
         ]);
         try {
-            $company = Customer::findorfail($id);
+            $company = Company::findorfail($id);
             $company->companyName = $request->input('name');
-            $company->uniqCode = $request->input('uinqCode');
+            $company->uniqueCode = $request->input('uniqueCode');
             $company->companyBoss = $request->input('companyBoss');
             $company->postcode = $request->input('postcode');
             $company->address = $request->input('addrbody');
@@ -158,6 +157,7 @@ class CompanyController extends Controller
             alert()->success('موفقیت آمیز', 'شرکت/ارگان با موفقیت ویرایش شد');
             return redirect('/admin/company');
         } catch (\Exception $m) {
+            return $m;
             alert()->error('خطا', 'خطا در ویرایش رکورد');
             return view('index.v1.admin.company.edit', compact(['company']));
         }
@@ -172,7 +172,7 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         try {
-            $company = Customer::findorfail($id);
+            $company = Company::findorfail($id);
             if (($company) != null) {
                 $company->delete();
                 alert()->success('موفقیت آمیز', 'مشتری با موفقیت حذف شد');

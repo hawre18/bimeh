@@ -33,7 +33,8 @@ Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'
 });
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController')->middleware('can:customer-crud');
-    Route::resource('company','LegalCustomerController')->middleware('can:customer-crud');
+    Route::resource('company','CompanyController')->middleware('can:customer-crud');
+    Route::resource('employ','EmployController')->middleware('can:customer-crud');
     Route::get('customer/address/create/{customerId}','CustomerController@address')->name('create.address')->middleware('can:customer-crud');
     Route::get('home','HomeController@index')->name('admin.home');
     Route::get('address','AddressController@index')->name('index.address')->middleware('can:address-crud');
