@@ -52,9 +52,11 @@ class SellController extends Controller
             foreach($request->input('service') as $service){
                 $ser=Service::findorfail($service);
                 $serviceId=[$ser->id];
-                $sum=$sum+$ser->price;
+                $sum=$sum+$ser->price*$ser->offPrice;
             }
-            $sum=$sum/2;
+            //0.4*2000000
+            //0.5*8000000
+
             $sell->totalPrice=$sum;
             $sell->save();
             $sell->services()->sync($request->input('service'));
@@ -68,20 +70,6 @@ class SellController extends Controller
         //$sell->permissions()->sync($request->input('permission_id'));
     }
 
-    public function fetch(Request $request)
-    {
-        if($request->get('query')){
-            $query=$request->get('query');
-            $data=Customer::where('nationalcode','LIKE',$request->query.'%')->get();
-
-
-                $response=[
-                    'customers'=>$data
-                ];
-                return response()->json($response,200);
-
-        }
-    }
     public function getAllCustomer()
     {
 

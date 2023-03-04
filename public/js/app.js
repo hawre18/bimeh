@@ -5541,8 +5541,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5566,12 +5564,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      value: [],
       customer: 'مشتری را انتخاب کنید',
       customers: [],
       services: [],
@@ -29477,53 +29473,65 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      [
-        _c("label", { staticClass: "form-label", attrs: { for: "customer" } }, [
-          _vm._v("مشتری "),
-        ]),
-        _vm._v(" "),
-        _c(
-          "multiselect",
-          {
-            staticClass: "form-control department-name select2input",
-            attrs: {
-              id: "customer",
-              name: "customer",
-              "data-live-search": "true",
-            },
-            on: {
-              change: function ($event) {
-                _vm.getAllServices(), _vm.getWallet()
-              },
-            },
-            model: {
+    _c("div", [
+      _c("label", { staticClass: "form-label", attrs: { for: "customer" } }, [
+        _vm._v("مشتری "),
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
               value: _vm.customer,
-              callback: function ($$v) {
-                _vm.customer = $$v
-              },
               expression: "customer",
             },
-          },
-          [
-            _c("option", { attrs: { disabled: "" } }, [_vm._v("انتخاب کنید")]),
-            _vm._v(" "),
-            _vm._l(_vm.customers, function (customer) {
-              return _c("option", { domProps: { value: customer.id } }, [
-                _vm._v(
-                  _vm._s(customer.f_name + " ") +
-                    _vm._s(customer.l_name + " ") +
-                    _vm._s(customer.nationalcode)
-                ),
-              ])
-            }),
           ],
-          2
-        ),
-      ],
-      1
-    ),
+          staticClass: "form-control department-name select2input",
+          attrs: {
+            id: "customer",
+            name: "customer",
+            "data-live-search": "true",
+          },
+          on: {
+            change: [
+              function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.customer = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              function ($event) {
+                _vm.getAllServices(), _vm.getWallet()
+              },
+            ],
+          },
+        },
+        [
+          _c("option", { attrs: { disabled: "" } }, [_vm._v("انتخاب کنید")]),
+          _vm._v(" "),
+          _vm._l(_vm.customers, function (customer) {
+            return _c("option", { domProps: { value: customer.id } }, [
+              _vm._v(
+                _vm._s(customer.f_name + " ") +
+                  _vm._s(customer.l_name + " ") +
+                  _vm._s(customer.nationalcode)
+              ),
+            ])
+          }),
+        ],
+        2
+      ),
+    ]),
     _vm._v(" "),
     _vm.customer > 0
       ? _c(

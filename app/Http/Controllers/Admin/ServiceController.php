@@ -53,13 +53,15 @@ class ServiceController extends Controller
         $this->validate(request(), [
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'offPrice'=>'required'
         ]);
         try{
             $service= new Service();
             $service->title=$request->input('title');
             $service->label=$request->input('description');
             $service->price=$request->input('price');
+            $dervice->offPrice=$request->input('offPrice');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت اضافه شد');
             return redirect('admin/services');
@@ -116,13 +118,15 @@ class ServiceController extends Controller
         $this->validate(request(), [
             'title' => 'required',
             'label' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'offPrice'=>'required'
         ]);
         try{
             $service=Service::findorfail($id);
             $service->title=$request->input('title');
             $service->label=$request->input('label');
             $service->price=$request->input('price');
+            $service->offPrice=$request->input('offPrice');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت ویرایش شد');
             return redirect('admin/services');

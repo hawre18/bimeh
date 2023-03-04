@@ -85,7 +85,7 @@
                     <li><a href="service-details.html">جزئیات خدمات </a></li>
                 </ul>
             </li>
-            <li><a href="about.html">درباره ما </a></li>
+            <li><a href="{{route('about')}}">درباره ما </a></li>
 
             <li><a href="{{route('contact')}}">تماس با ما </a></li>
         </ul>

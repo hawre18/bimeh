@@ -18,6 +18,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
+                                            <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
+                                            <select name="type">
+                                                <option>نتخاب کنید</option>
+                                                @foreach($types as $type)
+                                                    <option value="{{$type->id}}" @if($service->type_id==$type->id) selected @endif>{{$type->label}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
                                             <label class="form-label"> عنوان<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{$service->title}}">
                                         </div>
@@ -32,6 +43,13 @@
                                         <div class="mb-3">
                                             <label class="form-label">قیمت<span class="text-danger">*</span></label>
                                             <input type="number" class="form-control" placeholder="قیمت" name="price" required="" value="{{$service->price}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <span>بصورت اعشار وارد شود مثلا:50%=0.5</span>
+                                            <label class="form-label">پرداخت توسط بیمه<span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" name="offPrice" required="" value="{{$service->offPrice}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

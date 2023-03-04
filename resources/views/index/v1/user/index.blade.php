@@ -333,9 +333,9 @@
                                 <div class="category_list"><a href="#">{{$session->title}}</a></div>
                                 <h4 class="title"><a href="#">{!! substr($session->description,0,30) !!}</a></h4>
                             </div>
-                            <div class="content_footer"><a class="rn-btn btn-opacity" href="#">ادامه مطلب </a>
+                            <div class="content_footer"><a class="rn-btn btn-opacity" href="{{route('uSession.show',$session->id)}}">ادامه مطلب </a>
                             </div>
-                        </div><a class="transparent_link" href="#"></a>
+                        </div><a class="transparent_link" href="{{route('uSession.show',$session->id)}}"></a>
                     </div>
                 </div>
             </div>
