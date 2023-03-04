@@ -18,7 +18,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types=Type::latest('created_at')->paginate(20);
+        $types=Type::with('image','user')->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.type.index')){
             return view('index.v1.admin.type.index',compact('types'));
         }else{
@@ -53,11 +53,16 @@ class TypeController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'label' => 'required',
+            'description' => 'required',
+            'photo_id' => 'required',
         ]);
         try{
             $type= new Type();
             $type->name=$request->input('name');
             $type->label=$request->input('label');
+            $type->description=$request->input('description');
+            $type->image_id=$request->input('photo_id');
+            $type->user_id=auth()->guard('web')->user()->id;
             $type->save();
             alert()->success('موفقیت آمیز','نوع طرح با موفقیت اضافه شد');
             return redirect('admin/type');
@@ -114,11 +119,16 @@ class TypeController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'label' => 'required',
+            'description' => 'required',
+            'photo_id' => 'required',
         ]);
         try{
             $type=Type::findorfail($id);
             $type->name=$request->input('name');
             $type->label=$request->input('label');
+            $type->description=$request->input('description');
+            $type->image_id=$request->input('photo_id');
+            $type->user_id=auth()->guard('web')->user()->id;
             $type->save();
             alert()->success('موفقیت آمیز','نوع طرح با موفقیت ویرایش شد');
             return redirect('admin/type');

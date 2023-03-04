@@ -24,4 +24,8 @@ class Image extends Model
     {
         return $this->belongsTo(Sample::class);
     }
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

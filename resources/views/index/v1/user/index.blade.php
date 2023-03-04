@@ -8,10 +8,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="inner text-center">
-                            <h1 class="title">ما را معرفی کنید <br> آژانس خلاق.</h1>
-                            <p class="description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. <br>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
-                            <div class="slide-btn button-group"><a class="btn-default" href="contact.html">خدمات ایمروز </a><a class="btn-default btn-border btn-opacity" href="portfolio.html">نمایش پروژه</a></div>
+                            <h1 class="title">{{$information->title}}</h1>
+                            <p class="description">{!!substr($information->description,0,40)!!}
+                            <div class="slide-btn button-group"><a class="btn-default" href="{{route('contact')}}">تماس با ما</a><a class="btn-default btn-border btn-opacity" href="{{route('about')}}">درباره ما</a></div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title text-center"><span class="subtitle">چکار میتوانیم برایتان انجام بدهیم</span>
+                <div class="section-title text-center"><span class="subtitle">برخی از طرح هایی که ما به شما ارائه میدهیم</span>
                     <h2 class="title">خدماتی را برای شما فراهم می کند.</h2>
                     <p class="description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است., <br> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
                 </div>
@@ -39,7 +38,7 @@
                     <!-- Starrt Single Services -->
                     @foreach(App\Models\Type::all() as $type)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
-                        <a href="#">
+                        <a href="{{route('type.show',$type->id)}}">
                             <div class="service service__style--2 text-left bg-gray">
                                 <div class="icon">
                                     <i data-feather="cast"></i>

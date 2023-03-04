@@ -8,7 +8,7 @@
                         <h2 class="title theme-gradient">{{$session->title}}</h2>
                         <ul class="blog-meta d-flex justify-content-center align-items-center">
                             <li><i data-feather="clock"></i>{{\Hekmatinasser\Verta\Verta::instance($session->date)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</li>
-                            <li> <i data-feather="user"></i> فاطیما توری</li>
+                            <li> <i data-feather="user"></i>{{$session->user->f_name." ".$session->user->l_name}}</li>
                         </ul>
                     </div>
                 </div>

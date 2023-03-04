@@ -52,9 +52,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Company::class);
     }
-    public function emploies()
+    public function sessions()
     {
-        return $this->hasMany(Employ::class);
+        return $this->hasMany(Session::class);
+    }
+    public function types()
+    {
+        return $this->hasMany(Type::class);
     }
 
 }

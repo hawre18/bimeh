@@ -16,4 +16,12 @@ class Type extends Model
     {
         return $this->hasMany(Wallet::class);
     }
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

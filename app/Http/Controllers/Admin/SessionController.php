@@ -62,6 +62,7 @@ class SessionController extends Controller
             $session->description=$request->input('description');
             $session->date=$request->input('date');
             $session->image_id=$request->input('photo_id');
+            $session->user_id=auth()->guard('web')->user()->id;
             $session->save();
             alert()->success('موفقیت آمیز','نشست با موفقیت اضافه شد');
             return redirect('admin/session');
@@ -128,6 +129,7 @@ class SessionController extends Controller
             $session->description=$request->input('description');
             $session->date=$request->input('date');
             $session->image_id=$request->input('photo_id');
+            $session->user_id=auth()->guard('web')->user()->id;
             $session->save();
             alert()->success('موفقیت آمیز','نشست با موفقیت ویرایش شد');
             return redirect('admin/session');

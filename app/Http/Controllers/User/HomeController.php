@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Information;
 use App\Models\Plane;
 use App\Models\Service;
 use App\Models\Session;
@@ -18,8 +19,9 @@ class HomeController extends Controller
         $services=Service::all();
         $plane=Plane::all();
         $customer=Customer::all();
+        $information=Information::first();
         if (View::exists('index.v1.user.index')){
-            return view('index.v1.user.index',compact(['services','plane','customer']));
+            return view('index.v1.user.index',compact(['services','plane','customer','information']));
         }
         abort(Response::HTTP_NOT_FOUND);
     }
@@ -54,7 +56,7 @@ class HomeController extends Controller
     }
     public function sessionShow($id)
     {
-        $session=Session::with('image')->findorfail($id);
+        $session=Session::with('image','user')->findorfail($id);
         if(View::exists('index.v1.user.sessionShow')){
             return view('index.v1.user.sessionShow',compact('session'));
         }

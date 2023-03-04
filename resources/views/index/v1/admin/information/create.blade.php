@@ -97,7 +97,7 @@
         var photosGallery=[]
         var drop=new Dropzone('#photo',{
             addRemoveLinks:true,
-            url:"{{route('photos.upload')}}",
+            url:"{{route('photosLogo.upload')}}",
             sending:function (file,xhr,formData) {
                 formData.append("_token","{{csrf_token()}}")
             },

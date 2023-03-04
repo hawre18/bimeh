@@ -29,7 +29,9 @@
 <header class="header-area formobile-menu header--transparent default-color">
     <div class="header-wrapper" id="header-wrapper">
         <div class="header-left">
-            <div class="logo"><a href="index-2.html"><img src="{{asset('assets/v1/user/images/logo/logo.png')}}" alt="Digital Agency"></a>
+            @foreach(App\Models\Information::with('image')->get() as $logo)
+            <div class="logo"><a href="{{route('/')}}"><img src="{{asset('storage/photos/logo/'.$logo->image->path)}}" alt="Digital Agency"></a>
+             @endforeach
             </div>
         </div>
         <div class="header-right">
@@ -45,7 +47,7 @@
                             <li><a href="service-details.html">جزئیات خدمات </a></li>
                         </ul>
                     </li>
-                    <li><a href="about.html">درباره ما </a></li>
+                    <li><a href="{{route('about')}}">درباره ما </a></li>
                     <li><a href="{{route('contact')}}">تماس با ما </a></li>
                 </ul>
             </nav>
@@ -62,9 +64,12 @@
 <div class="rn-popup-mobile-menu d-block d-lg-none">
     <div class="inner">
         <div class="popup-menu-top">
+            @foreach(App\Models\Information::with('image')->get() as $logo)
             <div class="logo">
-                <a href="index-2.html"><img src="{{asset('assets/v1/user/images/logo/logo-symbol-dark.png')}}" alt="imroz"></a>
+                <a href="{{route('/')}}"><img src="{{asset('storage/photos/logo/'.$logo->image->path)}}" alt="imroz"></a>
             </div>
+            @endforeach
+
             <div class="close-menu d-block d-lg-none">
                     <span class="closeTrigger">
                     <i data-feather="x"></i>
@@ -72,9 +77,6 @@
             </div>
         </div>
         <ul class="mainmenu">
-            <li class="has-dropdown">
-                <a href="{{route('/')}}">ورود/عضویت </a>
-            </li>
             <li class="has-dropdown">
                 <a href="{{route('/')}}">خانه </a>
             </li>
@@ -99,11 +101,11 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-12">
                 <div class="inner text-center">
-                    <div class="logo">
-                        <a href="{{route('/')}}">
-                            <img src="{{asset('assets/v1/user/images/logo/logo-light.png')}}" alt="Logo images">
-                        </a>
-                    </div>
+                    @foreach(App\Models\Information::with('image')->get() as $logo)
+                        <div class="logo">
+                            <a href="{{route('/')}}"><img src="{{asset('storage/photos/logo/'.$logo->image->path)}}" alt="Logo images"></a>
+                        </div>
+                    @endforeach
                     <!-- Social icone Area -->
                     <ul class="social-share d-flex justify-content-center liststyle">
                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>

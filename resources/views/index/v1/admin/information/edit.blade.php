@@ -40,7 +40,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">آدرس<span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="آدرس" name="address" required=""value="{{$information->address}}">
+                                            <input type="text" class="form-control" placeholder="آدرس" name="address" required=""value="{{$information->address}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
