@@ -45,7 +45,7 @@
                                             <span>اگر مشتری طرف قرارداد با ارگان یا شرکت هست لطفا انتخاب کنید در غیر اینصورت فیلد را خالی بگذارید</span>
                                             <label class="form-label">شرکت/ارگان<span class="text-danger">*</span></label>
                                             <select class="form-control" name="company" >
-                                                <option>انتخاب کنید</option>
+                                                <option value="0">انتخاب کنید</option>
                                                 @foreach($companies as $company)
                                                     <option value="{{$company->id}}">{{$company->companyName}}</option>
                                                 @endforeach

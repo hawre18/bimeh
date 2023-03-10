@@ -26,7 +26,9 @@ Route::group(['prefix' => 'api','namespace'=>'App\Http\Controllers\Admin'],funct
     Route::post('photos/uploadPlane','ImageController@upload')->name('photosPlane.upload');
     Route::post('photosLogo/upload','ImageController@uploadLogo')->name('photosLogo.upload');
     Route::post('photoType/upload','ImageController@uploadType')->name('photoType.upload');
-    Route::post('photosSession/upload','ImageController@uploadsession')->name('photoSession.upload');
+    Route::post('photoPlane/upload','ImageController@uploadPlane')->name('photoPlane.upload');
+    Route::post('photosSession/upload','ImageController@uploadSession')->name('photoSession.upload');
+    Route::post('photoSample/upload','ImageController@uploadSample')->name('photoSample.upload');
 });
 Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'],function () {
     Route::get('/wallet/{customerId}','SellController@getWallet');
@@ -43,7 +45,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('address.destroy/{id}','AddressController@destroy')->name('address.destroy')->middleware('can:address-crud');
     Route::resource('plane','PlaneController')->middleware('can:plane-crud');
     Route::resource('type','TypeController')->middleware('can:customer-crud');
-    Route::resource('session','sessionController')->middleware('can:plane-crud');
+    Route::resource('session','SessionController')->middleware('can:plane-crud');
+    Route::resource('sample','SampleController')->middleware('can:plane-crud');
     Route::resource('role','RoleController')->middleware('can:role-crud');
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
     Route::resource('order','OrderController')->middleware('can:role-crud');
@@ -54,13 +57,14 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::resource('information','InformationController')->middleware('can:doctor-crud');
     Route::patch('doctors/active/{id}','DoctorController@status')->name('doctors.active')->middleware('can:doctor-crud');
     Route::get('wallet/{customerId}/{typePlane}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
+    Route::resource('wallets','WalletController')->middleware('can:wallet-crud');
     Route::put('wallet/charging/{customerId}/{typePlane}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
     Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
     Route::get('sells/index','SellController@index')->name('sellsa.index');
     Route::resource('wallets','WalletController');
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf');
     Route::group(['prefix'=>'user'],function (){
-        Route::resource('users','UserController')->middleware('can:user-crud');
+        Route::resource('users','UserController')->middleware('can:plane-crud');
 
     });
 });
@@ -71,6 +75,7 @@ Route::group(['namespace'=>'App\Http\Controllers\User'],function (){
     Route::get('about','HomeController@about')->name('about');
     Route::get('plane/show/{id}','HomeController@planeShow')->name('uPlane.show');
     Route::get('session/show/{id}','HomeController@sessionShow')->name('uSession.show');
+    Route::get('sample/show/{id}','HomeController@sampleShow')->name('uSample.show');
     Route::get('type/show/{id}','HomeController@typeShow')->name('uType.show');
 });
 

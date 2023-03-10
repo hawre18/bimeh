@@ -71,7 +71,8 @@ class OrderController extends Controller
         $this->validate(request(), [
             'customer' => 'required',
             'plane' => 'required',
-            'pay'=>'required'
+            'pay'=>'required',
+            'codePay'=>'required'
 
         ]);
         try{
@@ -81,6 +82,7 @@ class OrderController extends Controller
             $order->customer_id=$request->input('customer');
             $order->user_id=auth()->guard('web')->user()->id;
             $order->status=1;
+            $order->codePay=$request->input('codePay');
             $order->payType=$request->input('pay');
             $order->plane_id=$plane->id;
             $order->save();
@@ -115,6 +117,7 @@ class OrderController extends Controller
             return back();
         }
         catch (\Exception $m){
+            return $m;
             alert()->success(' خطا','خطا در فروش ');
             return back();
         }

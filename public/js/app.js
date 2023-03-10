@@ -5564,6 +5564,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5618,6 +5623,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29688,6 +29698,18 @@ var render = function () {
     _vm._v(" "),
     _vm.customer > 0
       ? _c("div", [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "codePay" } },
+            [_vm._v("شناسه پرداخت")]
+          ),
+          _vm._v(" "),
+          _c("input", { attrs: { type: "text", name: "codePay" } }),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.customer > 0
+      ? _c("div", [
           _c("label", { staticClass: "form-label" }, [_vm._v("کیف پول")]),
           _vm._v(" "),
           _c(
@@ -29758,10 +29780,7 @@ var render = function () {
               _vm._l(_vm.planes, function (plane) {
                 return _c("option", { domProps: { value: plane.id } }, [
                   _vm._v(
-                    _vm._s(plane.title + " ") +
-                      _vm._s(
-                        _vm.number_format(plane.price, 0, "", ",") + "تومان "
-                      )
+                    _vm._s(plane.title + " ") + _vm._s(plane.price + "تومان ")
                   ),
                 ])
               }),

@@ -81,4 +81,40 @@ class ImageController extends Controller
         ]);
 
     }
+    public function uploadPlane(Request $request){
+
+        $uploadedFile=$request->file('file');
+        $filename=time().$uploadedFile->getClientOriginalName();
+        $original_name=$uploadedFile->getClientOriginalName();
+        Storage::disk('local')->putFileas(
+            'public/photos/plane',$uploadedFile,$filename
+        );
+        $photo=new Image();
+        $photo->name=$original_name;
+        $photo->path=$filename;
+        // $photo->user_id=auth()->guard('web')->user()->id;;
+        $photo->save();
+        return response()->json([
+            'photo_id'=>$photo->id
+        ]);
+
+    }
+    public function uploadSample(Request $request){
+
+        $uploadedFile=$request->file('file');
+        $filename=time().$uploadedFile->getClientOriginalName();
+        $original_name=$uploadedFile->getClientOriginalName();
+        Storage::disk('local')->putFileas(
+            'public/photos/sample',$uploadedFile,$filename
+        );
+        $photo=new Image();
+        $photo->name=$original_name;
+        $photo->path=$filename;
+        // $photo->user_id=auth()->guard('web')->user()->id;;
+        $photo->save();
+        return response()->json([
+            'photo_id'=>$photo->id
+        ]);
+
+    }
 }

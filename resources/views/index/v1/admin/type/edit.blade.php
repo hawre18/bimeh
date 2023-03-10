@@ -3,6 +3,9 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
+@section('styles')
+    <link rel="stylesheet" href="{{asset('/admin/dist/css/dropzone.css')}}">
+@endsection
 @section('content')
     <!-- Hero Start -->
     <section class="bg-half-150 d-table w-100 bg-light" style="background: url('./assets/v1/admin/images/bg/bg-lines-one.png') center;">
@@ -29,8 +32,30 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
+                                            <textarea id="description" name="description" required="">{{$type->description}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">عکس<span class="text-danger">*</span></label>
+                                            <input type="hidden" name="photo_id" id="type-photo">
+                                            <div id="photo" class="dropzone" ></div>
+                                            <div class="col-sm-3" id="updated_photo_{{$image->id}}">
+                                                <img class="img-responsive" src="{{asset('storage/photos/type/'.$image->path)}}">
+                                                <button type="button" class="btn btn-danger" onclick="removeImages({{$image->id}})">حذف</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary" >ویرایش</button>
+                                            <button class="btn btn-primary" onclick="typeGallery()">ثبت</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary" onclick="typeGallery()" >ویرایش</button>
                                         </div>
                                     </div>
                                 </div>
@@ -42,5 +67,39 @@
         </div> <!--end container-->
     </section><!--end section-->
     <!-- Hero End -->
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/v1/admin/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        Dropzone.autoDiscover=false;
+        var photosGallery=[]
+        var photo=[].concat({{$image->id}})
+        var drop=new Dropzone('#photo',{
+            addRemoveLinks:true,
+            url:"{{route('photoType.upload')}}",
+            sending:function (file,xhr,formData) {
+                formData.append("_token","{{csrf_token()}}")
+            },
+            success: function (file,response) {
+                photosGallery.push(response.photo_id)
+            }
+        });
+        typeGallery=function () {
+            document.getElementById('type-photo').value=photosGallery.concat(photo)
+        }
+        removeImages=function (id) {
+            var index=photo.indexOf(id)
+            photo.splice(index,1);
+            document.getElementById('updated_photo_'+id).remove();
+        }
+        CKEDITOR.replace('description',{
+            customConfig:'config.js',
+            toolbar:'simple',
+            language:'fa',
+            removePlugins:'cloudservices, easyimage'
+        });
+
+    </script>
 @endsection
 

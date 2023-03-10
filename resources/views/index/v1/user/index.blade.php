@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center"><span class="subtitle">برخی از طرح هایی که ما به شما ارائه میدهیم</span>
-                    <h2 class="title">خدماتی را برای شما فراهم می کند.</h2>
+                    <h2 class="title">طرح های ما</h2>
                     <p class="description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است., <br> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است..</p>
                 </div>
             </div>
@@ -34,14 +34,13 @@
         <div class="row creative-service mt--30">
             <div class="col-lg-12">
                 <div class="row service-main-wrapper">
-
                     <!-- Starrt Single Services -->
-                    @foreach(App\Models\Type::all() as $type)
+                    @foreach($types as $type)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-left">
                         <a href="{{route('type.show',$type->id)}}">
                             <div class="service service__style--2 text-left bg-gray">
                                 <div class="icon">
-                                    <i data-feather="cast"></i>
+                                    <img class="w-100" src="{{asset('storage/photos/type/'.$type->image->path)}}" alt="Blog Images" />
                                 </div>
                                 <div class="content">
                                     <h3 class="title">{{$type->label}}</h3>
@@ -52,8 +51,6 @@
                     </div>
                     @endforeach
                     <!-- ENd Single Services -->
-
-
                 </div>
             </div>
         </div>
@@ -67,7 +64,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center"><span class="subtitle">پروژه های ما</span>
+                    <div class="section-title text-center"><span class="subtitle">نمونه کارهای ما</span>
                         <h2 class="title">برخی از کارهای اخیر ما</h2>
                         <p class="description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است., <br>
                             اما اکثریت دچار تغییر شده اند.</p>
@@ -86,24 +83,24 @@
                 {"breakpoint":770, "settings": {"slidesToShow": 2}},
                 {"breakpoint":490, "settings": {"slidesToShow": 1}}
                 ]'>
-                @foreach(App\Models\Sample::with('image')->get()->all() as $sample)
+                @foreach(App\Models\Sample::with('image','service')->get()->all() as $sample)
                 <div class="single_im_portfolio">
                     <div class="im_portfolio">
                         <div class="thumbnail_inner">
-                            <div class="thumbnail"><a href="#"><img src="{{asset('storage/photos/sample/'.$sample->image->path)}}" alt="React Creative Agency"></a></div>
+                            <div class="thumbnail"><a href="{{route('uSample.show',$sample->id)}}"><img src="{{asset('storage/photos/sample/'.$sample->image->path)}}" alt="React Creative Agency"></a></div>
                         </div>
                         <div class="content">
                             <div class="inner">
                                 <div class="portfolio_heading">
-                                    <div class="category_list"><a href="#">{{$sample->dateDo}} </a></div>
-                                    <h4 class="title"><a href="#">{{$sample->label}} </a>
+                                    <div class="category_list"><a href="#">{{\Hekmatinasser\Verta\Verta::instance($sample->dateDo)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</a></div>
+                                    <h4 class="title"><a href="{{route('uSample.show',$sample->id)}}">{{$sample->service->title}} </a>
                                     </h4>
                                 </div>
                                 <div class="portfolio_hover">
                                     <p>{!! substr($sample->description,0,50) !!}</p>
                                 </div>
                             </div>
-                        </div><a class="transparent_link" href="#"></a>
+                        </div><a class="transparent_link" href="{{route('uSample.show',$sample->id)}}"></a>
                     </div>
                 </div>
 
@@ -177,118 +174,6 @@
 
 
 
-<!-- Start Testimonial Area  -->
-<div class="rn-testimonial-area bg_color--1 ptb--120">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <!-- Start Tab Content  -->
-                <div class="rn-testimonial-content tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>جوری ونستون </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>جان دیرا </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>علومن سنت </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>جوان روسی </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>فاطیما </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab6" role="tabpanel" aria-labelledby="tab6-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>ایرون روین </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab7" role="tabpanel" aria-labelledby="tab7-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>موهما ورنم </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
-                        <div class="inner">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد..</p>
-                        </div>
-                        <div class="author-info">
-                            <h6><span>شیپا  </span> - طراح ، متخصص ، سئوکار.</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Tab Content  -->
-            </div>
-
-            <div class="col-lg-6 mt_md--40 mt_sm--40">
-                <!-- Start Tab Nav  -->
-                <ul class="testimonial-thumb-wrapper nav nav-tabs" id="myTab" role="tablist">
-                    <li>
-                        <a class="active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">
-                            <div class="testimonial-thumbnai">
-                                <div class="thumb">
-                                    <img src="{{asset('assets/v1/user/images/client/testimonial-1.jpg')}}" alt="Testimonial Images">
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">
-                            <div class="testimonial-thumbnai">
-                                <div class="thumb">
-                                    <img src="{{asset('assets/v1/user/images/client/testimonial-2.jpg')}}" alt="Testimonial Images">
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">
-                            <div class="testimonial-thumbnai">
-                                <div class="thumb">
-                                    <img src="{{asset('assets/v1/user/images/client/testimonial-3.jpg')}}" alt="Testimonial Images">
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- End Tab Content  -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Testimonial Area  -->
 
 <!-- Rn Blog Area Start-->
 <div class="rn-blog-area pt--120 pb--140 bg_color--5">

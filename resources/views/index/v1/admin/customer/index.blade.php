@@ -18,6 +18,7 @@
                                     <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
                                     <th class="border-bottom p-3">کدملی</th>
+                                    <th class="border-bottom p-3">شرکت/ارگان</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
@@ -30,6 +31,12 @@
                                         </td>
                                         <td class="p-3">{{$customer->l_name}}</td>
                                         <td class="p-3">{{$customer->nationalcode}}</td>
+                                        @if($customer->company_id>0)
+                                        <td class="p-3">{{$customer->company->companyName}}</td>
+                                        @endif
+                                        @if($customer->company_id<1)
+                                            <td class="p-3">اختصاصی</td>
+                                        @endif
                                         <td class="text-end p-3">
                                             <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
                                             <a href="{{route('customer.edit',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >ویرایش</a>

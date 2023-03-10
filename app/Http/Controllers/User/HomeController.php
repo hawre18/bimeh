@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Information;
 use App\Models\Plane;
+use App\Models\Sample;
 use App\Models\Service;
 use App\Models\Session;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +22,9 @@ class HomeController extends Controller
         $plane=Plane::all();
         $customer=Customer::all();
         $information=Information::first();
+        $types=Type::with('image')->get();
         if (View::exists('index.v1.user.index')){
-            return view('index.v1.user.index',compact(['services','plane','customer','information']));
+            return view('index.v1.user.index',compact(['services','plane','customer','information','types']));
         }
         abort(Response::HTTP_NOT_FOUND);
     }
@@ -59,6 +62,14 @@ class HomeController extends Controller
         $session=Session::with('image','user')->findorfail($id);
         if(View::exists('index.v1.user.sessionShow')){
             return view('index.v1.user.sessionShow',compact('session'));
+        }
+        abort(Response::HTTP_NOT_FOUND);
+    }
+    public function sampleShow($id)
+    {
+        $sample=Sample::with('image','customer','doctor','service')->findorfail($id);
+        if(View::exists('index.v1.user.sampleShow')){
+            return view('index.v1.user.sampleShow',compact('sample'));
         }
         abort(Response::HTTP_NOT_FOUND);
     }

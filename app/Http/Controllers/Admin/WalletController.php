@@ -63,6 +63,7 @@ class WalletController extends Controller
                 $wallet->customer_id=$request->input('customer_id');
                 $wallet->type_id=$request->input('typePlane');
                 $wallet->modeCharge=0;
+                $wallet->user_id=auth()->guard('web')->user()->id;
                 $wallet->save();
                 alert()->success('موفقیت آمیز','کیف پول با موفقیت ایجاد شد');
                 return redirect('/admin/wallets');

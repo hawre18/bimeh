@@ -1,4 +1,9 @@
+<style>
+
+
+</style>
 <template>
+
     <div>
     <div>
         <label for="customer" class="form-label">مشتری </label>

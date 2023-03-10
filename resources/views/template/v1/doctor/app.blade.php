@@ -23,6 +23,7 @@
     <link href="{{asset('assets/v1/admin/css/unicons.iconscout.com/release/v3.0.6/css/line.css')}}" rel="stylesheet">
     <!-- Css -->
     <link href="{{asset('assets/v1/admin/css/style-rtl.min.css')}}" rel="stylesheet" type="text/css" id="theme-opt">
+    @yield('multiselect')
 
 </head>
 
@@ -157,6 +158,7 @@
 <!-- Offcanvas End -->
 <!-- javascript -->
 <script src="{{asset('js/app.js')}}"></script>
+@yield('multi')
 @yield('alert')
 <script src="{{asset('assets/v1/admin/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Icons -->

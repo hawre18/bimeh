@@ -18,8 +18,10 @@
                                 <th class="border-bottom p-3" style="min-width: 180px;">طرح انتخابی</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;">مشتری</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;">کاربر پرداخت کننده</th>
+                                <th class="border-bottom p-3" style="min-width: 150px;">نوع پرداخت</th>
+                                <th class="border-bottom p-3" style="min-width: 150px;">شناسه پرداخت</th>
                                 <th class="border-bottom p-3">وضعیت</th>
-                                <th class="border-bottom p-3">علیات</th>
+                                <th class="border-bottom p-3">عملیات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,12 +31,23 @@
                                     <td class="p-3">{{$order->plane->title}}</td>
                                     <td class="p-3">{{$order->customer->f_name.' '.$order->customer->l_name.' '.$order->customer->nationalcode}}</td>
                                     <td class="p-3">{{$order->user->f_name.' '.$order->user->l_name}}</td>
+                                    @if($order->payType=='transfer')
+                                        <td class="p-3" ><span class="label alert-info" >انتقال وجه</span></td>
+                                    @endif
+                                    @if($order->payType=="cache")
+                                        <td class="p-3" ><span class="label alert-success">نقدا</span></td>
+                                    @endif
+                                    @if($order->payType=="pos")
+                                        <td class="p-3" ><span class="label alert-success">دستگاه pos</span></td>
+                                    @endif
+                                    <td class="p-3" ><span class="label alert-success">{{$order->codePay}}</span></td>
                                     @if($order->status==0)
                                         <td class="p-3" ><span class="label alert-info" >پرداخت نشده</span></td>
                                     @endif
                                     @if($order->status==1)
                                         <td class="p-3" ><span class="label alert-success">پرداخت شده</span></td>
                                     @endif
+
                                     <td class="text-end p-3">
                                         @if($order->status==0)
                                             <a href="{{route('order.pay',['orderId'=>$order->id])}}" class="btn btn-icon btn-soft-success">pay</a>

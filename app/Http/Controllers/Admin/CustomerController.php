@@ -23,7 +23,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers=Customer::with('company')->latest('created_at')->paginate(20);
+        $customers=Customer::with('company')->latest('company_id')->paginate(20);
         if(View::exists('index.v1.admin.customer.index')){
             return view('index.v1.admin.customer.index', compact(['customers']));
         }else{
@@ -67,7 +67,8 @@ class CustomerController extends Controller
             $customer->l_name=$request->input('lname');
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
-            $customer->company_id=$request->input('company');
+            if($request->input('company')!=null){
+                $customer->company_id=$request->input('company');}
             $customer->user_id=auth()->guard('web')->user()->id;
             $customer->save();
             try {
@@ -165,6 +166,8 @@ class CustomerController extends Controller
             $customer->l_name=$request->input('lname');
             $customer->phone=$request->input('phone');
             $customer->nationalcode=$request->input('nationalcode');
+                $customer->company_id=$request->input('company');
+
             $customer->user_id=auth()->guard('web')->user()->id;
             $customer->save();
             alert()->success('موفقیت آمیز','مشتری با موفقیت ویرایش شد');

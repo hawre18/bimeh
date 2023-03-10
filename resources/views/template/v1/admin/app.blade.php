@@ -71,12 +71,8 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
-                                <li> <a href="{{route('user.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item text-dark"><i class="fa fa-sign-out"></i></a>
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="post" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
                                 <li><a href="{{route('level.index')}}">لیست مدیران</a></li>
+                                <li><a href="{{route('register')}}">افزودن کاربر</a></li>
                                 <li><a href="{{route('level.create')}}">افزودن مدیر</a></li>
                             </ul>
                         </div>
@@ -105,6 +101,15 @@
                             <ul>
                                 <li><a href="{{route('customer.index')}}">لیست مشتری ها</a></li>
                                 <li><a href="{{route('customer.create')}}">افزودن مشتری</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-wheelchair ms-2 d-inline-block"></i>کیف پول ها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('wallets.index')}}">لیست کیف پول ها</a></li>
+                                <li><a href="{{route('wallets.create')}}">افزودن کیف پول</a></li>
                             </ul>
                         </div>
                     </li>
@@ -169,6 +174,13 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="sidebar-dropdown">
+                        <a href="{{route('user.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item text-dark"><i class="fa fa-sign-out"></i>خروج</a>
+                            <form id="logout-form" action="{{ route('user.logout') }}" method="post" style="display: none;">
+                                @csrf
+                            </form>
+                    </li>
+
                 </ul>
                 <!-- sidebar-menu  -->
             </div>

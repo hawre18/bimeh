@@ -69,13 +69,12 @@ class CompanyController extends Controller
             $company->tellphone = $request->input('tellphone');
             $company->province_id = $request->input('province');
             $company->city_id = $request->input('city');
-            $company->admin_id = auth()->guard('web')->user()->id;
+            $company->user_id = auth()->guard('web')->user()->id;
             $company->save();
 
             alert()->success('موفقیت آمیز', 'شرکت با موفقیت اضافه شد');
             return redirect('/admin/company');
         } catch (\Exception $m) {
-            return $m;
             alert()->error('خطا', 'خطا در ذخیره رکورد');
             return redirect('/admin/company/create');
         }
@@ -152,12 +151,11 @@ class CompanyController extends Controller
             $company->tellphone = $request->input('tellphone');
             $company->province_id = $request->input('province');
             $company->city_id = $request->input('city');
-            $company->admin_id = auth()->guard('web')->user()->id;
+            $company->user_id = auth()->guard('web')->user()->id;
             $company->save();
             alert()->success('موفقیت آمیز', 'شرکت/ارگان با موفقیت ویرایش شد');
             return redirect('/admin/company');
         } catch (\Exception $m) {
-            return $m;
             alert()->error('خطا', 'خطا در ویرایش رکورد');
             return view('index.v1.admin.company.edit', compact(['company']));
         }

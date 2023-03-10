@@ -11,4 +11,16 @@ class Sample extends Model
     {
         return $this->belongsTo(Image::class);
     }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }

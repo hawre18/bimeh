@@ -16,6 +16,11 @@
 
         </div>
         <div v-if="customer>0">
+            <label for="codePay" class="form-label">شناسه پرداخت</label>
+            <input type="text" name="codePay">
+
+        </div>
+        <div v-if="customer>0">
             <label class="form-label">کیف پول</label>
             <select class="form-control" id="wallet" name="wallet" v-model="wallet" @change="getAllPlanes()">
                 <option  disabled>انتخاب کنید</option>
@@ -26,7 +31,7 @@
             <label class="form-label">طرح</label>
             <select class="form-control" id="plane" name="plane">
                 <option  disabled>انتخاب کنید</option>
-                <option v-for="plane in planes" :value="plane.id" >{{plane.title+" "}}{{number_format(plane.price,0,'',',') +"تومان "}}</option>
+                <option v-for="plane in planes" :value="plane.id" >{{plane.title+" "}}{{plane.price +"تومان "}}</option>
             </select>
         </div>
 

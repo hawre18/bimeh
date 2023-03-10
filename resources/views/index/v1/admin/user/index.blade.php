@@ -14,7 +14,7 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;">نام کاربری</th>
                                     <th class="border-bottom p-3">کدملی</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
                                     <th class="border-bottom p-3">علیات</th>
@@ -24,13 +24,14 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3"><a href="{{route('user.show',$user->id)}}" class="text-dark">{{$user->name}}</a></td>
+                                        <td class="p-3"><a href="{{route('users.show',$user->id)}}" class="text-dark">{{$user->f_name.' '.$user->l_name}}</a></td>
                                         <td class="p-3">{{$user->email}}</td>
                                         <td class="p-3">{{$user->nationalcode}}</td>
+                                        <td class="p-3">{{$user->phone}}</td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($user->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('user.edit',$user->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
-                                            <a href="{{route('user.destroy',$user->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <a href="{{route('users.edit',$user->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
+                                            <a href="{{route('users.destroy',$user->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
                                         </td>
                                     </tr>
                                 @endforeach

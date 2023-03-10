@@ -36,7 +36,7 @@ class LevelManageController extends Controller
             'role_id' => 'required'
         ]);
         try{
-            $users=findorfail($request->input('user_id'))->roles()->sync($request->input('roles_id'));
+            $users=User:: findorfail($request->input('user_id'))->roles()->sync($request->input('roles_id'));
             alert()->success('موفقیت آمیز',' دسترسی با موفقیت اضافه شد');
             return redirect('/admin/level');
         }
