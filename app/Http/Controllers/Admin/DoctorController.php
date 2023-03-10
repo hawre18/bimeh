@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Customer;
 use App\Models\Doctor;
+use App\Models\Type;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,8 +38,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        $types=Type::all();
         if(View::exists('index.v1.admin.doctor.create')){
-            return view('index.v1.admin.doctor.create');
+            return view('index.v1.admin.doctor.create',copmact('types'));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -63,7 +65,9 @@ class DoctorController extends Controller
             'province' => 'required',
             'sku' => 'required',
             'password' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'type'=>'required'
+
         ]);
 
         try{
@@ -79,6 +83,7 @@ class DoctorController extends Controller
             $doctor->sku=$request->input('sku');
             $doctor->password=Hash::make( $request->input('password'));
             $doctor->email=$request->input('email');
+            $doctor->type_id=$request->input('type');
             $doctor->save();
             alert()->success('موفقیت آمیز','دکتر با موفقیت اضافه شد');
             return redirect('admin/doctors/create');
@@ -110,6 +115,7 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor=Doctor::findorfail($id);
+        $types=Type::all();
         if(($doctor)!=null){
             if(View::exists('index.v1.admin.doctor.edit')){
                 return view('index.v1.admin.doctor.edit',compact(['doctor']));
@@ -141,7 +147,8 @@ class DoctorController extends Controller
             'city' => 'required',
             'province' => 'required',
             'sku' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'type' => 'required'
         ]);
 
         try{
@@ -154,6 +161,7 @@ class DoctorController extends Controller
             $doctor->phone=$request->input('phone');
             $doctor->tellphone=$request->input('tellphone');
             $doctor->sku=$request->input('sku');
+            $doctor->type_id=$request->input('type');
             if($request->input('password')!=null){
                 $doctor->password=Hash::make( $request->input('password'));
             }

@@ -34,8 +34,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        $types=Type::all();
         if(View::exists('index.v1.admin.services.create')){
-            return view('index.v1.admin.services.create');
+            return view('index.v1.admin.services.create',compact('types'));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -54,14 +55,16 @@ class ServiceController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'offPrice'=>'required'
+            'offPrice'=>'required',
+            'type'=>'required'
         ]);
         try{
             $service= new Service();
             $service->title=$request->input('title');
             $service->label=$request->input('description');
             $service->price=$request->input('price');
-            $dervice->offPrice=$request->input('offPrice');
+            $service->offPrice=$request->input('offPrice');
+            $service->type_id=$request->input('type');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت اضافه شد');
             return redirect('admin/services');
@@ -93,8 +96,9 @@ class ServiceController extends Controller
     {
         if(View::exists('index.v1.admin.services.edit')){
             $service=Service::findorfail($id);
+            $types=Type::all();
             if(($service)!=null){
-                return view('index.v1.admin.services.edit',compact(['service']));
+                return view('index.v1.admin.services.edit',compact(['service','types']));
             }
             elseif(!(($service))!=null){
                 alert()->error('خطا','سرویس یافت نشد');
@@ -119,7 +123,8 @@ class ServiceController extends Controller
             'title' => 'required',
             'label' => 'required',
             'price' => 'required',
-            'offPrice'=>'required'
+            'offPrice'=>'required',
+            'type'=>'required'
         ]);
         try{
             $service=Service::findorfail($id);
@@ -127,6 +132,7 @@ class ServiceController extends Controller
             $service->label=$request->input('label');
             $service->price=$request->input('price');
             $service->offPrice=$request->input('offPrice');
+            $service->type_id=$request->input('type')
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت ویرایش شد');
             return redirect('admin/services');

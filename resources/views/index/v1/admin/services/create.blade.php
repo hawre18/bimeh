@@ -15,7 +15,7 @@
                             <form method="post" action="/admin/services" class="login-form mt-4" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
                                             <select name="type">
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
+                                            <label class="form-label"> اسم خدمت<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{old('title')}}">
                                         </div>
                                     </div>
