@@ -36,33 +36,33 @@ Route::group(['prefix' => 'apiDoctor','namespace'=>'App\Http\Controllers\Doctor'
 });
 Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'namespace'=>'App\Http\Controllers\Admin'],function (){
     Route::resource('customer','CustomerController')->middleware('can:customer-crud');
-    Route::resource('company','CompanyController')->middleware('can:customer-crud');
-    Route::resource('employ','EmployController')->middleware('can:customer-crud');
+    Route::resource('company','CompanyController')->middleware('can:company-crud');
+    Route::resource('employ','EmployController')->middleware('can:employ-crud');
     Route::get('customer/address/create/{customerId}','CustomerController@address')->name('create.address')->middleware('can:customer-crud');
     Route::get('home','HomeController@index')->name('admin.home');
     Route::get('address','AddressController@index')->name('index.address')->middleware('can:address-crud');
     Route::post('customer/address/store/{customerId}','AddressController@store')->name('addresses.store')->middleware('can:address-crud');
     Route::get('address.destroy/{id}','AddressController@destroy')->name('address.destroy')->middleware('can:address-crud');
     Route::resource('plane','PlaneController')->middleware('can:plane-crud');
-    Route::resource('type','TypeController')->middleware('can:customer-crud');
-    Route::resource('session','SessionController')->middleware('can:plane-crud');
-    Route::resource('sample','SampleController')->middleware('can:plane-crud');
+    Route::resource('type','TypeController')->middleware('can:type-crud');
+    Route::resource('session','SessionController')->middleware('can:session-crud');
+    Route::resource('sample','SampleController')->middleware('can:sample-crud');
     Route::resource('role','RoleController')->middleware('can:role-crud');
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
-    Route::resource('order','OrderController')->middleware('can:role-crud');
+    Route::resource('order','OrderController')->middleware('can:order-crud');
     Route::resource('permission','PermissionController')->middleware('can:permission-crud');
     Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']]);
     Route::resource('services','ServiceController')->middleware('can:service-crud');
     Route::resource('doctors','DoctorController')->middleware('can:doctor-crud');
-    Route::resource('information','InformationController')->middleware('can:doctor-crud');
+    Route::resource('information','InformationController')->middleware('can:information-crud');
     Route::patch('doctors/active/{id}','DoctorController@status')->name('doctors.active')->middleware('can:doctor-crud');
     Route::get('wallet/{customerId}/{typePlane}','WalletController@charge')->name('wallet.charge')->middleware('can:wallet-crud');
     Route::resource('wallets','WalletController')->middleware('can:wallet-crud');
     Route::put('wallet/charging/{customerId}/{typePlane}','WalletController@charging')->name('wallet.charging')->middleware('can:wallet-crud');
     Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
-    Route::get('sells/index','SellController@index')->name('sellsa.index');
-    Route::resource('wallets','WalletController');
-    Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf');
+    Route::get('sells/index','SellController@index')->name('sellsa.index')->middleware('can:sell-crud');;
+    Route::resource('wallets','WalletController')->middleware('can:wallet-crud');;
+    Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf')->middleware('can:sell-crud');;
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:plane-crud');
 

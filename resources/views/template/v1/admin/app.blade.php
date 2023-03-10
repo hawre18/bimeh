@@ -167,6 +167,23 @@
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-presentation ms-2 d-inline-block"></i>جلسات</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('session.index')}}">لیست جلسات</a></li>
+                                <li><a href="{{route('session.create')}}">ایجاد جلسه</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-info ms-2 d-inline-block"></i>اطلاعات پایه سایت</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('information.index')}}">مشاهده</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-invoice ms-2 d-inline-block"></i>فاکتور ها</a>
                         <div class="sidebar-submenu">
                             <ul>
