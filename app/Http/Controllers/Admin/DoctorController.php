@@ -27,8 +27,6 @@ class DoctorController extends Controller
         return view('index.v1.admin.doctor.index',compact(['doctors']));
         }
             abort(Response::HTTP_NOT_FOUND);
-
-
     }
 
     /**
@@ -118,7 +116,7 @@ class DoctorController extends Controller
         $types=Type::all();
         if(($doctor)!=null){
             if(View::exists('index.v1.admin.doctor.edit')){
-                return view('index.v1.admin.doctor.edit',compact(['doctor']));
+                return view('index.v1.admin.doctor.edit',compact(['doctor','types']));
             }elseif(!(View::exists('index.v1.admin.doctor.edit'))){
                 abort(Response::HTTP_NOT_FOUND);
             }

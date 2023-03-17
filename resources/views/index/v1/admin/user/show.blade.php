@@ -19,24 +19,18 @@
                                 <th class="border-bottom p-3">کدملی</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
                                 <th class="border-bottom p-3" style="min-width: 150px;"> ایمیل</th>
-                                <th class="border-bottom p-3">تاریخ عضویت</th>
-                                <th class="border-bottom p-3">علیات</th>
+
                             </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="p-3">{{$customer->f_name}}</td>
-                                    <td class="p-3">{{$customer->l_name}}</td>
-                                    <td class="p-3">{{$customer->user_name}}</td>
-                                    <td class="p-3">{{$customer->nationalcode}}</td>
-                                    <td class="p-3"> {{$customer->phone}} </td>
-                                    <td class="p-3"> {{$customer->ایمیل}} </td>
-                                    <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($customer->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
-                                    <td class="text-end p-3">
-                                        <a href="{{route('create.address',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-primary">آدرس</a>
-                                        <a href="{{route('wallet.charge',['customerId'=>$customer->id])}}" class="btn btn-icon btn-pills btn-soft-success">کیف</a>
-                                        <a href="{{route('customer.destroy',$customer->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
-                                    </td>
+                                    <td class="p-3">{{$admin->f_name}}</td>
+                                    <td class="p-3">{{$admin->l_name}}</td>
+                                    <td class="p-3">{{$admin->user_name}}</td>
+                                    <td class="p-3">{{$admin->nationalcode}}</td>
+                                    <td class="p-3"> {{$admin->phone}} </td>
+                                    <td class="p-3"> {{$admin->ایمیل}} </td>
+
                                 </tr>
                             </tbody>
                         </table>

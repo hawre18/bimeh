@@ -14,25 +14,39 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">نام کاربری</th>
+                                    <th class="border-bottom p-3" style="min-width: 150px;">ایمیل</th>
                                     <th class="border-bottom p-3">کدملی</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;"> همراه</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                @foreach($admins as $admin)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3"><a href="{{route('users.show',$user->id)}}" class="text-dark">{{$user->f_name.' '.$user->l_name}}</a></td>
-                                        <td class="p-3">{{$user->email}}</td>
-                                        <td class="p-3">{{$user->nationalcode}}</td>
-                                        <td class="p-3">{{$user->phone}}</td>
-                                        <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($user->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
+                                        <td class="p-3"><a href="{{route('crud.show',$admin->id)}}" class="text-dark">{{$admin->f_name.' '.$admin->l_name}}</a></td>
+                                        <td class="p-3">{{$admin->email}}</td>
+                                        <td class="p-3">{{$admin->nationalcode}}</td>
+                                        <td class="p-3">{{$admin->phone}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('users.edit',$user->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
-                                            <a href="{{route('users.destroy',$user->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <a href="{{route('crud.edit',$admin->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
+                                            <a href="{{route('crud.destroy',$admin->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            @if($admin->level=='user')
+                                                <form method="post" action="{{route('admins.active',$admin->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button type="submit" class="btn btn-icon btn-pills btn-soft-success">A</button>
+                                                </form>
+                                            @endif
+                                            @if($admin->level=='admin')
+                                                <form method="post" action="{{route('admins.active',$admin->id)}}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button type="submit" class="btn btn-icon btn-pills btn-soft-danger">DA</button>
+                                                </form>
+                                            @endif
                                         </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>

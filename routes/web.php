@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
     Route::resource('order','OrderController')->middleware('can:order-crud');
     Route::resource('permission','PermissionController')->middleware('can:permission-crud');
-    Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']]);
+    Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']])->middleware('admin-crud');
     Route::resource('services','ServiceController')->middleware('can:service-crud');
     Route::resource('doctors','DoctorController')->middleware('can:doctor-crud');
     Route::resource('information','InformationController')->middleware('can:information-crud');
@@ -64,7 +64,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::resource('wallets','WalletController')->middleware('can:wallet-crud');;
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf')->middleware('can:sell-crud');;
     Route::group(['prefix'=>'user'],function (){
-        Route::resource('users','UserController')->middleware('can:plane-crud');
+        Route::resource('users','UserController')->middleware('can:user-crud');
+        Route::resource('crud','AdminController')->middleware('can:admin-crud');
+        Route::patch('admins/active/{id}','AdminController@status')->name('admins.active')->middleware('can:admin-crud');
 
     });
 });

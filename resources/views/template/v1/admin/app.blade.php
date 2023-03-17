@@ -70,9 +70,9 @@
                         <a href="javascript:void(0)"><i class="uil uil-user ms-2 d-inline-block"></i>کاربران</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
+                                <li><a href="{{route('crud.index')}}">لیست کاربران</a></li>
                                 <li><a href="{{route('level.index')}}">لیست مدیران</a></li>
-                                <li><a href="{{route('register')}}">افزودن کاربر</a></li>
+                                <li><a href="{{route('crud.create')}}">افزودن کاربر</a></li>
                                 <li><a href="{{route('level.create')}}">افزودن مدیر</a></li>
                             </ul>
                         </div>
