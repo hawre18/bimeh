@@ -176,6 +176,15 @@
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-sitemap ms-2 d-inline-block"></i>نمونه کارها</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="{{route('sample.index')}}">لیست </a></li>
+                                <li><a href="{{route('sample.create')}}">افزودن نمونه کار</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-info ms-2 d-inline-block"></i>اطلاعات پایه سایت</a>
                         <div class="sidebar-submenu">
                             <ul>

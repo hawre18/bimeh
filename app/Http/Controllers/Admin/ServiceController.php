@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -18,7 +19,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services=Service::latest('created_at')->paginate(20);
+        $services=Service::with('type')->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.services.index')){
             return view('index.v1.admin.services.index',compact(['services']));
         }else{
@@ -132,7 +133,7 @@ class ServiceController extends Controller
             $service->label=$request->input('label');
             $service->price=$request->input('price');
             $service->offPrice=$request->input('offPrice');
-            $service->type_id=$request->input('type')
+            $service->type_id=$request->input('type');
             $service->save();
             alert()->success('موفقیت آمیز','خدمت با موفقیت ویرایش شد');
             return redirect('admin/services');

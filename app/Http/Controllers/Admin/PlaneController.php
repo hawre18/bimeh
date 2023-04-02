@@ -19,7 +19,7 @@ class PlaneController extends Controller
      */
     public function index()
     {
-        $planes=Plane::with(['type','image'])->latest('created_at')->paginate(20);
+        $planes=Plane::with(['type'])->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.plane.index')){
             return view('index.v1.admin.plane.index',compact(['planes']));
         }else{
@@ -40,9 +40,8 @@ class PlaneController extends Controller
             return view('index.v1.admin.plane.create',compact(['types']));
 
         }
-        else{
-            abort(Response::HTTP_NOT_FOUND);
-        }
+        abort(Response::HTTP_NOT_FOUND);
+
     }
 
     /**
@@ -57,7 +56,8 @@ class PlaneController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'charge' => 'required'
+            'charge' => 'required',
+            'typePlane'=>'required'
         ]);
         try{
             $plane= new Plane();
@@ -66,6 +66,7 @@ class PlaneController extends Controller
             $plane->price=$request->input('price');
             $plane->charge=$request->input('charge');
             $plane->image_id=$request->input('photo_id');
+            $plane->type_id=$request->input('typePlane');
             $plane->save();
             alert()->success('موفقیت آمیز','طرح با موفقیت اضافه شد');
             return redirect('admin/plane');
@@ -107,9 +108,9 @@ class PlaneController extends Controller
                 alert()->error('خطا','طرح موردنظر یافت نشد');
                 return redirect('/admin/plane');
             }
-            elseif(!(View::exists('index.v1.admin.plane.edit'))){
-                abort(Response::HTTP_NOT_FOUND);
-            }
+
+            abort(Response::HTTP_NOT_FOUND);
+
         }
     }
 

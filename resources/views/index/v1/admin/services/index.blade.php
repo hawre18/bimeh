@@ -17,6 +17,7 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">خدمت</th>
+                                    <th class="border-bottom p-3" style="min-width: 180px;">نوع خدمت</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">توضیحات</th>
                                     <th class="border-bottom p-3">قیمت</th>
                                     <th class="border-bottom p-3">علیات</th>
@@ -27,6 +28,7 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$service->title}}</td>
+                                        <td class="p-3">{{$service->type->label}}</td>
                                         <td class="p-3">{{$service->label}}</td>
                                         <td class="p-3"> {{$service->price}} </td>
                                         <td class="text-end p-3">

@@ -16,10 +16,10 @@
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                     <th class="border-bottom p-3" style="min-width: 180px;">عنوان پلن</th>
+                                    <th class="border-bottom p-3">نوع طرح</th>
                                     <th class="border-bottom p-3" style="min-width: 150px;">توضیحات</th>
                                     <th class="border-bottom p-3">قیمت</th>
                                     <th class="border-bottom p-3">مقدار شارژ</th>
-                                    <th class="border-bottom p-3">نوع طرح</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
                                 </thead>
@@ -28,10 +28,11 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$plane->title}}</td>
-                                        <td class="p-3">{{$plane->description}}</td>
+                                        <td class="p-3">{{$plane->type->label}}</td>
+                                        <td class="p-3">{!! substr($plane->description,0,30) !!}</td>
                                         <td class="p-3"> {{$plane->price}} </td>
                                         <td class="p-3">{{$plane->charge}}</td>
-                                        <td class="p-3">{{$plane->type->label}}</td>
+
                                         <td class="text-end p-3">
                                             <a href="{{route('plane.edit',$plane->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>
                                             <form method="post" action="{{route('plane.destroy',$plane->id)}}">

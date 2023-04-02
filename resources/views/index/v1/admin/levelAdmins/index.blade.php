@@ -13,8 +13,8 @@
                                 <thead>
                                 <tr>
                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                    <th class="border-bottom p-3" style="min-width: 180px;">نام</th>
-                                    <th class="border-bottom p-3" style="min-width: 150px;">نام خانوادگی</th>
+                                    <th class="border-bottom p-3" >نام</th>
+                                    <th class="border-bottom p-3" >نام خانوادگی</th>
                                     <th class="border-bottom p-3">مقام</th>
                                     <th class="border-bottom p-3">علیات</th>
                                 </tr>
@@ -24,7 +24,7 @@
                                     @if(count($role->users))
                                         @foreach($role->users as $user)
                                     <tr>
-                                        <td class="p-3">{{$loop->index+1}}</td>
+                                        <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$user->f_name}}</td>
                                         <td class="p-3">{{$user->l_name}}</td>
                                         <td class="p-3">{{$role->label}}</td>

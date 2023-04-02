@@ -37,16 +37,16 @@
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> عنوان<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{$plane->title}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <textarea type="text" id="editor" class="form-control"  name="description" required=""value="{{$plane->description}}"></textarea>
+                                            <textarea id="description" class="form-control"  name="description" required="">{{$plane->description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -61,7 +61,7 @@
                                             <input type="number" class="form-control" placeholder="مقدارشارژ" name="charge" required=""value="{{$plane->charge}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> نوع طرح<span class="text-danger">*</span></label>
                                             <select class="form-control" name="typePlane">

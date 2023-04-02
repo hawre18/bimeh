@@ -11,4 +11,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Sell::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

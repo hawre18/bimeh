@@ -31,6 +31,7 @@
                                     <a href="{{route('information.show',$information->id)}}"></a><td class="p-3">{{$information->title}}</td>
                                     <td class="p-3">{!! substr($information->description,0,30) !!}</td>
                                     <td class="p-3">{{$information->address}}</td>
+                                    <td class="p-3">{{$information->phone}}</td>
                                     <td class="p-3"> {{$information->email}} </td>
                                     <td class="p-3"> <img class="img-responsive" src="{{asset('storage/photos/logo/'.$information->image->path)}}"></td>
                                     <td class="text-end p-3">

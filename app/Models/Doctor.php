@@ -11,4 +11,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Sell::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

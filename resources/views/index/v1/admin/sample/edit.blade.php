@@ -6,24 +6,7 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
-@section('editorS')
 
-    <style>
-        #container {
-            width: 1000px;
-            margin: 20px auto;
-        }
-        .ck-editor__editable[role="textbox"] {
-            /* editing area */
-            min-height: 200px;
-        }
-        .ck-content .image {
-            /* block images */
-            max-width: 80%;
-            margin: 20px auto;
-        }
-    </style>
-@endsection
 @section('content')
     <!-- Hero Start -->
     <section class="bg-half-150 d-table w-100 bg-light" style="background: url('./assets/v1/admin/images/bg/bg-lines-one.png') center;">
@@ -76,11 +59,9 @@
                                             <input type="date" class="form-control" name="dateDo" required="" value="{{$sample->dateDo}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <textarea id="description" name="description" required=""></textarea>
-                                        </div>
+                                    <label class="form-label">توضیحات<span class="text-danger">*</span></label>
+                                    <div id="container">
+                                        <textarea  id="description" name="description">{{$sample->description}}</textarea>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">

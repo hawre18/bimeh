@@ -14,22 +14,20 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
-                            <h4 class="text-center">ویرایش طرح فروش</h4>
+                            <h4 class="text-center">ویرایش اطلاعات پایه سایت</h4>
                             <form method="post" action="{{route('information.update',$information->id)}}" class="login-form mt-4" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> عنوان<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="عنوان" name="title" required="" value="{{$information->title}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">توضیحات<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="توضیحات" name="description" required=""value="{{$information->description}}">
-                                        </div>
+                                    <label class="form-label">درباره شرکت<span class="text-danger">*</span></label>
+                                    <div id="container">
+                                        <textarea  id="description" name="description">{{$information->description}}</textarea>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
@@ -71,6 +69,7 @@
 @endsection
 @section('scripts')
     <script type="text/javascript" src="{{asset('/admin/dist/js/dropzone.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/v1/admin/ckeditor/ckeditor.js')}}"></script>
     <script>
         Dropzone.autoDiscover=false;
         var photosGallery=[]
@@ -93,5 +92,11 @@
             photo.splice(index,1);
             document.getElementById('updated_photo_'+id).remove();
         }
+        CKEDITOR.replace('description',{
+            customConfig:'config.js',
+            toolbar:'simple',
+            language:'fa',
+            removePlugins:'cloudservices, easyimage'
+        });
     </script>
 @endsection

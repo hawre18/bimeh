@@ -71,6 +71,7 @@ class ImageController extends Controller
         Storage::disk('local')->putFileas(
             'public/photos/type',$uploadedFile,$filename
         );
+
         $photo=new Image();
         $photo->name=$original_name;
         $photo->path=$filename;

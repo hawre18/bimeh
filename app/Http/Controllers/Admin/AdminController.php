@@ -87,7 +87,7 @@ class AdminController extends Controller
     {
         if(View::exists('index.v1.admin.user.show')){
             $admin=Admin::findorfail($id);
-            if(($user)!=null){
+            if(($admin)!=null){
                 return view('index.v1.admin.user.show',compact(['admin']));
             }
             elseif(($user)==null){
@@ -149,7 +149,7 @@ class AdminController extends Controller
             $admin->phone=$request->input('phone');
             $admin->nationalcode=$request->input('nationalcode');
             if($request->input('password')!=null){
-                $doctor->password=Hash::make( $request->input('password'));
+                $admin->password=Hash::make( $request->input('password'));
             }
             $admin->email=$request->input('email');
             $admin->user_name=$request->input('userName');
@@ -159,7 +159,7 @@ class AdminController extends Controller
         }
         catch (\Exception $m){
             alert()->warning(' خطا','خطا در ثبت رکورد');
-            return redirect('/admin/user/crud/create');
+            return redirect('/admin/user/crud');
         }
     }
 

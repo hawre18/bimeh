@@ -55,6 +55,7 @@ class TypeController extends Controller
             'label' => 'required',
             'description' => 'required',
             'photo_id' => 'required'
+
         ]);
         try{
             $type= new Type();

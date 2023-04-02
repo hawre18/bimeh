@@ -60,7 +60,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
-                                            <select name="type">
+                                            <select name="type" class="form-control">
                                                 <option>نتخاب کنید</option>
                                                 @foreach($types as $type)
                                                     <option value="{{$type->id}}">{{$type->label}}</option>

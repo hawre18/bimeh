@@ -8,6 +8,7 @@ use App\Models\Sell;
 use App\Models\Service;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use NPDF;
 
 class SellController extends Controller
 {

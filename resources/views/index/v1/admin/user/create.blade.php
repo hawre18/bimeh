@@ -28,7 +28,7 @@
                                             <input type="text" class="form-control" placeholder="نام خانوادگی" name="lname" required="" value="{{old('lname')}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">نام کاربری <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" placeholder="نام کاربری" name="userName" required="" value="{{old('userName')}}">

@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::get('order/pay/{orderId}','OrderController@pay')->name('order.pay')->middleware('can:role-crud');
     Route::resource('order','OrderController')->middleware('can:order-crud');
     Route::resource('permission','PermissionController')->middleware('can:permission-crud');
-    Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']])->middleware('admin-crud');
+    Route::resource('level','LevelManageController',['parameters'=> ['level'=>'user']])->middleware('can:admin-crud');
     Route::resource('services','ServiceController')->middleware('can:service-crud');
     Route::resource('doctors','DoctorController')->middleware('can:doctor-crud');
     Route::resource('information','InformationController')->middleware('can:information-crud');

@@ -61,11 +61,11 @@ class UserController extends Controller
             $user=User::findorfail($id);
             $user->f_name=$request->input('fname');
             $user->l_name=$request->input('lname');
-            $user->user_name=$request->input('username');
+            $user->user_name=$request->input('userName');
             $user->phone=$request->input('phone');
             $user->nationalcode=$request->input('nationalcode');
             $user->email=$request->input('email');
-            if(($request->input('password'))!=null){
+            if($request->input('password')!=null){
                 $user->password=Hash::make($request->input('password'));
             }
             $user->save();
