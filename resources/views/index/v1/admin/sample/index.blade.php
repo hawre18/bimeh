@@ -45,7 +45,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
-
+                <div style="text-align: center">
+                    {!! $samples->render() !!}
+                </div>
             </div>
         </div><!--end container-->
 

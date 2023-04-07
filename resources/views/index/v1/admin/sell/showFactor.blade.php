@@ -141,6 +141,9 @@
     <br/>
     <label>کاربر صادرکننده:</label>
     <label>{{Auth::guard('web')->user()->f_name ." "}}{{Auth::guard('web')->user()->l_name}}</label>
+    <br/>
+    <label>کاربر دکتر مرجع:</label>
+    <label style="direction:rtl;">{{$sell->doctor->fname.' '.$sell->doctor->lname}}</label>
 </div>
 
 

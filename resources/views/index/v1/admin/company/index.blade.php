@@ -46,6 +46,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
+                <div style="text-align: center">
+                    {!! $companys->render() !!}
+                </div>
             </div>
         </div><!--end container-->
 

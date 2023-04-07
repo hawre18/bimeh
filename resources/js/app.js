@@ -27,6 +27,7 @@ Vue.component('plane-component', require('./components/PlaneComponent.vue').defa
 Vue.component('customer-component', require('./components/CustomerComponent.vue').default);
 Vue.component('multi-select-component', require('./components/multiSelect.vue').default);
 Vue.component('where-plane-component',require('./components/WherePlaneComponent.vue').default);
+Vue.component('rep-component',require('./components/RepComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

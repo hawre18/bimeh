@@ -41,7 +41,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
-
+                <div style="text-align: center">
+                    {!! $types->render() !!}
+                </div>
             </div>
         </div><!--end container-->
 

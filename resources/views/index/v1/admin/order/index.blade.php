@@ -65,6 +65,9 @@
                     </div>
                 </div>
             </div><!--end row-->
+            <div style="text-align: center">
+                {!! $orders->render() !!}
+            </div>
         </div>
     </div><!--end container-->
 

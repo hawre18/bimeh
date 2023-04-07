@@ -42,6 +42,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
+                <div style="text-align: center">
+                    {!! $addresses->render() !!}
+                </div>
             </div>
         </div><!--end container-->
 

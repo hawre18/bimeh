@@ -65,6 +65,9 @@
                         </div>
                     </div>
                 </div><!--end row-->
+                <div style="text-align: center">
+                    {!! $doctors->render() !!}
+                </div>
             </div>
         </div><!--end container-->
 @endsection
