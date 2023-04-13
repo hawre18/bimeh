@@ -27,9 +27,8 @@
                             @foreach($rows as $row)
                                 <tr>
                                     <th class="p-3">{{$loop->index+1}}</th>
-                                    <td class="p-3">{{$row->f_name}}</td>
-                                    <td class="p-3">{{$row->l_name}}</td>
-                                    <td class="p-3">{{$row->nationalcode}}</td>
+                                    <td class="p-3">{{$rows->pop()}}</td>
+
                                 </tr>
                             @endforeach
                             </tbody>

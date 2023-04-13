@@ -15,7 +15,7 @@ class ReporterController extends Controller
 
     public function listCustomer(Request $request)
     {
-        $rows=Customer::wherebetwen('created_at',[$request->input('dateS'),$request->input('dateE')])->get();
-return view('index.v1.admin.reporter.rows',compact('rows'));
+        $rows=Customer::whereBetween('created_at',[$request->input('dateS'),$request->input('dateE')])->get();
+        return view('index.v1.admin.reporter.rows',compact('rows'));
     }
 }

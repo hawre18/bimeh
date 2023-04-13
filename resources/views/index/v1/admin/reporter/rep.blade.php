@@ -7,17 +7,23 @@
 
     <div class="container-fluid" id="app">
         <div class="layout-specing">
-            <form >
-
-            </form>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <rep-component></rep-component>
+            <form method="post" action="/admin/repCreate" class="login-form mt-4" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <rep-component></rep-component>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="d-grid">
+                                <button class="btn btn-primary">ثبت</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-            </div><!--end row-->
+                </div><!--end row-->
+            </form>
+
 
 
         </div>

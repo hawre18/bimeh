@@ -24,9 +24,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+
         $orders=Order::with('customer','plane','user')->latest('created_at')->paginate(20);
         if(View::exists('index.v1.admin.order.index')){
-            return view('index.v1.admin.order.index',compact(['orders']));
+            return view('index.v1.admin.order.index',compact('orders'));
         }
         abort(Response::HTTP_NOT_FOUND);
     }
@@ -81,7 +82,7 @@ class OrderController extends Controller
             $order=new Order();
             $order->customer_id=$request->input('customer');
             $order->user_id=auth()->guard('web')->user()->id;
-            $order->status=1;
+            $order->status=0;
             $order->codePay=$request->input('codePay');
             $order->payType=$request->input('pay');
             $order->plane_id=$plane->id;
@@ -95,11 +96,10 @@ class OrderController extends Controller
                     $mes1=$customer->f_name;
                     $mes2='عزیز '."<br/>";
 
-                    $mes3="کیف پول شما به مبلغ";
-                    $mes4=$plane->charge;
-                    $mes5="تومان شارژ شد. "."<br/>"."<br/>";
-                    $mes6="شفا آوا";
-                    $message = $mes1.$mes2.$mes3.$mes4.$mes5.$mes6;
+                    $mes3="خرید شما با موفقیت ثبت شدو در انتظار تایید توسط کارشناسان ما هست";
+                    $mes4="<br/>"."<br/>";
+                    $mes5="شفا آوا";
+                    $message = $mes1.$mes2.$mes3.$mes4.$mes5;
                     $receptor = $customer->phone;
                     $result = Kavenegar::Send( $sender,$receptor,$message);
                     $this->format($result);
