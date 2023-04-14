@@ -8,6 +8,11 @@ $("#checkin-date").flatpickr({
     "locale": "fa",
     "plugins": [new rangePlugin({ input: "#checkin-date" })]
 });
+$("#checkin-date2").flatpickr({
+    defaultDate:today,
+    "locale": "fa",
+    "plugins": [new rangePlugin({ input: "#checkin-date2" })]
+});
 
 $("#checkout-date").flatpickr({
     defaultDate:tomorrow

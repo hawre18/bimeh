@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "morilog/jalali": "3.*",
         "niklasravnsborg/laravel-pdf": "^4.1",
         "realrashid/sweet-alert": "^5.1"
     },

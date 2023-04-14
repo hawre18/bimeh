@@ -192,7 +192,7 @@ class OrderController extends Controller
 
     public function pay($orderId)
     {
-        $order=Order::findorfail($orderId);
+        $order=Order::findorfail($orderId)->with('customer');
         $plane=Plane::where('id',$order->plane_id)->first();
         if($order!=null){
             $order->status=1;
@@ -203,6 +203,26 @@ class OrderController extends Controller
                 $wallet->modeCharge= $wallet->modeCharge+$plane->charge;
                 $wallet->save();
             }
+            try {
+                $sender='10000550002200';
+                $mes1=$order->customer->f_name;
+                $mes2='عزیز '."<br/>";
+
+                $mes3="کیف پول شما با موفقیت به مبلغ".$plane->charge."شارژ شد";
+                $mes4="<br/>"."<br/>";
+                $mes5="شفا آوا";
+                $message = $mes1.$mes2.$mes3.$mes4.$mes5;
+                $receptor = $order->customer->phone;
+                $result = Kavenegar::Send( $sender,$receptor,$message);
+                $this->format($result);
+
+            }catch(ApiException $e){
+                echo $e->errorMessage();
+            }
+            catch(HttpException $e){
+                echo $e->errorMessage();
+            }
+
             alert()->success('موفقیت آمیز','فروش با موفقیت پرداخت شد');
             return back();
         }

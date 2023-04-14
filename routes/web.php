@@ -64,7 +64,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::resource('wallets','WalletController')->middleware('can:wallet-crud');;
     Route::get('/sellpdf/{id}','SellController@createPDF')->name('sells.pdf')->middleware('can:sell-crud');;
     Route::get('rep','ReporterController@index')->name('reps')->middleware('can:sell-crud');
-    Route::post('repCreate','ReporterController@listCustomer')->name('repsCreate')->middleware('can:sell-crud');
+    Route::post('repwithdate','ReporterController@rowsWithDate')->name('repwithdate')->middleware('can:sell-crud');
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
         Route::resource('crud','AdminController')->middleware('can:admin-crud');
