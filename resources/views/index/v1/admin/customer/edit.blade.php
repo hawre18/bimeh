@@ -47,7 +47,7 @@
                                             <select class="form-control" name="company">
                                                 <option>انتخاب کنید</option>
                                                 @foreach($companies as $company)
-                                                    <option @if($company->id==$employ->company_id) selected @endif value="{{$company->id}}">{{$company->companyName}}</option>
+                                                    <option @if($company->id==$customer->company_id) selected @endif value="{{$company->id}}">{{$company->companyName}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

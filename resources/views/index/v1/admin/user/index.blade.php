@@ -29,8 +29,8 @@
                                         <td class="p-3">{{$admin->nationalcode}}</td>
                                         <td class="p-3">{{$admin->phone}}</td>
                                         <td class="text-end p-3">
-                                            <a href="{{route('crud.edit',$admin->id)}}" class="btn btn-icon btn-pills btn-soft-success">ویرایش</a>
                                             <a href="{{route('crud.destroy',$admin->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
+                                            <a href="{{route('crud.edit',$admin->id)}}" class="btn btn-icon btn-pills btn-soft-success">UP</a>
                                             @if($admin->level=='user')
                                                 <form method="post" action="{{route('admins.active',$admin->id)}}">
                                                     {{ csrf_field() }}

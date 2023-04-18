@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:web','checkAdmin'],'names
     Route::group(['prefix'=>'user'],function (){
         Route::resource('users','UserController')->middleware('can:user-crud');
         Route::resource('crud','AdminController')->middleware('can:admin-crud');
+        Route::get('crud/{id}/destroy','AdminController@destroy')->name('crud.destroy')->middleware('can:admin-crud');
         Route::patch('admins/active/{id}','AdminController@status')->name('admins.active')->middleware('can:admin-crud');
 
     });

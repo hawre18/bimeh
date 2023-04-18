@@ -91,7 +91,6 @@ class CustomerController extends Controller
             return redirect('/admin/customer');
         }
         catch (\Exception $m){
-            return $m;
             alert()->error('خطا','خطا در ذخیره کاربر');
             return redirect('/admin/customer/create');
         }

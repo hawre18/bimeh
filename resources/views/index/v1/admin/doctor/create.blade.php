@@ -46,7 +46,7 @@
                                             <input type="text" class="form-control" placeholder="آدرس" name="address" required="" value="{{old('address')}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6" id="app">
+                                    <div class="col-md-12" id="app">
                                         <div class="mb-3">
                                             <select-city-component></select-city-component>
                                         </div>

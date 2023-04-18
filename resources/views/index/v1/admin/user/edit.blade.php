@@ -55,7 +55,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">پسورد</label>
-                                            <input type="text" class="form-control" placeholder="اگر مایل به تییر رمز نیستین این فیلد را خالی بگذارید" name="password">
+                                            <input type="text" class="form-control" placeholder="اگر مایل به تغییر رمز نیستین این فیلد را خالی بگذارید" name="password">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

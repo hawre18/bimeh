@@ -29,37 +29,9 @@
                                     <td class="p-3">{{$admin->user_name}}</td>
                                     <td class="p-3">{{$admin->nationalcode}}</td>
                                     <td class="p-3"> {{$admin->phone}} </td>
-                                    <td class="p-3"> {{$admin->ایمیل}} </td>
+                                    <td class="p-3"> {{$admin->email}} </td>
 
                                 </tr>
-                            </tbody>
-                        </table>
-                        <table class="table mb-0 table-center">
-                            <thead>
-                            <tr>
-                                <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                <th class="border-bottom p-3" style="min-width: 180px;">آدرس</th>
-                                <th class="border-bottom p-3" style="min-width: 150px;">استان</th>
-                                <th class="border-bottom p-3">شهر</th>
-                                <th class="border-bottom p-3" style="min-width: 150px;">کدپستی</th>
-                                <th class="border-bottom p-3" style="min-width: 150px;">تلفن</th>
-                                <th class="border-bottom p-3">علیات</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($addresses as $address)
-                                <tr>
-                                    <th class="p-3">{{$loop->index+1}}</th>
-                                    <td class="p-3">{{$address->bodyad}}</a></td>
-                                    <td class="p-3">{{$address->province->name}}</td>
-                                    <td class="p-3">{{$address->city->name}}</td>
-                                    <td class="p-3"> {{$address->postcode}} </td>
-                                    <td class="p-3"> {{$address->phone}} </td>
-                                    <td class="text-end p-3">
-                                        <a href="{{route('address.destroy',$address->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>
-                                    </td>
-                                </tr>
-                            @endforeach
                             </tbody>
                         </table>
                     </div>

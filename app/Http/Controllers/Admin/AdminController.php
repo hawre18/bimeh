@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
@@ -90,7 +91,7 @@ class AdminController extends Controller
             if(($admin)!=null){
                 return view('index.v1.admin.user.show',compact(['admin']));
             }
-            elseif(($user)==null){
+            elseif(($admin)==null){
                 alert()->error('خطا','کاربری یافت نشد');
                 return redirect('/admin/user/crud');
             }
@@ -186,6 +187,7 @@ class AdminController extends Controller
             alert()->success(' خطا','خطا در حذف رکورد');
             return redirect('admin/user/crud');
         }
+
     }
 public function status($id)
 {

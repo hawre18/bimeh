@@ -15,13 +15,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('ایمیل') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control"  name="email" value="{{ old('email') }}" required  autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input  type="text" class="form-control"  name="email" value="{{ old('email') }}" required  autofocus>
                             </div>
                         </div>
 

@@ -52,7 +52,7 @@
                                             <input type="text" class="form-control" placeholder="با پیش کد استان" name="tellphone" required="" value="{{$doctor->tellphone}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6" id="app">
+                                    <div class="col-md-12" id="app">
                                         <div class="mb-3">
                                             <select-city-component></select-city-component>
                                         </div>
@@ -60,7 +60,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label"> نوع خدمت<span class="text-danger">*</span></label>
-                                            <select name="type">
+                                            <select class="form-control" name="type">
                                                 <option>نتخاب کنید</option>
                                                 @foreach($types as $type)
                                                     <option value="{{$type->id}}" @if($doctor->type_id==$type->id) selected @endif>{{$type->label}}</option>

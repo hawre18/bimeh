@@ -196,7 +196,6 @@ class OrderController extends Controller
         $plane=Plane::where('id',$order->plane_id)->first();
         if($order!=null){
             $order->status=1;
-            $order->user_id=auth()->guard('web')->user()->id;
             $order->save();
             if($order->status==1){
                 $wallet=Wallet::where('customer_id',$order->customer_id)->first();
