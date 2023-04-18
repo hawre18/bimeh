@@ -20,7 +20,7 @@ class WalletController extends Controller
 
     public function index()
     {
-        $wallets=Wallet::with(['type','customer'])->latest('created_at')->paginate(20);
+        $wallets=Wallet::with(['customer'])->latest('created_at')->paginate(20);
         $type=Type::all();
         if(View::exists('index.v1.admin.wallet.index')){
             return view('index.v1.admin.wallet.index',compact(['wallets']));
@@ -57,9 +57,10 @@ class WalletController extends Controller
         try{
 
             $walletFind=Wallet::where('customer_id',$request->input('customer_id'))->where('type_id',$request->input('typePlane'))->count();
-
+            $type=Type::where('id',$request->input('typePlane'))->first();
             if($walletFind<1){
                 $wallet=new Wallet();
+                $wallet->label=$type->label;
                 $wallet->customer_id=$request->input('customer_id');
                 $wallet->type_id=$request->input('typePlane');
                 $wallet->modeCharge=0;

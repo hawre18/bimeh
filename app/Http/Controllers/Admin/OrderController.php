@@ -87,32 +87,7 @@ class OrderController extends Controller
             $order->payType=$request->input('pay');
             $order->plane_id=$plane->id;
             $order->save();
-            if($order->status==1){
-                $wallet=Wallet::where('customer_id',$request->input('customer'))->where('type_id',$plane->type_id)->first();
-                $wallet->modeCharge=$wallet->modeCharge+$plane->charge;
-                $wallet->save();
-                try {
-                    $sender='10000550002200';
-                    $mes1=$customer->f_name;
-                    $mes2='عزیز '."<br/>";
 
-                    $mes3="خرید شما با موفقیت ثبت شدو در انتظار تایید توسط کارشناسان ما هست";
-                    $mes4="<br/>"."<br/>";
-                    $mes5="شفا آوا";
-                    $message = $mes1.$mes2.$mes3.$mes4.$mes5;
-                    $receptor = $customer->phone;
-                    $result = Kavenegar::Send( $sender,$receptor,$message);
-                    $this->format($result);
-
-                }catch(ApiException $e){
-                    echo $e->errorMessage();
-                }
-                catch(HttpException $e){
-                    echo $e->errorMessage();
-                }
-
-
-            }
             alert()->success('موفقیت آمیز','فروش با موفقیت ثبت شد');
             return back();
         }
@@ -192,13 +167,17 @@ class OrderController extends Controller
 
     public function pay($orderId)
     {
-        $order=Order::findorfail($orderId)->with('customer');
+
+        $order=Order::findorfail($orderId);
+
         $plane=Plane::where('id',$order->plane_id)->first();
+
         if($order!=null){
             $order->status=1;
             $order->save();
             if($order->status==1){
-                $wallet=Wallet::where('customer_id',$order->customer_id)->first();
+                $wallet=Wallet::where('customer_id',$order->customer_id)->where('type_id',$plane->type_id)->first();
+
                 $wallet->modeCharge= $wallet->modeCharge+$plane->charge;
                 $wallet->save();
             }
