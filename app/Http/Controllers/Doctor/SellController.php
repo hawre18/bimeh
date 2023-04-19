@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Sell;
 use App\Models\Service;
+use App\Models\Information;
+use App\Models\Address;
 use App\Models\Wallet;
 use Dompdf\Exception;
 use Illuminate\Http\Request;
@@ -184,11 +186,13 @@ class SellController extends Controller
         }
     }
     public function createPDF($id) {
+        $information=Information::first();
         // retreive all records from db
         $sell=Sell::with('services','customer')->where('id',$id)->first();
         $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
+        $address=Address::where('customer_id',$customer->id)->with('province','city')->first();
         // share data to view
-        $pdf = NPDF::loadView('index.v1.doctor.showFactor',compact(['sell','customer']));
+        $pdf = NPDF::loadView('index.v1.doctor.showFactor',compact(['sell','customer','information','address']));
         return $pdf->stream('report.pdf');
     }
 }
