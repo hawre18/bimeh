@@ -104,7 +104,7 @@
     @foreach($sell->services as $service)
         <tr>
 
-            @foreach($sell->services as $service)
+
                 <td>{{$loop->index+1}}</td>
                 <td>{{$service->id}}</td>
                 <td>{{$service->title}}</td>
@@ -114,7 +114,7 @@
                 <td>0</td>
                 <td>{{$service->price-($service->price*$service->offPrice)}}</td>
 
-            @endforeach
+           
         </tr>
     @endforeach
     <tr>
