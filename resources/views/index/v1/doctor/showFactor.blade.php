@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <th  style="text-align: right;">نشانی:</th>
-        <td style="text-align: left;">{{$address->address}}</td>
+        <td style="text-align: left;">{{$information->address}}</td>
         <th  style="text-align: right;">شماره ملی:</th>
         <td style="text-align: left;">-</td>
         <th  style="text-align: right;">تلفن</th>
