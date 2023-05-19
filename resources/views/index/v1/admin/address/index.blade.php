@@ -27,10 +27,22 @@
                                 @foreach($addresses as $address)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">{{$address->customer['f_name'].' '.$address->customer['l_name']}}</td>
+                                        <td class="p-3">
+                                            @if($address->customer!=null)
+                                            {{$address->customer['f_name'].' '.$address->customer['l_name']}}
+                                                @elseif($address->customer==null)
+                                            null
+                                                @endif
+                                        </td>
                                         <td class="p-3">{{$address->bodyad}}</td>
                                         <td class="p-3">{{$address->postcode}}</td>
-                                        <td class="p-3"> {{$address->province->name}} </td>
+                                        <td class="p-3">
+                                            @if($address->province!=null)
+                                                {{$address->province->name}}
+                                        @elseif($address->province==null)
+                                        null
+                                        @endif
+                                        </td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($address->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('address.destroy',$address->id)}}" class="btn btn-icon btn-pills btn-soft-danger" >حذف</a>

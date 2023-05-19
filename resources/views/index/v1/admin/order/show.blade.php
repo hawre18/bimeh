@@ -24,11 +24,32 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="p-3">{{$order->customer->f_name.$order->customer->l_name}}</td>
-                                <td class="p-3">{{$order->user->f_name.$order->user->l_name}}</td>
-                                <td class="p-3">{{$order->plane->title}}</td>
+                                <td class="p-3">
+                                    @if($order->customer!=null)
+                                        {{$order->customer->f_name.' '.$order->customer->l_name}}
+                                    @elseif($order==null)
+                                        null
+                                    @endif
+                                </td>
+                                <td class="p-3">
+                                    @if($order->user!=null)
+                                        {{$order->user->f_name.' '.$order->user->l_name}}
+                                    @elseif($order->user==null)
+                                        null
+                                    @endif
+                                </td>
+
+                                    @if($order->plane!=null)
+                                    <td class="p-3">
+                                        {{$order->plane->title}}
+                                </td>
                                 <td class="p-3">{{$order->plane->price}}</td>
                                 <td class="p-3">{{$order->plane->charge}}</td>
+                                @elseif($order->plane==null)
+                                    <td class="p-3">null</td>
+                                    <td class="p-3">null</td>
+                                    <td class="p-3">null</td>
+                                @endif
                                 <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($order->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                 <td class="text-end p-3">
                                     @if($order->status==0)
@@ -55,8 +76,20 @@
                                 <tr>
                                     <th class="p-3">{{$loop->index+1}}</th>
                                     <td class="p-3">{{$address->bodyad}}</a></td>
-                                    <td class="p-3">{{$address->province->name}}</td>
-                                    <td class="p-3">{{$address->city->name}}</td>
+                                    <td class="p-3">
+                                        @if($address->province!=null)
+                                            {{$address->province->name}}
+                                        @elseif($address->province==null)
+                                            null
+                                        @endif
+                                    </td>
+                                    <td class="p-3">
+                                        @if($address->city!=null)
+                                            {{$address->city->name}}
+                                        @elseif($address->city==null)
+                                            null
+                                        @endif
+                                    </td>
                                     <td class="p-3"> {{$address->postcode}} </td>
                                     <td class="p-3"> {{$address->phone}} </td>
                                     <td class="text-end p-3">

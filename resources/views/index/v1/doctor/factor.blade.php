@@ -31,7 +31,11 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">
+                                            @if($sell->customer!=null)
                                             <a href="{{route('sell.show',['idSell'=>$sell->id,'idCustomer'=>$sell->customer->nationalcode])}}" class="text-dark">{{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}</a>
+                                                @elseif($sell->customer==null)
+                                            null
+                                                @endif
                                         </td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="p-3">{{$sell->id}}</td>

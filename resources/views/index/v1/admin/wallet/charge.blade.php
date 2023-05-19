@@ -11,7 +11,11 @@
                         <div class="col-lg-8 mt-4">
                             <div class="label label-success">
                                     <span >
+                                        @if($wallet->type!=null)
                                        کیف پول خدمات {{$wallet->type->label}}
+                                        @elseif($wallet->type==null)
+                                            null
+                                        @endif
                                     </span>
                             </div>
                             <div class="card border-0 p-4 rounded shadow">

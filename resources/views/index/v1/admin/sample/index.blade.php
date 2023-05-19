@@ -26,9 +26,27 @@
                                 @foreach($samples as $sample)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">{{$sample->customer->f_name.' '.$sample->customer->l_name}}</td>
-                                        <td class="p-3">{{$sample->doctor->fname.' '.$sample->doctor->lname}}</td>
-                                        <td class="p-3"> {{$sample->service->title}} </td>
+                                        <td class="p-3">
+                                            @if($sample->customer!=null)
+                                                {{$sample->customer->f_name.' '.$sample->customer->l_name}}
+                                        @elseif($sample->customer==null)
+                                        null
+                                                @endif
+                                        </td>
+                                        <td class="p-3">
+                                            @if($sample->doctor!=null)
+                                                {{$sample->doctor->fname.' '.$sample->doctor->lname}}
+                                            @elseif($sample->doctor==null)
+                                                null
+                                                @endif
+                                        </td>
+                                        <td class="p-3">
+                                            @if($sample->service!=null)
+                                                {{$sample->service->title}}
+                                            @elseif($sample->service==null)
+                                                null
+                                                @endif
+                                        </td>
                                         <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sample->dateDo)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                         <td class="text-end p-3">
                                             <a href="{{route('sample.edit',$sample->id)}}" class="btn btn-icon btn-pills btn-soft-success" >ویرایش</a>

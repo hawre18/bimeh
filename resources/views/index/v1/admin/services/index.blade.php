@@ -28,7 +28,13 @@
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
                                         <td class="p-3">{{$service->title}}</td>
-                                        <td class="p-3">{{$service->type->label}}</td>
+                                        <td class="p-3">
+                                            @if($service->type!=null)
+                                                {{$service->type->label}}
+                                        @elseif($service->type==null)
+                                        null
+                                                @endif
+                                        </td>
                                         <td class="p-3">{{$service->label}}</td>
                                         <td class="p-3"> {{$service->price}} </td>
                                         <td class="text-end p-3">

@@ -31,7 +31,11 @@
     </tr>
     <tr>
         <th style="text-align: right;">نام شخص حقیقی/حقوقی:</th>
-        <td style="text-align: left;">{{$information->title}}</td>
+        <td style="text-align: left;">
+            @if($information->title!=null){{$information->title}}
+            @elseif($information->title==null)null
+            @endif
+        </td>
         <th style="text-align: right;max-width: 30px;">شماره اقتصادی:</th>
         <td  style="text-align:left;">12345678</td>
         <th style="text-align: right;">شماره ثبت:</th>
@@ -49,20 +53,36 @@
     </tr>
     <tr>
         <th  style="text-align: right;">نشانی:</th>
-        <td style="text-align: left;">{{$information->address}}</td>
+        <td style="text-align: left;">
+            @if($information->address!=null){{$information->address}}
+            @elseif($information->address==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">شماره ملی:</th>
         <td style="text-align: left;">-</td>
         <th  style="text-align: right;">تلفن</th>
-        <td style="text-align: left;">{{substr($information->phone,3,11)}}</td>
+        <td style="text-align: left;">
+            @if($information->phone!=null){{substr($information->phone,3,11)}}
+            @elseif($information->phone==null)null
+            @endif
+        </td>
         <td style="text-align: right;">-</td>
-        <td style="text-align: left;">{{substr($information->phone,0,3)}}</td>
+        <td style="text-align: left;">
+            @if($information->phone!=null){{substr($information->phone,0,3)}}
+            @elseif($information->phone==null)null
+            @endif
+        </td>
     </tr>
     <tr style="text-align: center;background: #0f5132;">
         <th colspan="12" style="text-align: center;">مشخصات مشتری</th>
     </tr>
     <tr>
         <th style="text-align: right;">نام شخص حقیقی/حقوقی:</th>
-        <td style="text-align: left;">{{$customer->f_name.' '}}{{$customer->l_name.' '}}</td>
+        <td style="text-align: left;">
+            @if($customer->f_name!=null&&$customer->l_name!=null){{$customer->f_name.' '}}{{$customer->l_name.' '}}
+            @elseif($customer->f_name==null||$customer->l_name==null) null
+            @endif
+        </td>
         <th style="text-align: right;max-width: 30px;">شماره اقتصادی:</th>
         <td  style="text-align:left;">-</td>
         <th style="text-align: right;">شماره ثبت:</th>
@@ -70,23 +90,55 @@
     </tr>
     <tr>
         <th  style="text-align: right;">نشانی کامل استان:</th>
-        <td style="text-align: left;">{{$address->province->name}}</td>
+        <td style="text-align: left;">
+            @if($address->province!=null){{$address->province->name}}
+            @elseif($address->province==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">شهرستان:</th>
-        <td style="text-align: left;">{{$address->city->name}}</td>
+        <td style="text-align: left;">
+            @if($address->city!=null){{$address->city->name}}
+            @elseif($address->city==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">کدپستی:</th>
-        <td style="text-align: left;">{{$address->postcode}}</td>
+        <td style="text-align: left;">
+            @if($address->postcode!=null){{$address->postcode}}
+            @elseif($address->postcode==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">شهر:</th>
-        <td style="text-align: left;">{{$address->city->name}}</td>
+        <td style="text-align: left;">
+            @if($address->city->name!=null){{$address->city->name}}
+            @elseif($address->city->name==null)null
+            @endif
+        </td>
     </tr>
     <tr>
         <th  style="text-align: right;">نشانی:</th>
-        <td style="text-align: left;">{{$address->bodyad}}</td>
+        <td style="text-align: left;">
+            @if($address->bodyad!=null){{$address->bodyad}}
+            @elseif($address->bodyad==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">شماره ملی:</th>
-        <td style="text-align: left;">{{$customer->nationalcode}}</td>
+        <td style="text-align: left;">
+            @if($customer->nationalcode!=null){{$customer->nationalcode}}
+            @elseif($customer->nationalcode==null)null
+            @endif
+        </td>
         <th  style="text-align: right;">تلفن</th>
-        <td style="text-align: left;">{{substr ($address->tellphone,3,11)}}</td>
+        <td style="text-align: left;">
+            @if($address->tellphone!=null){{substr ($address->tellphone,3,11)}}
+            @elseif($address->tellphone==null)null
+            @endif
+        </td>
         <td style="text-align: right;">-</td>
-        <td style="text-align: left;">{{substr($address->tellphone,0,3)}}</td>
+        <td style="text-align: left;">
+            @if($address->tellphone!=null){{substr($address->tellphone,0,3)}}
+            @elseif($address->tellphone==null)null
+            @endif
+        </td>
     </tr>
     <tr style="text-align: center;background: #0f5132;">
         <th colspan="12" style="text-align: center;">مشخصات خدمات</th>
@@ -104,7 +156,7 @@
     @foreach($sell->services as $service)
         <tr>
 
-
+@if($sell->services!=null)
                 <td>{{$loop->index+1}}</td>
                 <td>{{$service->id}}</td>
                 <td>{{$service->title}}</td>
@@ -114,12 +166,25 @@
                 <td>0</td>
                 <td>{{$service->price-($service->price*$service->offPrice)}}</td>
 
-           
+
+@elseif($sell->services==null)
+                <td>{{$loop->index+1}}</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+
+@endif
         </tr>
     @endforeach
     <tr>
         <td>جمع کل قابل پرداخت: </td>
-        <td colspan="11">{{$sell->totalPrice}}</td>
+        <td colspan="11">
+            {{$sell->totalPrice}}
+        </td>
     </tr>
     <tr>
         <td>شرایط نحوه پرداخت:</td>
@@ -144,7 +209,11 @@
     <label>{{Auth::guard('web')->user()->f_name ." "}}{{Auth::guard('web')->user()->l_name}}</label>
     <br/>
     <label>کاربر دکتر مرجع:</label>
-    <label style="direction:rtl;">{{$sell->doctor->fname.' '.$sell->doctor->lname}}</label>
+    <label style="direction:rtl;">
+        @if($sell->doctor!=null){{$sell->doctor->fname.' '.$sell->doctor->lname}}
+        @elseif($sell->doctor==null) null
+        @endif
+    </label>
 </div>
 
 

@@ -63,8 +63,20 @@
                                 <tr>
                                     <th class="p-3">{{$loop->index+1}}</th>
                                     <td class="p-3">{{$address->bodyad}}</a></td>
-                                    <td class="p-3">{{$address->province->name}}</td>
-                                    <td class="p-3">{{$address->city->name}}</td>
+                                    <td class="p-3">
+                                        @if($address->province!=null)
+                                            {{$address->province->name}}
+                                        @elseif($address->province==null)
+                                            null
+                                        @endif
+                                    </td>
+                                    <td class="p-3">
+                                        @if($address->city!=null)
+                                            {{$address->city->name}}
+                                        @elseif($address->city==null)
+                                            null
+                                        @endif
+                                    </td>
                                     <td class="p-3"> {{$address->postcode}} </td>
                                     <td class="p-3"> {{$address->phone}} </td>
                                     <td class="text-end p-3">

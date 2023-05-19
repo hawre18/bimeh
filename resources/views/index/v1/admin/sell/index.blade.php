@@ -30,7 +30,13 @@
                             @foreach($sells as $sell)
                                 <tr>
                                     <th class="p-3">{{$loop->index+1}}</th>
-                                    <td class="p-3">{{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}</td>
+                                    <td class="p-3">
+                                        @if($sell->customer!=null)
+                                            {{$sell->customer->f_name.' '}}{{$sell->customer->l_name.' '}}{{$sell->customer->nationalcode}}
+                                    @elseif($sell->customer==null)
+                                    null
+                                        @endif
+                                    </td>
                                     <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatJalaliDatetime(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                     <td class="p-3">{{$sell->id}}</td>
                                     @if($sell->status==0)
@@ -39,7 +45,13 @@
                                     @if($sell->status==1)
                                         <td class="p-3" ><span class="label alert-success">پرداخت شده</span></td>
                                     @endif
-                                    <td class="p-3"> {{$sell->doctor->fname.' '}}{{$sell->doctor->lname}} </td>
+                                    <td class="p-3">
+                                        @if($sell->doctor!=null)
+                                            {{$sell->doctor->fname.' '}}{{$sell->doctor->lname}}
+                                    @elseif($sell->doctor==null)
+                                    null
+                                        @endif
+                                    </td>
                                     <td class="p-3"> {{$sell->totalPrice}} </td>
                                     <td class="text-end p-3">
                                         @if($sell->status==1)

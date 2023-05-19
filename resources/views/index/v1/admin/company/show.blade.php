@@ -29,12 +29,30 @@
                                     <td class="p-3">{{$company->companyName}}</td>
                                     <td class="p-3">{{$company->companyBoss}}</td>
                                     <td class="p-3">{{$company->uniqueCode}}</td>
-                                    <td class="p-3"> {{$company->province->name}} </td>
-                                    <td class="p-3"> {{$company->city->name}} </td>
+                                    <td class="p-3">
+                                        @if($company->province!=null)
+                                            {{$company->province->name}}
+                                    @elseif($company->province==null)
+                                    null
+                                            @endif
+                                    </td>
+                                    <td class="p-3">
+                                        @if($company->city->name!=null)
+                                            {{$company->city->name}}
+                                        @elseif($company->city->name==null)
+                                            null
+                                        @endif
+                                    </td>
                                     <td class="p-3"> {{$company->address}} </td>
                                     <td class="p-3"> {{$company->tellphone}} </td>
                                     <td class="p-3"> {{$company->postcode}} </td>
-                                    <td class="p-3"> {{$company->user->f_name." "}}{{$company->user->l_name}} </td>
+                                    <td class="p-3">
+                                        @if($company->user!=null)
+                                            {{$company->user->f_name." "}}{{$company->user->l_name}}
+                                        @elseif($company->user==null)
+                                            null
+                                        @endif
+                                    </td>
 
                                 </tr>
                             </tbody>

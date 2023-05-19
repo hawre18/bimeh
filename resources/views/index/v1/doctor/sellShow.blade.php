@@ -27,7 +27,13 @@
                             <tbody>
 
                                 <tr>
-                                    <td class="p-3">{{$customer->f_name.' '}}{{$customer->l_name.' '}}{{$customer->nationalcode}}</td>
+                                    <td class="p-3">
+                                        @if($sell->customer!=null)
+                                            {{$customer->f_name.' '}}{{$customer->l_name.' '}}{{$customer->nationalcode}}
+                                    @elseif($sell->customer==null)
+                                    null
+                                            @endif
+                                    </td>
                                     <td class="p-3">{{\Hekmatinasser\Verta\Verta::instance($sell->created_at)->formatDifference(\Hekmatinasser\Verta\Verta::today('Asia/Tehran'))}}</td>
                                     <td class="p-3">{{$sell->id}}</td>
                                     <td class="p-3"> @foreach($sell->services as $service){{$service->title.','}} @endforeach</td>

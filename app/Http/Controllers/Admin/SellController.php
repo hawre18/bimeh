@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Sell;
 use App\Models\Service;
 use App\Models\Wallet;
+use App\Models\Information;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use NPDF;
 
@@ -20,9 +22,11 @@ class SellController extends Controller
     public function createPDF($id) {
         // retreive all records from db
         $sell=Sell::with(['services','customer','doctor'])->where('id',$id)->first();
+        $information=Information::first();
         $customer=Customer::where('nationalcode',$sell->customer->nationalcode)->with('wallet')->first();
+        $address=Address::where('customer_id',$customer->id)->with('province','city')->first();
         // share data to view
-        $pdf = NPDF::loadView('index.v1.admin.sell.showFactor',compact(['sell','customer']));
+        $pdf = NPDF::loadView('index.v1.admin.sell.showFactor',compact(['sell','customer','information','address']));
         return $pdf->stream($sell->customer->nationalcode);
     }
     public function create()

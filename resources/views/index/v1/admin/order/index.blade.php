@@ -28,9 +28,27 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <th class="p-3">{{$loop->index+1}}</th>
-                                    <td class="p-3">{{$order->plane->title}}</td>
-                                    <td class="p-3">{{$order->customer->f_name.' '.$order->customer->l_name.' '.$order->customer->nationalcode}}</td>
-                                    <td class="p-3">{{$order->user->f_name.' '.$order->user->l_name}}</td>
+                                    <td class="p-3">
+                                        @if($order->plane!=null)
+                                            {{$order->plane->title}}
+                                    @elseif($order->plane==null)
+                                    null
+                                            @endif
+                                    </td>
+                                    <td class="p-3">
+                                        @if($order->customer!=null)
+                                            {{$order->customer->f_name.' '.$order->customer->l_name.' '.$order->customer->nationalcode}}
+                                    @elseif($order==null)
+                                    null
+                                            @endif
+                                    </td>
+                                    <td class="p-3">
+                                        @if($order->user!=null)
+                                            {{$order->user->f_name.' '.$order->user->l_name}}
+                                    @elseif($order->user==null)
+                                    null
+                                    @endif
+                                    </td>
                                     @if($order->payType=='transfer')
                                         <td class="p-3" ><span class="label alert-info" >انتقال وجه</span></td>
                                     @endif

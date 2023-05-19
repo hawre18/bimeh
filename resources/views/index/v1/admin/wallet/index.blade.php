@@ -25,7 +25,13 @@
                                 @foreach($wallets as $wallet)
                                     <tr>
                                         <th class="p-3">{{$loop->index+1}}</th>
-                                        <td class="p-3">{{$wallet->customer->f_name}}{{' '}}{{$wallet->customer->l_name}}</td>
+                                        <td class="p-3">
+                                            @if($wallet->customer!=null)
+                                                {{$wallet->customer->f_name}}{{' '}}{{$wallet->customer->l_name}}
+                                        @elseif($wallet->customer==null)
+                                        null
+                                        @endif
+                                        </td>
                                         <td class="p-3">{{$wallet->label}}</td>
                                         <td class="p-3">{{$wallet->modeCharge}}</td>
                                         <td class="text-end p-3">
